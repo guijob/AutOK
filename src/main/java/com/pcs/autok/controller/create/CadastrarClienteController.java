@@ -30,12 +30,12 @@ public class CadastrarClienteController extends HttpServlet {
 		try {
 			Cliente cliente = new Cliente();
 			request.setAttribute("cliente", cliente);
-			request.getRequestDispatcher("/views/usuario/formulario.jsp")
+			request.getRequestDispatcher("/views/cliente/formulario.jsp")
 					.forward(request, response);
 		} catch (Exception e) {
 			e.printStackTrace();
 			request.setAttribute("erro", e.getMessage());
-			request.getRequestDispatcher("/views/usuario/formulario.jsp")
+			request.getRequestDispatcher("/views/error.jsp")
 					.forward(request, response);
 	}
 	}
