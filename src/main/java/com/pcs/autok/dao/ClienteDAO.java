@@ -22,11 +22,9 @@ public class ClienteDAO extends ConnectionDAO {
 			StringBuilder sql = new StringBuilder();
 
 			sql.append(" insert into cliente cliente ");
-			sql.append(" values " + cliente.getIdCliente() + ", "
-					+ cliente.getNomeCliente() + ", "
-					+ cliente.getTelCliente() + ", "
-					+ cliente.getEmailCliente() + ", " 
-					+ cliente.getCpfCliente() + ";");
+			sql.append(" values " + cliente.getIdCliente() + ", " + cliente.getNomeCliente() + ", "
+					+ cliente.getTelCliente() + ", " + cliente.getEmailCliente() + ", " + cliente.getCpfCliente()
+					+ ";");
 			stmt.executeQuery(sql.toString());
 		} catch (Exception e) {
 			// TODO Auto-generated catch block

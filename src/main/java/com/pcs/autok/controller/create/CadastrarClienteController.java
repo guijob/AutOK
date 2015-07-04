@@ -10,34 +10,31 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.pcs.autok.model.Cliente;
 
-
-@WebServlet("/cadastrarCliente")
+@WebServlet("/cadastrarCliente2")
 public class CadastrarClienteController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	
-	protected void doGet(HttpServletRequest request,
-			HttpServletResponse response) throws ServletException, IOException {
+
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		doService(request, response);
 	}
 
-	protected void doPost(HttpServletRequest request,
-			HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		doService(request, response);
 	}
-	
-	private void doService(HttpServletRequest request,
-			HttpServletResponse response) throws ServletException, IOException {
+
+	private void doService(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		try {
 			Cliente cliente = new Cliente();
 			request.setAttribute("cliente", cliente);
-			request.getRequestDispatcher("/views/cliente/formulario.jsp")
-					.forward(request, response);
+			request.getRequestDispatcher("/views/cliente/formulario.jsp").forward(request, response);
 		} catch (Exception e) {
 			e.printStackTrace();
 			request.setAttribute("erro", e.getMessage());
-			request.getRequestDispatcher("/views/error.jsp")
-					.forward(request, response);
+			request.getRequestDispatcher("/views/error.jsp").forward(request, response);
+		}
 	}
-	}
-	
+
 }

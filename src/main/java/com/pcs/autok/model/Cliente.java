@@ -5,19 +5,18 @@ public class Cliente {
 	/* id do cliente: chave primaria */
 	private Integer idCliente;
 
-	/* cpf do cliente*/
+	/* cpf do cliente */
 	private Long cpfCliente;
-	
+
 	/* nome do cliente */
 	private String nomeCliente;
-	
+
 	/* telefone do cliente */
 	private Integer telCliente;
-	
+
 	/* email do cliente */
 	private String emailCliente;
-	
-	
+
 	/* getters e setters */
 
 	public Integer getIdCliente() {
@@ -59,12 +58,11 @@ public class Cliente {
 	public void setEmailCliente(String emailCliente) {
 		this.emailCliente = emailCliente;
 	}
-	
+
 	/* toString da classe */
 	@Override
 	public String toString() {
-		return "Cliente [idCliente=" + idCliente + ", cpfCliente=" + cpfCliente
-				+ ", nomeCliente=" + nomeCliente + ", telCliente=" + telCliente
-				+ ", emailCliente=" + emailCliente + "]";
+		return "Cliente [idCliente=" + idCliente + ", cpfCliente=" + cpfCliente + ", nomeCliente=" + nomeCliente
+				+ ", telCliente=" + telCliente + ", emailCliente=" + emailCliente + "]";
 	}
 }
