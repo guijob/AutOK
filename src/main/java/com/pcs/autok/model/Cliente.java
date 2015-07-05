@@ -5,19 +5,38 @@ public class Cliente {
 	/* id do cliente: chave primaria */
 	private Integer idCliente;
 
-	/* cpf do cliente */
-	private Long cpfCliente;
-
 	/* nome do cliente */
 	private String nomeCliente;
 
 	/* telefone do cliente */
 	private Integer telCliente;
 
+	/* endereço do cliente */
+	private String endCliente;
+
 	/* email do cliente */
 	private String emailCliente;
 
+	/* senha do cliente */
+	private String senhaCliente;
+
 	/* getters e setters */
+
+	public String getEndCliente() {
+		return endCliente;
+	}
+
+	public void setEndCliente(String endCliente) {
+		this.endCliente = endCliente;
+	}
+
+	public String getSenhaCliente() {
+		return senhaCliente;
+	}
+
+	public void setSenhaCliente(String senhaCliente) {
+		this.senhaCliente = senhaCliente;
+	}
 
 	public Integer getIdCliente() {
 		return idCliente;
@@ -25,14 +44,6 @@ public class Cliente {
 
 	public void setIdCliente(Integer idCliente) {
 		this.idCliente = idCliente;
-	}
-
-	public Long getCpfCliente() {
-		return cpfCliente;
-	}
-
-	public void setCpfCliente(Long cpfCliente) {
-		this.cpfCliente = cpfCliente;
 	}
 
 	public String getNomeCliente() {
@@ -59,10 +70,11 @@ public class Cliente {
 		this.emailCliente = emailCliente;
 	}
 
-	/* toString da classe */
 	@Override
 	public String toString() {
-		return "Cliente [idCliente=" + idCliente + ", cpfCliente=" + cpfCliente + ", nomeCliente=" + nomeCliente
-				+ ", telCliente=" + telCliente + ", emailCliente=" + emailCliente + "]";
+		return "Cliente [idCliente=" + idCliente + ", nomeCliente="
+				+ nomeCliente + ", telCliente=" + telCliente + ", endCliente="
+				+ endCliente + ", emailCliente=" + emailCliente
+				+ ", senhaCliente=" + senhaCliente + "]";
 	}
 }
