@@ -6,9 +6,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.pcs.autok.controller.validators.CadastroValidator;
+import com.pcs.autok.controller.validators.CadastrarClienteValidator;
 import com.pcs.autok.dao.ClienteDAO;
 import com.pcs.autok.model.Cliente;
+import com.pcs.autok.utils.ResultParameters;
 
 @Controller
 public class CadastrarClienteController {
@@ -26,16 +27,17 @@ public class CadastrarClienteController {
 	public ModelAndView cadastrarCliente(@ModelAttribute Cliente cliente) {
 		System.out.println("cadastrarCliente: Passing through...");
 		int result;
-		CadastroValidator validator = new CadastroValidator(cliente);
+		CadastrarClienteValidator validator = new CadastrarClienteValidator(cliente);
 		ClienteDAO dao = new ClienteDAO();
 		ModelAndView mv = new ModelAndView("sucesso");
 
 		result = validator.validarCliente(cliente);
 
-		if (result == 1) {
+		if (result == ResultParameters.OK.getResult()) {
 			dao.cadastrarCliente(cliente);
 			return mv;
 		} else {
+			System.out.println("cadastrarCliente: Error " + result);
 			ModelAndView mv2 = new ModelAndView("view/error");
 			return mv2;
 		}
