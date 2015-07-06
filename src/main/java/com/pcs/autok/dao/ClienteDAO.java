@@ -20,14 +20,15 @@ public class ClienteDAO extends ConnectionDAO {
 			conn = startConnection();
 			stmt = conn.createStatement();
 			StringBuilder sql = new StringBuilder();
-
-			sql.append(" insert into cliente cliente ");
-			sql.append(" values " + cliente.getIdCliente() + ", "
-					+ cliente.getNomeCliente() + ", " + cliente.getTelCliente()
-					+ ", " + cliente.getEndCliente() + ", "
-					+ cliente.getEmailCliente() + ", "
-					+ cliente.getSenhaCliente() + ";");
-			stmt.executeQuery(sql.toString());
+			
+			sql.append("insert into dbAutOK.cliente");
+			sql.append(" values " + "(0, " + "'" + cliente.getNomeCliente() + "', "
+					+ cliente.getTelCliente() + ", '" + cliente.getEndCliente()
+					+ "', '" + cliente.getEmailCliente() + "', '"
+					+ cliente.getSenhaCliente() + "');");
+			System.out.println(sql.toString());
+			
+			stmt.executeUpdate(sql.toString());
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
