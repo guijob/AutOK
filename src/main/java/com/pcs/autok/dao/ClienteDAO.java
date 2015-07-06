@@ -56,11 +56,12 @@ public class ClienteDAO extends ConnectionDAO {
 			StringBuilder sql = new StringBuilder();
 			
 			sql.append("select * from dbAutOK.cliente where");
-			sql.append(" cliente like '" + cliente.getEmailCliente() + "');");
+			sql.append(" nomecliente like '" + cliente.getEmailCliente() + "';");
 			System.out.println(sql.toString());
 			
 			rs = stmt.executeQuery(sql.toString());
 			
+			System.out.println(rs.next());
 			result = rs.next();
 			
 		} catch (Exception e) {

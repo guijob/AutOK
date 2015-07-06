@@ -20,6 +20,9 @@ public class Cliente {
 	/* senha do cliente */
 	private String senhaCliente;
 
+	/* senha repetida do cliente */
+	private String confereSenhaCliente;
+
 	/* getters e setters */
 
 	public String getEndCliente() {
@@ -70,11 +73,20 @@ public class Cliente {
 		this.emailCliente = emailCliente;
 	}
 
+	public String getConfereSenhaCliente() {
+		return confereSenhaCliente;
+	}
+
+	public void setConfereSenhaCliente(String confereSenhaCliente) {
+		this.confereSenhaCliente = confereSenhaCliente;
+	}
+
 	@Override
 	public String toString() {
 		return "Cliente [idCliente=" + idCliente + ", nomeCliente="
 				+ nomeCliente + ", telCliente=" + telCliente + ", endCliente="
 				+ endCliente + ", emailCliente=" + emailCliente
-				+ ", senhaCliente=" + senhaCliente + "]";
+				+ ", senhaCliente=" + senhaCliente + ", confereSenhaCliente="
+				+ confereSenhaCliente + "]";
 	}
 }

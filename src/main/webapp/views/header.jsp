@@ -30,14 +30,9 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#">Exemplo 2</a>
+          <a class="navbar-brand" href="#">AutOK</a>
         </div>
         <div class="collapse navbar-collapse">
-          <ul class="nav navbar-nav">
-            <li><a href="${pageContext.request.contextPath}/">Home</a></li>
-            <li><a href="${pageContext.request.contextPath}/listarUsuarios">Usuarios</a></li>
-            <li><a href="${pageContext.request.contextPath}/forcarErroConexoes">Forçar erro de conexões abertas!</a></li>
-          </ul>
         </div><!--/.nav-collapse -->
       </div>
     </div>

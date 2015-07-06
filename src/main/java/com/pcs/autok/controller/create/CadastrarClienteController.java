@@ -1,5 +1,8 @@
 package com.pcs.autok.controller.create;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -9,6 +12,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.pcs.autok.controller.validators.CadastrarClienteValidator;
 import com.pcs.autok.dao.ClienteDAO;
 import com.pcs.autok.model.Cliente;
+import com.pcs.autok.utils.HashResultParameters;
 import com.pcs.autok.utils.ResultParameters;
 
 @Controller
@@ -38,12 +42,14 @@ public class CadastrarClienteController {
 			return mv;
 		} else {
 			System.out.println("cadastrarCliente: Error " + result);
-			ModelAndView mv2 = new ModelAndView("view/error");
+			ModelAndView mv2 = new ModelAndView("erro");
+			Map<Integer, String> map = new HashMap<Integer, String>();
+			HashResultParameters hashMap = new HashResultParameters();
+			map = hashMap.setResultParametersHashMap(map);
+			
+			mv2.addObject("erro", map.get(result));
 			return mv2;
 		}
-		// se não passar dos testes, retorna com erro do validator
-
-		// se tudo der certo, ir para sucesso
 
 		// se der erro na inserção, trata o erro e manda pra pagina de
 		// formulario com detalhes do erro

@@ -76,7 +76,15 @@
 	      <!-- Senha -->
 	      <label class="control-label"  for="senhaCliente">Senha</label>
 	      <div class="controls">
-	        <form:input type="text" path="senhaCliente" class="input-xlarge"></form:input>
+	        <form:input type="password" path="senhaCliente" class="input-xlarge"></form:input>
+	      </div>
+	    </div>
+	    
+	    <div class="control-group">
+	      <!-- Confere Senha -->
+	      <label class="control-label"  for="confereSenhaCliente">Senha novamente</label>
+	      <div class="controls">
+	        <form:input type="password" path="confereSenhaCliente" class="input-xlarge"></form:input>
 	      </div>
 	    </div>
 	    	 
