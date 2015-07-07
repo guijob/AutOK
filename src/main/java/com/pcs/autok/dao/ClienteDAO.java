@@ -20,14 +20,15 @@ public class ClienteDAO extends ConnectionDAO {
 			conn = startConnection();
 			stmt = conn.createStatement();
 			StringBuilder sql = new StringBuilder();
-			
+
 			sql.append("insert into dbAutOK.cliente");
-			sql.append(" values " + "(0, " + "'" + cliente.getNomeCliente() + "', "
-					+ cliente.getTelCliente() + ", '" + cliente.getEndCliente()
-					+ "', '" + cliente.getEmailCliente() + "', '"
+			sql.append(" values " + "(0, " + "'" + cliente.getNomeCliente()
+					+ "', " + cliente.getTelCliente() + ", '"
+					+ cliente.getEndCliente() + "', '"
+					+ cliente.getEmailCliente() + "', '"
 					+ cliente.getSenhaCliente() + "');");
 			System.out.println(sql.toString());
-			
+
 			stmt.executeUpdate(sql.toString());
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -42,7 +43,7 @@ public class ClienteDAO extends ConnectionDAO {
 			}
 		}
 	}
-	
+
 	public boolean buscarEmail(Cliente cliente) {
 		Connection conn = null;
 		Statement stmt = null;
@@ -53,16 +54,16 @@ public class ClienteDAO extends ConnectionDAO {
 			conn = startConnection();
 			stmt = conn.createStatement();
 			StringBuilder sql = new StringBuilder();
-			
+
 			sql.append("select * from dbAutOK.cliente where");
 			sql.append(" nomecliente like '" + cliente.getEmailCliente() + "';");
 			System.out.println(sql.toString());
-			
+
 			rs = stmt.executeQuery(sql.toString());
-			
+
 			System.out.println(rs.next());
 			result = rs.next();
-			
+
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -78,7 +79,7 @@ public class ClienteDAO extends ConnectionDAO {
 		}
 		return result;
 	}
-	
+
 	public void excluirCliente(Cliente cliente) {
 
 		Connection conn = null;
@@ -88,11 +89,13 @@ public class ClienteDAO extends ConnectionDAO {
 			conn = startConnection();
 			stmt = conn.createStatement();
 			StringBuilder sql = new StringBuilder();
-			
+
 			sql.append("delete from dbAutOK.cliente");
-			sql.append(" where idcliente = " + cliente.getIdCliente() + ";");
+			sql.append(" where idcliente = '" + cliente.getIdCliente()
+					+ "' and senhacliente = '" + cliente.getSenhaCliente()
+					+ "';");
 			System.out.println(sql.toString());
-			
+
 			stmt.executeUpdate(sql.toString());
 		} catch (Exception e) {
 			// TODO Auto-generated catch block

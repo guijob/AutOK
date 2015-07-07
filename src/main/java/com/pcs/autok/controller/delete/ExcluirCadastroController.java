@@ -18,11 +18,11 @@ import com.pcs.autok.utils.ResultParameters;
 @Controller
 public class ExcluirCadastroController {
 
-	@RequestMapping(value = "/confirmacaoExcluirCliente", method = RequestMethod.GET)
+	@RequestMapping("/confirmacaoExcluirCliente")
 	public ModelAndView getConfirmacaoExluirCliente() {
 			System.out.println("getConfirmacaoExcluirCliente: Passing through...");
 
-			ModelAndView mv = new ModelAndView("cliente/formularioExclusao");
+			ModelAndView mv = new ModelAndView("formularioExclusao");
 			mv.addObject("clienteEntidade", new Cliente());
 			return mv;
 	}
