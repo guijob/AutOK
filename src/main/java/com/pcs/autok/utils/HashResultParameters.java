@@ -15,6 +15,7 @@ public class HashResultParameters {
 		map.put(7, "A senha deve conter pelo menos 4 caracteres");
 		map.put(8, "As senhas digitadas não conferem");
 		map.put(9, "Por favor, preencha todos os campos");
+		map.put(10, "Usuário não encontrado em nosso sistema");
 		
 		return map;
 	}

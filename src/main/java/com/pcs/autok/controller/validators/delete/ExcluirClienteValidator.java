@@ -1,5 +1,6 @@
 package com.pcs.autok.controller.validators.delete;
 
+import com.pcs.autok.dao.ClienteDAO;
 import com.pcs.autok.model.Cliente;
 import com.pcs.autok.utils.ResultParameters;
 
@@ -36,7 +37,14 @@ public class ExcluirClienteValidator {
 			return ResultParameters.SENHAS_NAO_BATEM.getResult();
 		}
 		
-		// validacao se email e senha fornecidos batem com algum cliente
+		/* email e senha fornecidos batem com algum cliente */
+		
+		ClienteDAO dao = new ClienteDAO();
+		boolean result = dao.buscarCliente(cliente);
+		if (!result) {
+			System.out.println("Não passou porque não existe usuário no banco de dados");
+			return ResultParameters.USUARIO_NAO_ENCONTRADO.getResult();
+		}
 
 		/* validacao ok */
 		return ResultParameters.OK.getResult();

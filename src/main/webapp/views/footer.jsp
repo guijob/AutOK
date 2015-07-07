@@ -1,8 +1,9 @@
-	<div class="container">
-      <footer>
-        <p>&copy; Grupo 04 - PCS2034 de 2015</p>
-      </footer>
-    </div> <!-- /container -->
+	
+    <footer class="footer">
+    	<div class="container">
+        	<p>&copy; Grupo 04 - PCS2034 de 2015</p>
+    	</div> <!-- /container -->
+    </footer>
     
     </div><!-- /.container -->
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->

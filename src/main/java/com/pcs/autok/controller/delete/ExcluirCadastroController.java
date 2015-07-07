@@ -33,7 +33,7 @@ public class ExcluirCadastroController {
 		int result;
 		ExcluirClienteValidator validator = new ExcluirClienteValidator(cliente);
 		ClienteDAO dao = new ClienteDAO();
-		ModelAndView mv = new ModelAndView("excluirOk");
+		ModelAndView mv = new ModelAndView("cliente/exclusaoOk");
 
 		result = validator.validar(cliente);
 
