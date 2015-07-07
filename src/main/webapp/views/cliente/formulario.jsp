@@ -35,16 +35,16 @@
 
     <div class="container">
 
-	<form:form class="form-horizontal" action="/autok/cadastrarCliente" method="POST" modelAttribute="clienteEntidade">
+	<form:form class="form-horizontal" style="margin: 0 auto; width:80%;" action="/autok/cadastrarCliente" method="POST" modelAttribute="clienteEntidade">
 	  <fieldset>
 	    <div id="legend">
-	      Register
+	      <legend>Preencha os campos abaixo</legend>
 	    </div>
 	    <div class="control-group">
 	      <!-- Full name -->
 	      <label class="control-label"  for="nome">Nome completo</label>
 	      <div class="controls">
-	        <form:input type="text" path="nomeCliente" class="input-xlarge"></form:input>
+	        <form:input type="text" path="nomeCliente" class="input-xlarge-2"></form:input>
 	      </div>
 	    </div>
 	    

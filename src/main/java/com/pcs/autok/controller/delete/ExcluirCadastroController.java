@@ -1,4 +1,4 @@
-package com.pcs.autok.controller.create;
+package com.pcs.autok.controller.delete;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -9,39 +9,39 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.pcs.autok.controller.validators.create.CadastrarClienteValidator;
+import com.pcs.autok.controller.validators.delete.ExcluirClienteValidator;
 import com.pcs.autok.dao.ClienteDAO;
 import com.pcs.autok.model.Cliente;
 import com.pcs.autok.utils.HashResultParameters;
 import com.pcs.autok.utils.ResultParameters;
 
 @Controller
-public class CadastrarClienteController {
+public class ExcluirCadastroController {
 
-	@RequestMapping(value = "/formularioCadastrarCliente", method = RequestMethod.POST)
-	public ModelAndView getFormularioCliente() {
-		System.out.println("getFormularioCliente: Passing through...");
+	@RequestMapping(value = "/confirmacaoExcluirCliente", method = RequestMethod.GET)
+	public ModelAndView getConfirmacaoExluirCliente() {
+			System.out.println("getConfirmacaoExcluirCliente: Passing through...");
 
-		ModelAndView mv = new ModelAndView("cliente/formulario");
-		mv.addObject("clienteEntidade", new Cliente());
-		return mv;
+			ModelAndView mv = new ModelAndView("cliente/formularioExclusao");
+			mv.addObject("clienteEntidade", new Cliente());
+			return mv;
 	}
-
-	@RequestMapping(value = "/cadastrarCliente", method = RequestMethod.POST)
-	public ModelAndView cadastrarCliente(@ModelAttribute Cliente cliente) {
-		System.out.println("cadastrarCliente: Passing through...");
+	
+	@RequestMapping(value = "/excluirCliente", method = RequestMethod.POST)
+	public ModelAndView excluirCliente(@ModelAttribute Cliente cliente) {
+		System.out.println("excluirCliente: Passing through...");
 		int result;
-		CadastrarClienteValidator validator = new CadastrarClienteValidator(cliente);
+		ExcluirClienteValidator validator = new ExcluirClienteValidator(cliente);
 		ClienteDAO dao = new ClienteDAO();
-		ModelAndView mv = new ModelAndView("sucesso");
+		ModelAndView mv = new ModelAndView("excluirOk");
 
 		result = validator.validar(cliente);
 
 		if (result == ResultParameters.OK.getResult()) {
-			dao.cadastrarCliente(cliente);
+			dao.excluirCliente(cliente);
 			return mv;
 		} else {
-			System.out.println("cadastrarCliente: Error " + result);
+			System.out.println("excluirCliente: Error " + result);
 			ModelAndView mv2 = new ModelAndView("erro");
 			Map<Integer, String> map = new HashMap<Integer, String>();
 			HashResultParameters hashMap = new HashResultParameters();

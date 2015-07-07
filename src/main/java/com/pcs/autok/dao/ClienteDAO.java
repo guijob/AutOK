@@ -34,9 +34,8 @@ public class ClienteDAO extends ConnectionDAO {
 			e.printStackTrace();
 		} finally {
 			try {
-				// conn.close();
-				// stmt.close();
-				// rs.close();
+				conn.close();
+				stmt.close();
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -78,6 +77,35 @@ public class ClienteDAO extends ConnectionDAO {
 			}
 		}
 		return result;
+	}
+	
+	public void excluirCliente(Cliente cliente) {
+
+		Connection conn = null;
+		Statement stmt = null;
+
+		try {
+			conn = startConnection();
+			stmt = conn.createStatement();
+			StringBuilder sql = new StringBuilder();
+			
+			sql.append("delete from dbAutOK.cliente");
+			sql.append(" where idcliente = " + cliente.getIdCliente() + ";");
+			System.out.println(sql.toString());
+			
+			stmt.executeUpdate(sql.toString());
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			try {
+				conn.close();
+				stmt.close();
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 	}
 
 	public List<Cliente> listarTodos() {

@@ -49,6 +49,11 @@
       <hr>
 	<div class="container">
       <footer>
+        <p><a action="/autok/excluirCadastro">Excluir cadastro</a></p>
+      </footer>
+    </div> <!-- /container -->
+    <div class="container">
+      <footer>
         <p>&copy; Grupo 04 - PCS2034 de 2015</p>
       </footer>
     </div> <!-- /container -->

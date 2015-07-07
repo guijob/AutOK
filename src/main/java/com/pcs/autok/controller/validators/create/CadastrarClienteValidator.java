@@ -1,4 +1,4 @@
-package com.pcs.autok.controller.validators;
+package com.pcs.autok.controller.validators.create;
 
 import com.pcs.autok.dao.ClienteDAO;
 import com.pcs.autok.model.Cliente;
@@ -12,7 +12,7 @@ public class CadastrarClienteValidator {
 		this.cliente = cliente;
 	}
 
-	public int validarCliente(Cliente cliente) {
+	public int validar(Cliente cliente) {
 
 		System.out.println(cliente.toString());
 		
