@@ -28,7 +28,7 @@
           <a class="navbar-brand" href="#">AutOK</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
-          <form class="navbar-form navbar-right" action="/autok/logarCliente" method="POST">
+          <form class="navbar-form navbar-right" action="/autok/formularioLogin" method="GET">
 	          <input type="submit" value="Logar" class="btn btn-success" >
           </form>
           <form class="navbar-form navbar-right" action="/autok/formularioCadastrarCliente" method="POST">

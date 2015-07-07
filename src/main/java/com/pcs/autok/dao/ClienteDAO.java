@@ -107,6 +107,39 @@ public class ClienteDAO extends ConnectionDAO {
 			}
 		}
 	}
+	
+	public boolean buscarCliente(Cliente cliente) {
+		Connection conn = null;
+		Statement stmt = null;
+		ResultSet rs = null;
+		boolean result = false;
+		try {
+			conn = startConnection();
+			stmt = conn.createStatement();
+			StringBuilder sql = new StringBuilder();
+	
+			sql.append("select * from dbAutOK.cliente where");
+			sql.append(" nomecliente like '" + cliente.getEmailCliente() 
+						+ "' and senha like '" + cliente.getSenhaCliente() + "';");
+			System.out.println(sql.toString());
+			rs = stmt.executeQuery(sql.toString());
+			System.out.println(rs.next());
+			result = rs.next();
+		} catch (Exception e) {
+				// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			try {
+				conn.close();
+				stmt.close();
+				rs.close();
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		return result;
+	}
 
 	public List<Cliente> listarTodos() {
 		List<Cliente> clientes = new ArrayList<Cliente>();

@@ -1,27 +1,28 @@
-package com.pcs.autok.controller.validators.delete;
+package com.pcs.autok.controller.validators.read;
 
 import com.pcs.autok.dao.ClienteDAO;
 import com.pcs.autok.model.Cliente;
 import com.pcs.autok.utils.ResultParameters;
 
-public class ExcluirClienteValidator {
+public class LogarUsuarioValidator {
 
 	Cliente cliente;
 
-	public ExcluirClienteValidator(Cliente cliente) {
+	public LogarUsuarioValidator(Cliente cliente) {
 		this.cliente = cliente;
 	}
 
 	public int validar(Cliente cliente) {
 
+		System.out.println(cliente.toString());
+		
 		/* validar campo vazio */
-		if (cliente.getEmailCliente() == null
-				|| cliente.getSenhaCliente() == null
-				|| cliente.getConfereSenhaCliente() == null) {
-			System.out.println("validarCliente: Não passou por ter campos vazios...");
+		if (cliente.getEmailCliente() == null ||
+			cliente.getSenhaCliente() == null) {
+			System.out.println("validarLoginCliente: Não passou por ter campos vazios...");
 			return ResultParameters.CAMPO_VAZIO.getResult();
 		}
-		
+
 		/* email não formatado */
 		String ePattern = "^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@((\\[[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\])|(([a-zA-Z\\-0-9]+\\.)+[a-zA-Z]{2,}))$";
 		java.util.regex.Pattern p = java.util.regex.Pattern.compile(ePattern);
@@ -30,17 +31,22 @@ public class ExcluirClienteValidator {
 			System.out.println("validarCliente: Não passou por ter email mal formatado...");
 			return ResultParameters.EMAIL_NAO_FORMATADO.getResult();
 		}
-		
+
+		/* senha pequena */
+		if (cliente.getSenhaCliente().toString().length() < 4) {
+			System.out.println("validarCliente: Não passou por ter senha pequena");
+			return ResultParameters.SENHA_PEQUENA.getResult();
+		}
+
+		/* usuario nao encontrado */
 		ClienteDAO dao = new ClienteDAO();
 		boolean result = dao.buscarCliente(cliente);
-		if (!result) {
+		if (result) {
 			System.out.println("Não passou porque não existe usuário no banco de dados");
 			return ResultParameters.USUARIO_NAO_ENCONTRADO.getResult();
 		}
 		
-		// validacao se email e senha fornecidos batem com algum cliente
-
-		/* validacao ok */
+		/* validação OK */
 		return ResultParameters.OK.getResult();
 	}
 }
