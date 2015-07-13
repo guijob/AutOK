@@ -33,12 +33,11 @@ public class ExcluirClienteValidator {
 		
 		ClienteDAO dao = new ClienteDAO();
 		boolean result = dao.buscarCliente(cliente);
+		System.out.println(": " + result);
 		if (!result) {
 			System.out.println("Não passou porque não existe usuário no banco de dados");
 			return ResultParameters.USUARIO_NAO_ENCONTRADO.getResult();
 		}
-		
-		// validacao se email e senha fornecidos batem com algum cliente
 
 		/* validacao ok */
 		return ResultParameters.OK.getResult();

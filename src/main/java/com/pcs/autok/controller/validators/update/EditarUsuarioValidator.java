@@ -1,14 +1,14 @@
-package com.pcs.autok.controller.validators.create;
+package com.pcs.autok.controller.validators.update;
 
 import com.pcs.autok.dao.ClienteDAO;
 import com.pcs.autok.model.Cliente;
 import com.pcs.autok.utils.ResultParameters;
 
-public class CadastrarClienteValidator {
+public class EditarUsuarioValidator {
 
 	Cliente cliente;
 
-	public CadastrarClienteValidator(Cliente cliente) {
+	public EditarUsuarioValidator(Cliente cliente) {
 		this.cliente = cliente;
 	}
 
@@ -63,14 +63,6 @@ public class CadastrarClienteValidator {
 		if (!cliente.getSenhaCliente().equals(cliente.getConfereSenhaCliente().toString())) {
 			System.out.println("validarCliente: Não passou porque as senhas nao bateram...");
 			return ResultParameters.SENHAS_NAO_BATEM.getResult();
-		}
-
-		/* email ja existe */
-		ClienteDAO dao = new ClienteDAO();
-		boolean result = dao.buscarEmail(cliente);
-		if (result) {
-			System.out.println("Não passou porque email ja existe no banco de dados");
-			return ResultParameters.EMAIL_JA_EXISTE.getResult();
 		}
 
 		/* validação OK */

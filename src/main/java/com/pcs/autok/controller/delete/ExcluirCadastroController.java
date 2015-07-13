@@ -22,7 +22,7 @@ public class ExcluirCadastroController {
 	public ModelAndView getConfirmacaoExluirCliente() {
 			System.out.println("getConfirmacaoExcluirCliente: Passing through...");
 
-			ModelAndView mv = new ModelAndView("cliente/formularioExclusao");
+			ModelAndView mv = new ModelAndView("formularioExclusao");
 			mv.addObject("clienteEntidade", new Cliente());
 			return mv;
 	}
@@ -33,7 +33,7 @@ public class ExcluirCadastroController {
 		int result;
 		ExcluirClienteValidator validator = new ExcluirClienteValidator(cliente);
 		ClienteDAO dao = new ClienteDAO();
-		ModelAndView mv = new ModelAndView("excluirOk");
+		ModelAndView mv = new ModelAndView("/cliente/exclusaoOk");
 
 		result = validator.validar(cliente);
 

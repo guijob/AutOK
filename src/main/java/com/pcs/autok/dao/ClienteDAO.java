@@ -11,6 +11,39 @@ import com.pcs.autok.model.Cliente;
 
 public class ClienteDAO extends ConnectionDAO {
 
+	public void editarCliente(Cliente cliente) {
+
+		Connection conn = null;
+		Statement stmt = null;
+
+		try {
+			conn = startConnection();
+			stmt = conn.createStatement();
+			StringBuilder sql = new StringBuilder();
+
+			sql.append("update dbAutOK.cliente");
+			sql.append(" set nomecliente = '" + cliente.getNomeCliente()
+					+ "', telefonecliente = " + cliente.getTelCliente() + ",enderecocliente = '"
+					+ cliente.getEndCliente() + "', emailcliente = '"
+					+ cliente.getEmailCliente() + "',senha = '"
+					+ cliente.getSenhaCliente() + "' where emailcliente = '" + cliente.getEmailCliente() + "';");
+			System.out.println(sql.toString());
+
+			stmt.executeUpdate(sql.toString());
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			try {
+				conn.close();
+				stmt.close();
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+	}
+	
 	public void cadastrarCliente(Cliente cliente) {
 
 		Connection conn = null;
@@ -92,7 +125,8 @@ public class ClienteDAO extends ConnectionDAO {
 			StringBuilder sql = new StringBuilder();
 			
 			sql.append("select * from dbAutOK.cliente where");
-			sql.append(" nomecliente like '" + cliente.getEmailCliente() + "';");
+			sql.append(" emailcliente like '" + cliente.getEmailCliente() + "'"
+					+ "and senha like '" + cliente.getSenhaCliente() + "';");
 			System.out.println(sql.toString());
 			
 			rs = stmt.executeQuery(sql.toString());
@@ -101,12 +135,11 @@ public class ClienteDAO extends ConnectionDAO {
 				u = new Cliente();
 				u.setIdCliente(rs.getInt("idcliente"));
 				u.setNomeCliente(rs.getString("nomecliente"));
-				u.setTelCliente(rs.getInt("telcliente"));
-				u.setEndCliente(rs.getString("endcliente"));
+				u.setTelCliente(rs.getInt("telefonecliente"));
+				u.setEndCliente(rs.getString("enderecocliente"));
 				u.setEmailCliente(rs.getString("emailcliente"));
 				u.setSenhaCliente(rs.getString("senha"));
 			}
-			
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -165,11 +198,10 @@ public class ClienteDAO extends ConnectionDAO {
 			StringBuilder sql = new StringBuilder();
 	
 			sql.append("select * from dbAutOK.cliente where");
-			sql.append(" nomecliente like '" + cliente.getEmailCliente() 
+			sql.append(" emailcliente like '" + cliente.getEmailCliente() 
 						+ "' and senha like '" + cliente.getSenhaCliente() + "';");
 			System.out.println(sql.toString());
 			rs = stmt.executeQuery(sql.toString());
-			System.out.println(rs.next());
 			result = rs.next();
 		} catch (Exception e) {
 				// TODO Auto-generated catch block
@@ -179,11 +211,13 @@ public class ClienteDAO extends ConnectionDAO {
 				conn.close();
 				stmt.close();
 				rs.close();
+				
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
+		System.out.println(":::" + result);
 		return result;
 	}
 

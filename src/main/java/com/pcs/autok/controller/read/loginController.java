@@ -37,7 +37,7 @@ public class loginController {
 
 		result = validator.validar(cliente);
 
-		if (result == ResultParameters.OK.getResult() && !dao.buscarRegistro(cliente).toString().equals(null)) {
+		if (result == ResultParameters.OK.getResult() & !(dao.buscarRegistro(cliente) == null)) {
 			mv.addObject("cliente", dao.buscarRegistro(cliente));
 			return mv;
 		} else {

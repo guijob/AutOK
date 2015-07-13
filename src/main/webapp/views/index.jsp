@@ -50,6 +50,8 @@
 	<div class="container">
       <footer>
         <p><a href = "${pageContext.request.contextPath}/confirmacaoExcluirCliente">Excluir cadastro</a></p>
+        <p><a href = "${pageContext.request.contextPath}/formularioLoginEditar">Editar cadastro</a></p>
+        <p><a href = "${pageContext.request.contextPath}/paginaPecas">Pecas</a></p>
       </footer>
     </div> <!-- /container -->
     <div class="container">
