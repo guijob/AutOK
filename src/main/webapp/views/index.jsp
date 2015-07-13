@@ -49,7 +49,7 @@
       <hr>
 	<div class="container">
       <footer>
-        <p><a action="/autok/excluirCadastro">Excluir cadastro</a></p>
+        <p><a href = "${pageContext.request.contextPath}/confirmacaoExcluirCliente">Excluir cadastro</a></p>
       </footer>
     </div> <!-- /container -->
     <div class="container">
