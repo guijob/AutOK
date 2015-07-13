@@ -11,7 +11,7 @@ import com.pcs.autok.model.TipoPeca;
 
 public class TipoPecasDAO extends ConnectionDAO {
 
-	public List<TipoPeca> buscarRegistro(TipoPeca tipoPeca) {
+	public List<TipoPeca> listarTipoPecas() {
 		Connection conn = null;
 		Statement stmt = null;
 		ResultSet rs = null;
@@ -31,7 +31,7 @@ public class TipoPecasDAO extends ConnectionDAO {
 			
 			while (rs.next()) {
 				o = new TipoPeca();
-				o.setDescrPeca(rs.getString("descrtipo_pecas"));
+				o.setDescrPeca(rs.getString("desctipo_pecas"));
 				u.add(o);
 			}
 		} catch (Exception e) {
