@@ -37,11 +37,11 @@ public class loginController {
 
 		result = validator.validar(cliente);
 
-		if (result == ResultParameters.OK.getResult()) {
-			dao.cadastrarCliente(cliente);
+		if (result == ResultParameters.OK.getResult() && !dao.buscarRegistro(cliente).toString().equals(null)) {
+			mv.addObject("cliente", dao.buscarRegistro(cliente));
 			return mv;
 		} else {
-			System.out.println("cadastrarCliente: Error " + result);
+			System.out.println("logarUsuario: Error " + result);
 			ModelAndView mv2 = new ModelAndView("erro");
 			Map<Integer, String> map = new HashMap<Integer, String>();
 			HashResultParameters hashMap = new HashResultParameters();

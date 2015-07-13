@@ -79,6 +79,49 @@ public class ClienteDAO extends ConnectionDAO {
 		return result;
 	}
 	
+	public Cliente buscarRegistro(Cliente cliente) {
+		Connection conn = null;
+		Statement stmt = null;
+		ResultSet rs = null;
+		Cliente u = null;
+		
+		try {
+			conn = startConnection();
+			stmt = conn.createStatement();
+			StringBuilder sql = new StringBuilder();
+			
+			sql.append("select * from dbAutOK.cliente where");
+			sql.append(" nomecliente like '" + cliente.getEmailCliente() + "';");
+			System.out.println(sql.toString());
+			
+			rs = stmt.executeQuery(sql.toString());
+			
+			if (rs.next()) {
+				u = new Cliente();
+				u.setIdCliente(rs.getInt("idcliente"));
+				u.setNomeCliente(rs.getString("nomecliente"));
+				u.setTelCliente(rs.getInt("telcliente"));
+				u.setEndCliente(rs.getString("endcliente"));
+				u.setEmailCliente(rs.getString("emailcliente"));
+				u.setSenhaCliente(rs.getString("senha"));
+			}
+			
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			try {
+				conn.close();
+				stmt.close();
+				rs.close();
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		return u;
+	}
+	
 	public void excluirCliente(Cliente cliente) {
 
 		Connection conn = null;
