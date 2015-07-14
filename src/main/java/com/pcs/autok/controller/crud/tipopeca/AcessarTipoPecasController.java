@@ -1,5 +1,6 @@
-package com.pcs.autok.controller.read;
+package com.pcs.autok.controller.crud.tipopeca;
 
+import java.sql.SQLException;
 import java.util.List;
 
 import org.springframework.stereotype.Controller;
@@ -14,7 +15,7 @@ import com.pcs.autok.model.TipoPeca;
 public class AcessarTipoPecasController {
 
 	@RequestMapping(value = "/listarTipoPecas", method = RequestMethod.GET)
-	public ModelAndView listarTipoPecas() {
+	public ModelAndView listarTipoPecas() throws SQLException {
 		System.out.println("listarTipoPecas: Passing through...");
 		TipoPecasDAO dao = new TipoPecasDAO();
 		ModelAndView mv = new ModelAndView("tipopecas/listar");

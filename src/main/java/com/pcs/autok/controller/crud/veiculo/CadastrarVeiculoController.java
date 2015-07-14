@@ -1,4 +1,4 @@
-package com.pcs.autok.controller.create;
+package com.pcs.autok.controller.crud.veiculo;
 
 import org.springframework.stereotype.Controller;
 

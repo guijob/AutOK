@@ -17,7 +17,8 @@ public enum ResultParameters {
 	SENHA_PEQUENA(7),
 	SENHAS_NAO_BATEM(8),
 	CAMPO_VAZIO(9),
-	USUARIO_NAO_ENCONTRADO(10);
+	EMAIL_SENHA_INCORRETO(10),
+	USUARIO_NAO_ENCONTRADO(11);
 	
 	public int result;
 	

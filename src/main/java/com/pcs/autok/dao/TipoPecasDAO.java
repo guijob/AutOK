@@ -1,52 +1,63 @@
 package com.pcs.autok.dao;
 
-import java.sql.Connection;
 import java.sql.ResultSet;
-import java.sql.Statement;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.pcs.autok.dao.connect.ConnectionDAO;
+import com.pcs.autok.dao.base.SuperDAO;
 import com.pcs.autok.model.TipoPeca;
 
-public class TipoPecasDAO extends ConnectionDAO {
+public class TipoPecasDAO extends SuperDAO {
 
-	public List<TipoPeca> listarTipoPecas() {
-		Connection conn = null;
-		Statement stmt = null;
+	public void editarTipoPecas(TipoPeca tipoPeca) {
+
+		StringBuilder sql = new StringBuilder();
+
+		sql.append("update dbAutOK.cliente");
+		sql.append(" set desc_tipo_peca = '" + tipoPeca.getDescrPeca() + "';");
+		System.out.println(sql.toString());
+
+		executeQueryCRUD(sql.toString());
+	}
+	
+	public void cadastrarTipoPecas(TipoPeca tipoPeca) {
+
+		StringBuilder sql = new StringBuilder();
+
+		sql.append("insert into dbAutOK.tipo_pecas");
+		sql.append(" values " + "(0, " + "'" + tipoPeca.getDescrPeca() + "');");
+		System.out.println(sql.toString());
+
+		executeQueryCRUD(sql.toString());
+	}
+	
+	public void excluirTipoPeca(TipoPeca tipoPeca) {
+
+		StringBuilder sql = new StringBuilder();
+
+		sql.append("delete from dbAutOK.cliente");
+		sql.append(" where desc_tipo_peca = '" + tipoPeca.getDescrPeca() + "';");
+		System.out.println(sql.toString());
+
+		executeQueryCRUD(sql.toString());
+	}
+	
+	public List<TipoPeca> listarTipoPecas() throws SQLException {
 		ResultSet rs = null;
 		List<TipoPeca> u = new ArrayList<TipoPeca>();
-		
-		try {
-			conn = startConnection();
-			stmt = conn.createStatement();
-			StringBuilder sql = new StringBuilder();
+		StringBuilder sql = new StringBuilder();
 			
-			sql.append("select * from dbAutOK.tipo_pecas;");
-			System.out.println(sql.toString());
+		sql.append("select * from dbAutOK.tipo_pecas;");
+		rs = executeQueryCRUD(sql.toString());
+		TipoPeca o;
 			
-			rs = stmt.executeQuery(sql.toString());
-			
-			TipoPeca o;
-			
-			while (rs.next()) {
-				o = new TipoPeca();
-				o.setDescrPeca(rs.getString("desctipo_pecas"));
-				u.add(o);
-			}
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} finally {
-			try {
-				conn.close();
-				stmt.close();
-				rs.close();
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+		while (rs.next()) {
+			o = new TipoPeca();
+			o.setDescrPeca(rs.getString("desctipo_pecas"));
+			u.add(o);
 		}
+		
 		return u;
 	}
 }

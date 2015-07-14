@@ -1,5 +1,6 @@
-package com.pcs.autok.controller.read;
+package com.pcs.autok.controller.crud.cliente;
 
+import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -9,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.pcs.autok.controller.validators.read.LogarUsuarioValidator;
+import com.pcs.autok.controller.validators.cliente.LogarUsuarioValidator;
 import com.pcs.autok.dao.ClienteDAO;
 import com.pcs.autok.model.Cliente;
 import com.pcs.autok.utils.HashResultParameters;
@@ -28,7 +29,7 @@ public class loginController {
 	}
 
 	@RequestMapping(value = "/logarUsuario", method = RequestMethod.POST)
-	public ModelAndView logarUsuario(@ModelAttribute Cliente cliente) {
+	public ModelAndView logarUsuario(@ModelAttribute Cliente cliente) throws SQLException {
 		System.out.println("logarUsuario: Passing through...");
 		int result;
 		LogarUsuarioValidator validator = new LogarUsuarioValidator(cliente);

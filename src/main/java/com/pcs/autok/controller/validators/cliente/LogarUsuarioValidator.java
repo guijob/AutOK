@@ -1,4 +1,6 @@
-package com.pcs.autok.controller.validators.read;
+package com.pcs.autok.controller.validators.cliente;
+
+import java.sql.SQLException;
 
 import com.pcs.autok.dao.ClienteDAO;
 import com.pcs.autok.model.Cliente;
@@ -12,7 +14,7 @@ public class LogarUsuarioValidator {
 		this.cliente = cliente;
 	}
 
-	public int validar(Cliente cliente) {
+	public int validar(Cliente cliente) throws SQLException  {
 
 		System.out.println(cliente.toString());
 		
