@@ -47,16 +47,13 @@
     </div>
 
       <hr>
-	<div class="container">
+      
+      <div class="container">
       <footer>
-        <p><a href = "${pageContext.request.contextPath}/confirmacaoExcluirCliente">Excluir cadastro</a></p>
-        <p><a href = "${pageContext.request.contextPath}/formularioLoginEditar">Editar cadastro</a></p>
-        <p><a href = "${pageContext.request.contextPath}/paginaPecas">Pecas</a></p>
-      </footer>
-    </div> <!-- /container -->
-    <div class="container">
-      <footer>
-        <p>&copy; Grupo 04 - PCS2034 de 2015</p>
+			<p>&copy; Grupo 04 - PCS2034 de 2015</p>
+        	<p><a href = "${pageContext.request.contextPath}/confirmacaoExcluirCliente">Excluir cadastro</a></p>
+     	   	<p><a href = "${pageContext.request.contextPath}/formularioLoginEditar">Editar cadastro</a></p>
+        	<p><a href = "${pageContext.request.contextPath}/paginaPecas">Pecas</a></p>
       </footer>
     </div> <!-- /container -->
 

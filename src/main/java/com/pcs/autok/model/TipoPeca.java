@@ -12,4 +12,10 @@ public class TipoPeca {
 	public void setDescrPeca(String descrPeca) {
 		this.descrPeca = descrPeca;
 	}
+
+	@Override
+	public String toString() {
+		return "TipoPeca [descrPeca=" + descrPeca + "]";
+	}
+	
 }
