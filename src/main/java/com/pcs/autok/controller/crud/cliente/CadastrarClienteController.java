@@ -1,4 +1,4 @@
-package com.pcs.autok.controller.update;
+package com.pcs.autok.controller.crud.cliente;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -9,45 +9,36 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.pcs.autok.controller.validators.update.EditarUsuarioValidator;
+import com.pcs.autok.controller.validators.cliente.CadastrarClienteValidator;
 import com.pcs.autok.dao.ClienteDAO;
 import com.pcs.autok.model.Cliente;
 import com.pcs.autok.utils.HashResultParameters;
 import com.pcs.autok.utils.ResultParameters;
 
 @Controller
-public class EditarClienteController {
+public class CadastrarClienteController {
 
-	@RequestMapping(value = "/formularioLoginEditar", method = RequestMethod.GET)
+	@RequestMapping(value = "/formularioCadastrarCliente", method = RequestMethod.POST)
 	public ModelAndView getFormularioCliente() {
-		System.out.println("getFormularioLoginEditarCliente: Passing through...");
+		System.out.println("getFormularioCliente: Passing through...");
 
-		ModelAndView mv = new ModelAndView("formularioLoginEditar");
-		mv.addObject("loginEntidade", new Cliente());
-		return mv;
-	}
-	
-	@RequestMapping(value = "/formularioEditar", method = RequestMethod.POST)
-	public ModelAndView editarUsuario(@ModelAttribute Cliente cliente) {
-		System.out.println("formularioEditar: Passing through...");
-
-		ModelAndView mv = new ModelAndView("cliente/formularioEditar");
+		ModelAndView mv = new ModelAndView("cliente/formulario");
 		mv.addObject("clienteEntidade", new Cliente());
 		return mv;
 	}
-	
-	@RequestMapping(value ="/editarCliente", method = RequestMethod.POST)
+
+	@RequestMapping(value = "/cadastrarCliente", method = RequestMethod.POST)
 	public ModelAndView cadastrarCliente(@ModelAttribute Cliente cliente) {
-		System.out.println("editarCliente: Passing through...");
+		System.out.println("cadastrarCliente: Passing through...");
 		int result;
-		EditarUsuarioValidator validator = new EditarUsuarioValidator(cliente);
+		CadastrarClienteValidator validator = new CadastrarClienteValidator(cliente);
 		ClienteDAO dao = new ClienteDAO();
 		ModelAndView mv = new ModelAndView("sucesso");
 
 		result = validator.validar(cliente);
 
 		if (result == ResultParameters.OK.getResult()) {
-			dao.editarCliente(cliente);
+			dao.cadastrarCliente(cliente);
 			return mv;
 		} else {
 			System.out.println("cadastrarCliente: Error " + result);
@@ -60,5 +51,4 @@ public class EditarClienteController {
 			return mv2;
 		}
 	}
-	
 }
