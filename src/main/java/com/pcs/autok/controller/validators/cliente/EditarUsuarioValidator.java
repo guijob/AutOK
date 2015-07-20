@@ -1,6 +1,5 @@
 package com.pcs.autok.controller.validators.cliente;
 
-import com.pcs.autok.dao.ClienteDAO;
 import com.pcs.autok.model.Cliente;
 import com.pcs.autok.utils.ResultParameters;
 

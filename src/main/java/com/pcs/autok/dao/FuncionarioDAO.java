@@ -7,11 +7,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.pcs.autok.dao.connect.ConnectionDAO;
-import com.pcs.autok.model.Atendente;
+import com.pcs.autok.model.Funcionario;
 
-public class AtendenteDAO extends ConnectionDAO {
+public class FuncionarioDAO extends ConnectionDAO {
 
-	public void editarAtendente(Atendente atendente) {
+	public void editarFuncionario(Funcionario funcionario) {
 
 		Connection conn = null;
 		Statement stmt = null;
@@ -21,12 +21,13 @@ public class AtendenteDAO extends ConnectionDAO {
 			stmt = conn.createStatement();
 			StringBuilder sql = new StringBuilder();
 
-			sql.append("update dbAutOK.atendente");
-			sql.append(" set nomeatendente = '" + atendente.getNomeAtendente()
-					+ "', telefoneatendente = " + atendente.getTelAtendente() + ",enderecoatendente = '"
-					+ atendente.getEndAtendente() + "', emailatendente = '"
-					+ atendente.getEmailAtendente() + "',senha = '"
-					+ atendente.getSenhaAtendente() + "' where emailatendente = '" + atendente.getEmailAtendente() + "';");
+			sql.append("update dbAutOK.funcionario");
+			sql.append(" set nomefuncionario = '" + funcionario.getNomeFuncionario()
+					+ "', telefonefuncionario = " + funcionario.getTelFuncionario() + ",enderecofuncionario = '"
+					+ funcionario.getEndFuncionario() + "', emailfuncionario = '"
+					+ funcionario.getEmailFuncionario() + "',senhafuncionario = '"
+					+ funcionario.getSenhaFuncionario() + "' where emailfuncionario = '" + funcionario.getEmailFuncionario() +
+					"' where tipofuncionario = '" + funcionario.getTipoFuncionario() +"';");
 			System.out.println(sql.toString());
 
 			stmt.executeUpdate(sql.toString());
@@ -44,7 +45,7 @@ public class AtendenteDAO extends ConnectionDAO {
 		}
 	}
 	
-	public void cadastrarAtendente(Atendente atendente) {
+	public void cadastrarFuncionario(Funcionario funcionario) {
 
 		Connection conn = null;
 		Statement stmt = null;
@@ -54,12 +55,13 @@ public class AtendenteDAO extends ConnectionDAO {
 			stmt = conn.createStatement();
 			StringBuilder sql = new StringBuilder();
 
-			sql.append("insert into dbAutOK.atendente");
-			sql.append(" values " + "(0, " + "'" + atendente.getNomeAtendente()
-					+ "', " + atendente.getTelAtendente() + ", '"
-					+ atendente.getEndAtendente() + "', '"
-					+ atendente.getEmailAtendente() + "', '"
-					+ atendente.getSenhaAtendente() + "');");
+			sql.append("insert into dbAutOK.funcionario");
+			sql.append(" values " + "(0, " + "'" + funcionario.getNomeFuncionario()
+					+ "', " + funcionario.getTelFuncionario() + ", '"
+					+ funcionario.getEndFuncionario() + "', '"
+					+ funcionario.getEmailFuncionario() + "', '"
+					+ funcionario.getSenhaFuncionario() + "', '"
+					+ funcionario.getTipoFuncionario() + "');");
 			System.out.println(sql.toString());
 
 			stmt.executeUpdate(sql.toString());
@@ -77,7 +79,7 @@ public class AtendenteDAO extends ConnectionDAO {
 		}
 	}
 
-	public boolean buscarEmail(Atendente atendente) {
+	public boolean buscarEmail(Funcionario funcionario) {
 		Connection conn = null;
 		Statement stmt = null;
 		ResultSet rs = null;
@@ -88,8 +90,8 @@ public class AtendenteDAO extends ConnectionDAO {
 			stmt = conn.createStatement();
 			StringBuilder sql = new StringBuilder();
 
-			sql.append("select * from dbAutOK.atendente where");
-			sql.append(" nomeatendente like '" + atendente.getEmailAtendente() + "';");
+			sql.append("select * from dbAutOK.funcionario where");
+			sql.append(" nomefuncionario like '" + funcionario.getEmailFuncionario() + "';");
 			System.out.println(sql.toString());
 
 			rs = stmt.executeQuery(sql.toString());
@@ -113,32 +115,33 @@ public class AtendenteDAO extends ConnectionDAO {
 		return result;
 	}
 	
-	public Atendente buscarRegistro(Atendente atendente) {
+	public Funcionario buscarRegistro(Funcionario funcionario) {
 		Connection conn = null;
 		Statement stmt = null;
 		ResultSet rs = null;
-		Atendente u = null;
+		Funcionario u = null;
 		
 		try {
 			conn = startConnection();
 			stmt = conn.createStatement();
 			StringBuilder sql = new StringBuilder();
 			
-			sql.append("select * from dbAutOK.atendente where");
-			sql.append(" emailatendente like '" + atendente.getEmailAtendente() + "'"
-					+ "and senha like '" + atendente.getSenhaAtendente() + "';");
+			sql.append("select * from dbAutOK.funcionario where");
+			sql.append(" emailfuncionario like '" + funcionario.getEmailFuncionario() + "'"
+					+ "and senhafuncionario like '" + funcionario.getSenhaFuncionario() + "';");
 			System.out.println(sql.toString());
 			
 			rs = stmt.executeQuery(sql.toString());
 			
 			if (rs.next()) {
-				u = new Atendente();
-				u.setIdAtendente(rs.getInt("idatendente"));
-				u.setNomeAtendente(rs.getString("nomeatendente"));
-				u.setTelAtendente(rs.getInt("telefoneatendente"));
-				u.setEndAtendente(rs.getString("enderecoatendente"));
-				u.setEmailAtendente(rs.getString("emailatendente"));
-				u.setSenhaAtendente(rs.getString("senha"));
+				u = new Funcionario();
+				u.setIdFuncionario(rs.getInt("idfuncionario"));
+				u.setNomeFuncionario(rs.getString("nomefuncionario"));
+				u.setTelFuncionario(rs.getInt("telefonefuncionario"));
+				u.setEndFuncionario(rs.getString("enderecofuncionario"));
+				u.setEmailFuncionario(rs.getString("emailfuncionario"));
+				u.setSenhaFuncionario(rs.getString("senhafuncionario"));
+				u.setTipoFuncionario(rs.getString("tipofuncionario"));
 			}
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -156,7 +159,7 @@ public class AtendenteDAO extends ConnectionDAO {
 		return u;
 	}
 	
-	public void excluirAtendente(Atendente atendente) {
+	public void excluirFuncionario(Funcionario funcionario) {
 
 		Connection conn = null;
 		Statement stmt = null;
@@ -166,9 +169,9 @@ public class AtendenteDAO extends ConnectionDAO {
 			stmt = conn.createStatement();
 			StringBuilder sql = new StringBuilder();
 
-			sql.append("delete from dbAutOK.atendente");
-			sql.append(" where emailatendente = '" + atendente.getEmailAtendente()
-					+ "' and senha = '" + atendente.getSenhaAtendente()
+			sql.append("delete from dbAutOK.funcionario");
+			sql.append(" where emailfuncionario = '" + funcionario.getEmailFuncionario()
+					+ "' and senhafuncionario = '" + funcionario.getSenhaFuncionario()
 					+ "';");
 			System.out.println(sql.toString());
 
@@ -187,7 +190,7 @@ public class AtendenteDAO extends ConnectionDAO {
 		}
 	}
 	
-	public boolean buscarAtendente(Atendente atendente) {
+	public boolean buscarFuncionario(Funcionario funcionario) {
 		Connection conn = null;
 		Statement stmt = null;
 		ResultSet rs = null;
@@ -197,9 +200,9 @@ public class AtendenteDAO extends ConnectionDAO {
 			stmt = conn.createStatement();
 			StringBuilder sql = new StringBuilder();
 	
-			sql.append("select * from dbAutOK.atendente where");
-			sql.append(" emailatendente like '" + atendente.getEmailAtendente() 
-						+ "' and senha like '" + atendente.getSenhaAtendente() + "';");
+			sql.append("select * from dbAutOK.funcionario where");
+			sql.append(" emailfuncionario like '" + funcionario.getEmailFuncionario() 
+						+ "' and senhafuncionario like '" + funcionario.getSenhaFuncionario() + "';");
 			System.out.println(sql.toString());
 			rs = stmt.executeQuery(sql.toString());
 			result = rs.next();
@@ -221,8 +224,8 @@ public class AtendenteDAO extends ConnectionDAO {
 		return result;
 	}
 
-	public List<Atendente> listarTodos() {
-		List<Atendente> atendentes = new ArrayList<Atendente>();
+	public List<Funcionario> listarTodos() {
+		List<Funcionario> funcionarios = new ArrayList<Funcionario>();
 
 		Connection conn = null;
 		Statement stmt = null;
@@ -232,13 +235,13 @@ public class AtendenteDAO extends ConnectionDAO {
 			conn = startConnection();
 			stmt = conn.createStatement();
 			StringBuilder sql = new StringBuilder();
-			sql.append(" select atendente.idAtendente, atendente.nomeAtendente, atendente.telAtendente");
-			sql.append(" from atendente atendente");
+			sql.append(" select funcionario.idFuncionario, funcionario.nomeFuncionario, funcionario.telFuncionario");
+			sql.append(" from funcionario funcionario");
 			rs = stmt.executeQuery(sql.toString());
 
-			Atendente u = null;
+			Funcionario u = null;
 			while (rs.next()) {
-				u = new Atendente();
+				u = new Funcionario();
 			}
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -253,7 +256,7 @@ public class AtendenteDAO extends ConnectionDAO {
 				e.printStackTrace();
 			}
 		}
-		return atendentes;
+		return funcionarios;
 	}
 
 }
