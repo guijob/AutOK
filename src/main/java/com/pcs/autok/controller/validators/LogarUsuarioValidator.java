@@ -1,4 +1,4 @@
-package com.pcs.autok.controller.validators.cliente;
+package com.pcs.autok.controller.validators;
 
 import com.pcs.autok.dao.ClienteDAO;
 import com.pcs.autok.model.Cliente;
@@ -41,7 +41,7 @@ public class LogarUsuarioValidator {
 		/* usuario nao encontrado */
 		ClienteDAO dao = new ClienteDAO();
 		boolean result = dao.buscarCliente(cliente);
-		if (result) {
+		if (!result) {
 			System.out.println("validarLoginCliente: Não passou porque não existe usuário no banco de dados");
 			return ResultParameters.USUARIO_NAO_ENCONTRADO.getResult();
 		}

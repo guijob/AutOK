@@ -217,7 +217,6 @@ public class ClienteDAO extends ConnectionDAO {
 				e.printStackTrace();
 			}
 		}
-		System.out.println(":::" + result);
 		return result;
 	}
 

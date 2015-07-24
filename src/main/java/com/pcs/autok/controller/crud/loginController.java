@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.pcs.autok.controller.validators.cliente.LogarUsuarioValidator;
+import com.pcs.autok.controller.validators.LogarUsuarioValidator;
 import com.pcs.autok.dao.ClienteDAO;
 import com.pcs.autok.model.Cliente;
 import com.pcs.autok.utils.HashResultParameters;
