@@ -1,4 +1,4 @@
-package com.pcs.autok.controller.crud.funcionarios;
+package com.pcs.autok.controller.crud.funcionario;
 
 import java.sql.SQLException;
 import java.util.HashMap;
