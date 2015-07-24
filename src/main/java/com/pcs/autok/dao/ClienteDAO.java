@@ -235,6 +235,7 @@ public class ClienteDAO extends ConnectionDAO {
 			sql.append(" from cliente cliente");
 			rs = stmt.executeQuery(sql.toString());
 
+			@SuppressWarnings("unused")
 			Cliente u = null;
 			while (rs.next()) {
 				u = new Cliente();
@@ -244,9 +245,9 @@ public class ClienteDAO extends ConnectionDAO {
 			e.printStackTrace();
 		} finally {
 			try {
-				// conn.close();
-				// stmt.close();
-				// rs.close();
+				 conn.close();
+				 stmt.close();
+				 rs.close();
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

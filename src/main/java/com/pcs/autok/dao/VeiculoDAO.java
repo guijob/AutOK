@@ -7,11 +7,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.pcs.autok.dao.connect.ConnectionDAO;
-import com.pcs.autok.model.Funcionario;
+import com.pcs.autok.model.Veiculo;
 
-public class FuncionarioDAO extends ConnectionDAO {
+public class VeiculoDAO extends ConnectionDAO {
 
-	public void editarFuncionario(Funcionario funcionario) {
+	public void editarVeiculo(Veiculo veiculo) {
 
 		Connection conn = null;
 		Statement stmt = null;
@@ -21,18 +21,13 @@ public class FuncionarioDAO extends ConnectionDAO {
 			stmt = conn.createStatement();
 			StringBuilder sql = new StringBuilder();
 
-			sql.append("update dbAutOK.funcionario");
-			sql.append(" set nomefuncionario = '" + funcionario.getNomeFuncionario()
-					+ "', telefonefuncionario = " + funcionario.getTelFuncionario() 
-					+ "', celularfuncionario = " + funcionario.getCelFuncionario() 
-					+ ", enderecofuncionario = '" + funcionario.getEndFuncionario() 
-					+ "', emailfuncionario = '" + funcionario.getEmailFuncionario() 
-					+ "', senhafuncionario = '" + funcionario.getSenhaFuncionario() 
-					+ "', tipofuncionario = " + funcionario.getTipoFuncionario() 
-					+ "', ctpsfuncionario = " + funcionario.getCtpsFuncionario() 
-					+ ", cpffuncionario = " + funcionario.getCpfFuncionario() 
-					+ " where emailfuncionario = '" + funcionario.getEmailFuncionario() 
-					+ "';");
+			sql.append("update dbAutOK.veiculo");
+			sql.append(" set modeloveiculo = '" + veiculo.getModeloVeiculo()
+					+ "', renavam = '" + veiculo.getRENAVAM() + "',fabricanteveiculo = '"
+					+ veiculo.getFabVeiculo() + "', anoveiculo = '"
+					+ veiculo.getFabAno() + "',quilometragem = "
+					+ veiculo.getQuilometragem() + "idcliente = " 
+					+ veiculo.getIdCliente() + ";");
 			System.out.println(sql.toString());
 
 			stmt.executeUpdate(sql.toString());
@@ -50,7 +45,7 @@ public class FuncionarioDAO extends ConnectionDAO {
 		}
 	}
 	
-	public void cadastrarFuncionario(Funcionario funcionario) {
+	public void cadastrarVeiculo(Veiculo veiculo) {
 
 		Connection conn = null;
 		Statement stmt = null;
@@ -60,18 +55,12 @@ public class FuncionarioDAO extends ConnectionDAO {
 			stmt = conn.createStatement();
 			StringBuilder sql = new StringBuilder();
 
-			sql.append("insert into dbAutOK.funcionario");
-			sql.append(" values " 
-					+ "(0, " + "'" 
-					+ funcionario.getNomeFuncionario() + "', " 
-					+ funcionario.getTelFuncionario() + ", "
-					+ funcionario.getCelFuncionario() + ", '"
-					+ funcionario.getEndFuncionario() + "', '"
-					+ funcionario.getEmailFuncionario() + "', '"
-					+ funcionario.getSenhaFuncionario() + "', '"
-					+ funcionario.getTipoFuncionario() + "', "
-					+ funcionario.getCtpsFuncionario() + ", "
-					+ funcionario.getCpfFuncionario() + ");");
+			sql.append("insert into dbAutOK.veiculo");
+			sql.append(" values " + "(0, " + "'" + veiculo.getModeloVeiculo()
+					+ "', " + veiculo.getRENAVAM() + ", '"
+					+ veiculo.getFabVeiculo() + "', '"
+					+ veiculo.getFabAno() + "', "
+					+ veiculo.getQuilometragem() + ");");
 			System.out.println(sql.toString());
 
 			stmt.executeUpdate(sql.toString());
@@ -89,7 +78,7 @@ public class FuncionarioDAO extends ConnectionDAO {
 		}
 	}
 
-	public boolean buscarEmail(Funcionario funcionario) {
+	public boolean buscarRENAVAM(Veiculo veiculo) {
 		Connection conn = null;
 		Statement stmt = null;
 		ResultSet rs = null;
@@ -100,12 +89,13 @@ public class FuncionarioDAO extends ConnectionDAO {
 			stmt = conn.createStatement();
 			StringBuilder sql = new StringBuilder();
 
-			sql.append("select * from dbAutOK.funcionario where");
-			sql.append(" nomefuncionario like '" + funcionario.getEmailFuncionario() + "';");
+			sql.append("select * from dbAutOK.veiculo where");
+			sql.append(" renvam like '" + veiculo.getRENAVAM() + "';");
 			System.out.println(sql.toString());
 
 			rs = stmt.executeQuery(sql.toString());
 
+			System.out.println(rs.next());
 			result = rs.next();
 
 		} catch (Exception e) {
@@ -124,36 +114,33 @@ public class FuncionarioDAO extends ConnectionDAO {
 		return result;
 	}
 	
-	public Funcionario buscarRegistro(Funcionario funcionario) {
+	public Veiculo buscarModelo(Veiculo veiculo) {
 		Connection conn = null;
 		Statement stmt = null;
 		ResultSet rs = null;
-		Funcionario u = null;
+		Veiculo u = null;
 		
 		try {
 			conn = startConnection();
 			stmt = conn.createStatement();
 			StringBuilder sql = new StringBuilder();
 			
-			sql.append("select * from dbAutOK.funcionario where");
-			sql.append(" emailfuncionario like '" + funcionario.getEmailFuncionario() + "'"
-					+ "and senhafuncionario like '" + funcionario.getSenhaFuncionario() + "';");
+			sql.append("select * from dbAutOK.veiculo where");
+			sql.append(" modeloveiculo like '" + veiculo.getModeloVeiculo() + "'"
+					+ "and idcliente = " + veiculo.getIdCliente() + "';");
 			System.out.println(sql.toString());
 			
 			rs = stmt.executeQuery(sql.toString());
 			
 			if (rs.next()) {
-				u = new Funcionario();
-				u.setIdFuncionario(rs.getInt("idfuncionario"));
-				u.setNomeFuncionario(rs.getString("nomefuncionario"));
-				u.setTelFuncionario(rs.getInt("telefonefuncionario"));
-				u.setCelFuncionario(rs.getInt("celularfuncionario"));
-				u.setEndFuncionario(rs.getString("enderecofuncionario"));
-				u.setEmailFuncionario(rs.getString("emailfuncionario"));
-				u.setSenhaFuncionario(rs.getString("senhafuncionario"));
-				u.setTipoFuncionario(rs.getString("tipofuncionario"));
-				u.setCtpsFuncionario(rs.getInt("ctpsfuncionario"));
-				u.setCpfFuncionario(rs.getInt("cpffuncionario"));
+				u = new Veiculo();
+				u.setIdVeiculo(rs.getInt("idveiculo"));
+				u.setIdCliente(rs.getInt("idcliente"));
+				u.setModeloVeiculo(rs.getString("modeloveiculo"));
+				u.setRENAVAM(rs.getString("renavam"));
+				u.setFabVeiculo(rs.getString("fabricanteveiculo"));
+				u.setFabAno(rs.getString("anoveiculo"));
+				u.setQuilometragem(rs.getInt("quilometragem"));
 			}
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -171,7 +158,7 @@ public class FuncionarioDAO extends ConnectionDAO {
 		return u;
 	}
 	
-	public void excluirFuncionario(Funcionario funcionario) {
+	public void excluirVeiculo(Veiculo veiculo) {
 
 		Connection conn = null;
 		Statement stmt = null;
@@ -181,10 +168,9 @@ public class FuncionarioDAO extends ConnectionDAO {
 			stmt = conn.createStatement();
 			StringBuilder sql = new StringBuilder();
 
-			sql.append("delete from dbAutOK.funcionario");
-			sql.append(" where emailfuncionario = '" + funcionario.getEmailFuncionario()
-					+ "' and senhafuncionario = '" + funcionario.getSenhaFuncionario()
-					+ "';");
+			sql.append("delete from dbAutOK.veiculo");
+			sql.append(" renavam like '" + veiculo.getRENAVAM() + "'"
+					+ "and idcliente = " + veiculo.getIdCliente() + "';");
 			System.out.println(sql.toString());
 
 			stmt.executeUpdate(sql.toString());
@@ -202,7 +188,7 @@ public class FuncionarioDAO extends ConnectionDAO {
 		}
 	}
 	
-	public boolean buscarFuncionario(Funcionario funcionario) {
+	public boolean buscarVeiculos(Veiculo veiculo) {
 		Connection conn = null;
 		Statement stmt = null;
 		ResultSet rs = null;
@@ -212,9 +198,8 @@ public class FuncionarioDAO extends ConnectionDAO {
 			stmt = conn.createStatement();
 			StringBuilder sql = new StringBuilder();
 	
-			sql.append("select * from dbAutOK.funcionario where");
-			sql.append(" emailfuncionario like '" + funcionario.getEmailFuncionario() 
-						+ "' and senhafuncionario like '" + funcionario.getSenhaFuncionario() + "';");
+			sql.append("select * from dbAutOK.veiculo where");
+			sql.append(" idcliente = " + veiculo.getIdCliente() + "';");
 			System.out.println(sql.toString());
 			rs = stmt.executeQuery(sql.toString());
 			result = rs.next();
@@ -236,8 +221,8 @@ public class FuncionarioDAO extends ConnectionDAO {
 		return result;
 	}
 
-	public List<Funcionario> listarTodos() {
-		List<Funcionario> funcionarios = new ArrayList<Funcionario>();
+	public List<Veiculo> listarTodos(Veiculo veiculo) {
+		List<Veiculo> veiculos = new ArrayList<Veiculo>();
 
 		Connection conn = null;
 		Statement stmt = null;
@@ -247,10 +232,15 @@ public class FuncionarioDAO extends ConnectionDAO {
 			conn = startConnection();
 			stmt = conn.createStatement();
 			StringBuilder sql = new StringBuilder();
-			sql.append(" select *");
-			sql.append(" from funcionario funcionario");
+			sql.append("select * from dbAutOK.veiculo where");
+			sql.append(" idcliente like '" + veiculo.getIdCliente() + "';");
 			rs = stmt.executeQuery(sql.toString());
 
+			@SuppressWarnings("unused")
+			Veiculo u = null;
+			while (rs.next()) {
+				u = new Veiculo();
+			}
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -264,7 +254,7 @@ public class FuncionarioDAO extends ConnectionDAO {
 				e.printStackTrace();
 			}
 		}
-		return funcionarios;
+		return veiculos;
 	}
 
 }
