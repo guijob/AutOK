@@ -1,5 +1,6 @@
-package com.pcs.autok.controller.crud.atendente;
+package com.pcs.autok.controller.crud.funcionarios;
 
+import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -9,39 +10,40 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.pcs.autok.controller.validators.cliente.EditarUsuarioValidator;
-import com.pcs.autok.dao.ClienteDAO;
+import com.pcs.autok.controller.validators.funcionario.EditarFuncionarioValidator;
+import com.pcs.autok.dao.FuncionarioDAO;
 import com.pcs.autok.model.Cliente;
+import com.pcs.autok.model.Funcionario;
 import com.pcs.autok.utils.HashResultParameters;
 import com.pcs.autok.utils.ResultParameters;
 
 @Controller
-public class EditarAtendenteController {
+public class EditarFuncionarioController {
 	
-	@RequestMapping(value = "/formularioEditarAtendente", method = RequestMethod.POST)
+	@RequestMapping(value = "/formularioEditarFuncionario", method = RequestMethod.POST)
 	public ModelAndView editarUsuario(@ModelAttribute Cliente cliente) {
 		System.out.println("formularioEditar: Passing through...");
 
-		ModelAndView mv = new ModelAndView("atendente/formularioEditar");
-		mv.addObject("atendenteEntidade", new Cliente());
+		ModelAndView mv = new ModelAndView("funcionario/formularioEditar");
+		mv.addObject("funcionarioEntidade", new Cliente());
 		return mv;
 	}
 	
-	@RequestMapping(value ="/editarAtendente", method = RequestMethod.POST)
-	public ModelAndView cadastrarCliente(@ModelAttribute Cliente cliente) {
-		System.out.println("editarAtendente: Passing through...");
+	@RequestMapping(value ="/editarFuncionario", method = RequestMethod.POST)
+	public ModelAndView cadastrarFuncionario(@ModelAttribute Funcionario funcionario) throws SQLException {
+		System.out.println("editarFuncionario: Passing through...");
 		int result;
-		EditarUsuarioValidator validator = new EditarUsuarioValidator(cliente);
-		ClienteDAO dao = new ClienteDAO();
+		EditarFuncionarioValidator validator = new EditarFuncionarioValidator(funcionario);
+		FuncionarioDAO dao = new FuncionarioDAO();
 		ModelAndView mv = new ModelAndView("sucesso");
 
-		result = validator.validar(cliente);
+		result = validator.validar(funcionario);
 
 		if (result == ResultParameters.OK.getResult()) {
-			dao.editarCliente(cliente);
+			dao.editarFuncionario(funcionario);
 			return mv;
 		} else {
-			System.out.println("cadastrarCliente: Error " + result);
+			System.out.println("cadastrarFuncionario: Error " + result);
 			ModelAndView mv2 = new ModelAndView("erro");
 			Map<Integer, String> map = new HashMap<Integer, String>();
 			HashResultParameters hashMap = new HashResultParameters();

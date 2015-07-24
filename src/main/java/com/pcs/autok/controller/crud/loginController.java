@@ -1,4 +1,4 @@
-package com.pcs.autok.controller.crud.cliente;
+package com.pcs.autok.controller.crud;
 
 import java.util.HashMap;
 import java.util.Map;
