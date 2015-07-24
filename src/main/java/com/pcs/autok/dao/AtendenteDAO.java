@@ -236,6 +236,7 @@ public class AtendenteDAO extends ConnectionDAO {
 			sql.append(" from atendente atendente");
 			rs = stmt.executeQuery(sql.toString());
 
+			@SuppressWarnings("unused")
 			Atendente u = null;
 			while (rs.next()) {
 				u = new Atendente();
@@ -245,9 +246,9 @@ public class AtendenteDAO extends ConnectionDAO {
 			e.printStackTrace();
 		} finally {
 			try {
-				// conn.close();
-				// stmt.close();
-				// rs.close();
+				 conn.close();
+				 stmt.close();
+				 rs.close();
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

@@ -7,11 +7,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.pcs.autok.dao.connect.ConnectionDAO;
-import com.pcs.autok.model.Cliente;
+import com.pcs.autok.model.Veiculo;
 
-public class ClienteDAO extends ConnectionDAO {
+public class VeiculoDAO extends ConnectionDAO {
 
-	public void editarCliente(Cliente cliente) {
+	public void editarVeiculo(Veiculo veiculo) {
 
 		Connection conn = null;
 		Statement stmt = null;
@@ -21,12 +21,13 @@ public class ClienteDAO extends ConnectionDAO {
 			stmt = conn.createStatement();
 			StringBuilder sql = new StringBuilder();
 
-			sql.append("update dbAutOK.cliente");
-			sql.append(" set nomecliente = '" + cliente.getNomeCliente()
-					+ "', telefonecliente = " + cliente.getTelCliente() + ",enderecocliente = '"
-					+ cliente.getEndCliente() + "', emailcliente = '"
-					+ cliente.getEmailCliente() + "',senha = '"
-					+ cliente.getSenhaCliente() + "' where emailcliente = '" + cliente.getEmailCliente() + "';");
+			sql.append("update dbAutOK.veiculo");
+			sql.append(" set modeloveiculo = '" + veiculo.getModeloVeiculo()
+					+ "', renavam = '" + veiculo.getRENAVAM() + "',fabricanteveiculo = '"
+					+ veiculo.getFabVeiculo() + "', anoveiculo = '"
+					+ veiculo.getFabAno() + "',quilometragem = "
+					+ veiculo.getQuilometragem() + "idcliente = " 
+					+ veiculo.getIdCliente() + ";");
 			System.out.println(sql.toString());
 
 			stmt.executeUpdate(sql.toString());
@@ -44,7 +45,7 @@ public class ClienteDAO extends ConnectionDAO {
 		}
 	}
 	
-	public void cadastrarCliente(Cliente cliente) {
+	public void cadastrarVeiculo(Veiculo veiculo) {
 
 		Connection conn = null;
 		Statement stmt = null;
@@ -54,12 +55,12 @@ public class ClienteDAO extends ConnectionDAO {
 			stmt = conn.createStatement();
 			StringBuilder sql = new StringBuilder();
 
-			sql.append("insert into dbAutOK.cliente");
-			sql.append(" values " + "(0, " + "'" + cliente.getNomeCliente()
-					+ "', " + cliente.getTelCliente() + ", '"
-					+ cliente.getEndCliente() + "', '"
-					+ cliente.getEmailCliente() + "', '"
-					+ cliente.getSenhaCliente() + "');");
+			sql.append("insert into dbAutOK.veiculo");
+			sql.append(" values " + "(0, " + "'" + veiculo.getModeloVeiculo()
+					+ "', " + veiculo.getRENAVAM() + ", '"
+					+ veiculo.getFabVeiculo() + "', '"
+					+ veiculo.getFabAno() + "', "
+					+ veiculo.getQuilometragem() + ");");
 			System.out.println(sql.toString());
 
 			stmt.executeUpdate(sql.toString());
@@ -77,7 +78,7 @@ public class ClienteDAO extends ConnectionDAO {
 		}
 	}
 
-	public boolean buscarEmail(Cliente cliente) {
+	public boolean buscarRENAVAM(Veiculo veiculo) {
 		Connection conn = null;
 		Statement stmt = null;
 		ResultSet rs = null;
@@ -88,8 +89,8 @@ public class ClienteDAO extends ConnectionDAO {
 			stmt = conn.createStatement();
 			StringBuilder sql = new StringBuilder();
 
-			sql.append("select * from dbAutOK.cliente where");
-			sql.append(" nomecliente like '" + cliente.getEmailCliente() + "';");
+			sql.append("select * from dbAutOK.veiculo where");
+			sql.append(" renvam like '" + veiculo.getRENAVAM() + "';");
 			System.out.println(sql.toString());
 
 			rs = stmt.executeQuery(sql.toString());
@@ -113,32 +114,33 @@ public class ClienteDAO extends ConnectionDAO {
 		return result;
 	}
 	
-	public Cliente buscarRegistro(Cliente cliente) {
+	public Veiculo buscarModelo(Veiculo veiculo) {
 		Connection conn = null;
 		Statement stmt = null;
 		ResultSet rs = null;
-		Cliente u = null;
+		Veiculo u = null;
 		
 		try {
 			conn = startConnection();
 			stmt = conn.createStatement();
 			StringBuilder sql = new StringBuilder();
 			
-			sql.append("select * from dbAutOK.cliente where");
-			sql.append(" emailcliente like '" + cliente.getEmailCliente() + "'"
-					+ "and senha like '" + cliente.getSenhaCliente() + "';");
+			sql.append("select * from dbAutOK.veiculo where");
+			sql.append(" modeloveiculo like '" + veiculo.getModeloVeiculo() + "'"
+					+ "and idcliente = " + veiculo.getIdCliente() + "';");
 			System.out.println(sql.toString());
 			
 			rs = stmt.executeQuery(sql.toString());
 			
 			if (rs.next()) {
-				u = new Cliente();
+				u = new Veiculo();
+				u.setIdVeiculo(rs.getInt("idveiculo"));
 				u.setIdCliente(rs.getInt("idcliente"));
-				u.setNomeCliente(rs.getString("nomecliente"));
-				u.setTelCliente(rs.getInt("telefonecliente"));
-				u.setEndCliente(rs.getString("enderecocliente"));
-				u.setEmailCliente(rs.getString("emailcliente"));
-				u.setSenhaCliente(rs.getString("senha"));
+				u.setModeloVeiculo(rs.getString("modeloveiculo"));
+				u.setRENAVAM(rs.getString("renavam"));
+				u.setFabVeiculo(rs.getString("fabricanteveiculo"));
+				u.setFabAno(rs.getString("anoveiculo"));
+				u.setQuilometragem(rs.getInt("quilometragem"));
 			}
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -156,7 +158,7 @@ public class ClienteDAO extends ConnectionDAO {
 		return u;
 	}
 	
-	public void excluirCliente(Cliente cliente) {
+	public void excluirVeiculo(Veiculo veiculo) {
 
 		Connection conn = null;
 		Statement stmt = null;
@@ -166,10 +168,9 @@ public class ClienteDAO extends ConnectionDAO {
 			stmt = conn.createStatement();
 			StringBuilder sql = new StringBuilder();
 
-			sql.append("delete from dbAutOK.cliente");
-			sql.append(" where emailcliente = '" + cliente.getEmailCliente()
-					+ "' and senha = '" + cliente.getSenhaCliente()
-					+ "';");
+			sql.append("delete from dbAutOK.veiculo");
+			sql.append(" renavam like '" + veiculo.getRENAVAM() + "'"
+					+ "and idcliente = " + veiculo.getIdCliente() + "';");
 			System.out.println(sql.toString());
 
 			stmt.executeUpdate(sql.toString());
@@ -187,7 +188,7 @@ public class ClienteDAO extends ConnectionDAO {
 		}
 	}
 	
-	public boolean buscarCliente(Cliente cliente) {
+	public boolean buscarVeiculos(Veiculo veiculo) {
 		Connection conn = null;
 		Statement stmt = null;
 		ResultSet rs = null;
@@ -197,9 +198,8 @@ public class ClienteDAO extends ConnectionDAO {
 			stmt = conn.createStatement();
 			StringBuilder sql = new StringBuilder();
 	
-			sql.append("select * from dbAutOK.cliente where");
-			sql.append(" emailcliente like '" + cliente.getEmailCliente() 
-						+ "' and senha like '" + cliente.getSenhaCliente() + "';");
+			sql.append("select * from dbAutOK.veiculo where");
+			sql.append(" idcliente = " + veiculo.getIdCliente() + "';");
 			System.out.println(sql.toString());
 			rs = stmt.executeQuery(sql.toString());
 			result = rs.next();
@@ -221,8 +221,8 @@ public class ClienteDAO extends ConnectionDAO {
 		return result;
 	}
 
-	public List<Cliente> listarTodos() {
-		List<Cliente> clientes = new ArrayList<Cliente>();
+	public List<Veiculo> listarTodos(Veiculo veiculo) {
+		List<Veiculo> veiculos = new ArrayList<Veiculo>();
 
 		Connection conn = null;
 		Statement stmt = null;
@@ -232,14 +232,14 @@ public class ClienteDAO extends ConnectionDAO {
 			conn = startConnection();
 			stmt = conn.createStatement();
 			StringBuilder sql = new StringBuilder();
-			sql.append(" select cliente.idCliente, cliente.nomeCliente, cliente.telCliente");
-			sql.append(" from cliente cliente");
+			sql.append("select * from dbAutOK.veiculo where");
+			sql.append(" idcliente like '" + veiculo.getIdCliente() + "';");
 			rs = stmt.executeQuery(sql.toString());
 
 			@SuppressWarnings("unused")
-			Cliente u = null;
+			Veiculo u = null;
 			while (rs.next()) {
-				u = new Cliente();
+				u = new Veiculo();
 			}
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -254,7 +254,7 @@ public class ClienteDAO extends ConnectionDAO {
 				e.printStackTrace();
 			}
 		}
-		return clientes;
+		return veiculos;
 	}
 
 }
