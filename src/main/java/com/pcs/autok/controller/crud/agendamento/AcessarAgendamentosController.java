@@ -22,7 +22,7 @@ public class AcessarAgendamentosController {
 		AgendamentoDAO dao = new AgendamentoDAO();
 		
 		ArrayList<Agendamento> lista = (ArrayList<Agendamento>) dao.buscarAgendamentosCliente((
-				(Cliente) session.getAttribute("usuarioLogado")).getIdCliente());
+				(Cliente) session.getAttribute("usuarioLogado")).getId());
 		
 
 		ModelAndView mv = new ModelAndView("agendamento/agendamentos");
