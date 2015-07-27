@@ -273,9 +273,80 @@ public class FuncionarioDAO extends ConnectionDAO {
 			stmt = conn.createStatement();
 			StringBuilder sql = new StringBuilder();
 			sql.append(" select *");
-			sql.append(" from funcionario funcionario");
+			sql.append(" from dbAutoK.funcionario");
 			rs = stmt.executeQuery(sql.toString());
+			
+			Funcionario u = null;
+			
+			while(rs.next()) {	
+				u = new Funcionario();
+				u.setIdFuncionario(rs.getInt("idfuncionario"));
+				u.setNomeFuncionario(rs.getString("nomefuncionario"));
+				u.setTelFuncionario(rs.getInt("telefonefuncionario"));
+				u.setCelFuncionario(rs.getInt("celularfuncionario"));
+				u.setEndFuncionario(rs.getString("enderecofuncionario"));
+				u.setEmailFuncionario(rs.getString("emailfuncionario"));
+				u.setSenhaFuncionario(rs.getString("senhafuncionario"));
+				u.setTipoFuncionario(rs.getString("tipofuncionario"));
+				u.setCtpsFuncionario(rs.getInt("ctpsfuncionario"));
+				u.setCpfFuncionario(rs.getInt("cpffuncionario"));
+				funcionarios.add(u);
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			try {
+				 conn.close();
+				 stmt.close();
+				 rs.close();
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		return funcionarios;
+	}
+	
+	public List<Funcionario> listarEquipe(horario h) {
+		List<Funcionario> funcionarios = new ArrayList<Funcionario>();
 
+		Connection conn = null;
+		Statement stmt = null;
+		ResultSet rs = null;
+		try {
+
+			conn = startConnection();
+			stmt = conn.createStatement();
+			StringBuilder sql = new StringBuilder();
+			sql.append(" select *");
+			sql.append(" from dbAutoK.horarios");
+			sql.append("  where data like '" + horario.data + "' and horario_"+ horario.hora +"is NULL;");
+			rs = stmt.executeQuery(sql.toString());
+			while(rs.next()) {
+				StringBuilder sqlf = new StringBuilder();
+				sqlf.append(" select TOP 2 *");
+				sqlf.append(" from dbAutoK.funcionarios");
+				sqlf.append(" where idfuncionario = " + rs.getInt("idfuncionario") + ";");
+				ResultSet rs2 = stmt.executeQuery(sqlf.toString());
+				
+				Funcionario u = null;
+				
+				while(rs2.next()) {	
+					u = new Funcionario();
+					u.setIdFuncionario(rs.getInt("idfuncionario"));
+					u.setNomeFuncionario(rs.getString("nomefuncionario"));
+					u.setTelFuncionario(rs.getInt("telefonefuncionario"));
+					u.setCelFuncionario(rs.getInt("celularfuncionario"));
+					u.setEndFuncionario(rs.getString("enderecofuncionario"));
+					u.setEmailFuncionario(rs.getString("emailfuncionario"));
+					u.setSenhaFuncionario(rs.getString("senhafuncionario"));
+					u.setTipoFuncionario(rs.getString("tipofuncionario"));
+					u.setCtpsFuncionario(rs.getInt("ctpsfuncionario"));
+					u.setCpfFuncionario(rs.getInt("cpffuncionario"));
+					funcionarios.add(u);
+				}
+			}
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
