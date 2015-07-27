@@ -2,7 +2,7 @@ package com.pcs.autok.controller.validators.funcionario;
 
 import java.sql.SQLException;
 
-import com.pcs.autok.model.Funcionario;
+import com.pcs.autok.model.base.abstracts.Funcionario;
 import com.pcs.autok.utils.ResultParameters;
 
 public class EditarFuncionarioValidator {

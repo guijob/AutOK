@@ -44,39 +44,47 @@
 	      <!-- Full name -->
 	      <label class="control-label"  for="nome">Nome completo</label>
 	      <div class="controls">
-	        <form:input type="text" path="nomeFuncionario" class="input-xlarge-2"></form:input>
+	        <form:input type="text" path="nome" class="input-xlarge-2"></form:input>
 	      </div>
 	    </div>
 	    
 	    <div class="control-group">
 	      <!-- Telephone -->
-	      <label class="control-label"  for="telFuncionario">Telefone</label>
+	      <label class="control-label"  for="telefone">Telefone</label>
 	      <div class="controls">
-	        <form:input type="text" path="telFuncionario" class="input-xlarge"></form:input>
+	        <form:input type="text" path="telefone" class="input-xlarge"></form:input>
 	      </div>
 	    </div>
 	    
 	    <div class="control-group">
 	      <!-- Address -->
-	      <label class="control-label"  for="endFuncionario">Endereço</label>
+	      <label class="control-label"  for="endereco">Endereço</label>
 	      <div class="controls">
-	        <form:input type="text" path="endFuncionario" class="input-xlarge"></form:input>
+	        <form:input type="text" path="endereco" class="input-xlarge"></form:input>
+	      </div>
+	    </div>
+	    
+	   	<div class="control-group">
+	      <!-- Tipo -->
+	      <label class="control-label"  for="tipo">Tipo de funcionario</label>
+	      <div class="controls">
+	        <form:input type="password" path="tipo" class="input-xlarge"></form:input>
 	      </div>
 	    </div>
 	    
 	    <div class="control-group">
 	      <!-- Email -->
-	      <label class="control-label"  for="emailFuncionario">E-mail</label>
+	      <label class="control-label"  for="email">E-mail</label>
 	      <div class="controls">
-	        <form:input type="text" path="emailFuncionario" class="input-xlarge"></form:input>
+	        <form:input type="text" path="email" class="input-xlarge"></form:input>
 	      </div>
 	    </div>
 	    
 	    <div class="control-group">
 	      <!-- Senha -->
-	      <label class="control-label"  for="senhaFuncionario">Senha</label>
+	      <label class="control-label"  for="senha">Senha</label>
 	      <div class="controls">
-	        <form:input type="password" path="senhaFuncionario" class="input-xlarge"></form:input>
+	        <form:input type="password" path="senha" class="input-xlarge"></form:input>
 	      </div>
 	    </div>
 	    

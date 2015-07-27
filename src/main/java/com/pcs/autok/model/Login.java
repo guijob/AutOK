@@ -2,7 +2,7 @@ package com.pcs.autok.model;
 
 import com.pcs.autok.model.base.abstracts.Usuario;
 
-public class Cliente extends Usuario{
+public class Login extends Usuario{
 /* senha repetida do cliente */
 	private String confereSenha;
 

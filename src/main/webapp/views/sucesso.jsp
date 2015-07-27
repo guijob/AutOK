@@ -1,12 +1,10 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Sucesso!</title>
-</head>
-<body>
-	Pagina mostrada quando o cadastro foi realizado com sucesso.
-</body>
-</html>
+<%@include file="header.jsp"%>
+		<script type="text/javascript">
+			setTimeout("document.location = 'http://localhost:8080/autok/'",3000);
+		</script>
+        <div class="starter-template">
+        	<h1>SUCESSO!</h1>
+        	<p class="lead">Cadastro realizado com sucesso, use suas credenciais para logar no sistema</p>
+        	<p class="">Você será redirecionado em 3 segundos.</p>
+        </div>
+<%@include file="footer.jsp"%>

@@ -7,11 +7,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.pcs.autok.dao.connect.ConnectionDAO;
-import com.pcs.autok.model.Cliente;
+import com.pcs.autok.model.Login;
 
 public class ClienteDAO extends ConnectionDAO {
 
-	public void editarCliente(Cliente cliente) {
+	public void editarCliente(Login cliente) {
 
 		Connection conn = null;
 		Statement stmt = null;
@@ -22,11 +22,11 @@ public class ClienteDAO extends ConnectionDAO {
 			StringBuilder sql = new StringBuilder();
 
 			sql.append("update dbAutOK.cliente");
-			sql.append(" set nomecliente = '" + cliente.getNomeCliente()
-					+ "', telefonecliente = " + cliente.getTelCliente() + ",enderecocliente = '"
-					+ cliente.getEndCliente() + "', emailcliente = '"
-					+ cliente.getEmailCliente() + "',senha = '"
-					+ cliente.getSenhaCliente() + "' where emailcliente = '" + cliente.getEmailCliente() + "';");
+			sql.append(" set nomecliente = '" + cliente.getNome()
+					+ "', telefonecliente = " + cliente.getTelefone() + ",enderecocliente = '"
+					+ cliente.getEndereco() + "', emailcliente = '"
+					+ cliente.getEmail() + "',senha = '"
+					+ cliente.getSenha() + "' where emailcliente = '" + cliente.getEmail() + "';");
 			System.out.println(sql.toString());
 
 			stmt.executeUpdate(sql.toString());
@@ -44,7 +44,7 @@ public class ClienteDAO extends ConnectionDAO {
 		}
 	}
 	
-	public void cadastrarCliente(Cliente cliente) {
+	public void cadastrarCliente(Login cliente) {
 
 		Connection conn = null;
 		Statement stmt = null;
@@ -55,11 +55,11 @@ public class ClienteDAO extends ConnectionDAO {
 			StringBuilder sql = new StringBuilder();
 
 			sql.append("insert into dbAutOK.cliente");
-			sql.append(" values " + "(0, " + "'" + cliente.getNomeCliente()
-					+ "', " + cliente.getTelCliente() + ", '"
-					+ cliente.getEndCliente() + "', '"
-					+ cliente.getEmailCliente() + "', '"
-					+ cliente.getSenhaCliente() + "');");
+			sql.append(" values " + "(0, " + "'" + cliente.getNome()
+					+ "', " + cliente.getTelefone() + ", '"
+					+ cliente.getEndereco() + "', '"
+					+ cliente.getEmail() + "', '"
+					+ cliente.getSenha() + "');");
 			System.out.println(sql.toString());
 
 			stmt.executeUpdate(sql.toString());
@@ -77,7 +77,7 @@ public class ClienteDAO extends ConnectionDAO {
 		}
 	}
 
-	public boolean buscarEmail(Cliente cliente) {
+	public boolean buscarEmail(Login cliente) {
 		Connection conn = null;
 		Statement stmt = null;
 		ResultSet rs = null;
@@ -89,7 +89,7 @@ public class ClienteDAO extends ConnectionDAO {
 			StringBuilder sql = new StringBuilder();
 
 			sql.append("select * from dbAutOK.cliente where");
-			sql.append(" nomecliente like '" + cliente.getEmailCliente() + "';");
+			sql.append(" nomecliente like '" + cliente.getEmail() + "';");
 			System.out.println(sql.toString());
 
 			rs = stmt.executeQuery(sql.toString());
@@ -113,11 +113,11 @@ public class ClienteDAO extends ConnectionDAO {
 		return result;
 	}
 	
-	public Cliente buscarRegistro(Cliente cliente) {
+	public Login buscarRegistro(Login cliente) {
 		Connection conn = null;
 		Statement stmt = null;
 		ResultSet rs = null;
-		Cliente u = null;
+		Login u = null;
 		
 		try {
 			conn = startConnection();
@@ -125,20 +125,20 @@ public class ClienteDAO extends ConnectionDAO {
 			StringBuilder sql = new StringBuilder();
 			
 			sql.append("select * from dbAutOK.cliente where");
-			sql.append(" emailcliente like '" + cliente.getEmailCliente() + "'"
-					+ "and senha like '" + cliente.getSenhaCliente() + "';");
+			sql.append(" emailcliente like '" + cliente.getEmail() + "'"
+					+ "and senha like '" + cliente.getSenha() + "';");
 			System.out.println(sql.toString());
 			
 			rs = stmt.executeQuery(sql.toString());
 			
 			if (rs.next()) {
-				u = new Cliente();
-				u.setIdCliente(rs.getInt("idcliente"));
-				u.setNomeCliente(rs.getString("nomecliente"));
-				u.setTelCliente(rs.getInt("telefonecliente"));
-				u.setEndCliente(rs.getString("enderecocliente"));
-				u.setEmailCliente(rs.getString("emailcliente"));
-				u.setSenhaCliente(rs.getString("senha"));
+				u = new Login();
+				u.setId(rs.getInt("idcliente"));
+				u.setNome(rs.getString("nomecliente"));
+				u.setTelefone(rs.getInt("telefonecliente"));
+				u.setEndereco(rs.getString("enderecocliente"));
+				u.setEmail(rs.getString("emailcliente"));
+				u.setSenha(rs.getString("senha"));
 			}
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -156,7 +156,7 @@ public class ClienteDAO extends ConnectionDAO {
 		return u;
 	}
 	
-	public void excluirCliente(Cliente cliente) {
+	public void excluirCliente(Login cliente) {
 
 		Connection conn = null;
 		Statement stmt = null;
@@ -167,8 +167,8 @@ public class ClienteDAO extends ConnectionDAO {
 			StringBuilder sql = new StringBuilder();
 
 			sql.append("delete from dbAutOK.cliente");
-			sql.append(" where emailcliente = '" + cliente.getEmailCliente()
-					+ "' and senha = '" + cliente.getSenhaCliente()
+			sql.append(" where emailcliente = '" + cliente.getEmail()
+					+ "' and senha = '" + cliente.getSenha()
 					+ "';");
 			System.out.println(sql.toString());
 
@@ -187,7 +187,7 @@ public class ClienteDAO extends ConnectionDAO {
 		}
 	}
 	
-	public boolean buscarCliente(Cliente cliente) {
+	public boolean buscarCliente(Login cliente) {
 		Connection conn = null;
 		Statement stmt = null;
 		ResultSet rs = null;
@@ -198,8 +198,8 @@ public class ClienteDAO extends ConnectionDAO {
 			StringBuilder sql = new StringBuilder();
 	
 			sql.append("select * from dbAutOK.cliente where");
-			sql.append(" emailcliente like '" + cliente.getEmailCliente() 
-						+ "' and senha like '" + cliente.getSenhaCliente() + "';");
+			sql.append(" emailcliente like '" + cliente.getEmail() 
+						+ "' and senha like '" + cliente.getSenha() + "';");
 			System.out.println(sql.toString());
 			rs = stmt.executeQuery(sql.toString());
 			result = rs.next();
@@ -220,8 +220,8 @@ public class ClienteDAO extends ConnectionDAO {
 		return result;
 	}
 
-	public List<Cliente> listarTodos() {
-		List<Cliente> clientes = new ArrayList<Cliente>();
+	public List<Login> listarTodos() {
+		List<Login> clientes = new ArrayList<Login>();
 
 		Connection conn = null;
 		Statement stmt = null;
@@ -236,9 +236,9 @@ public class ClienteDAO extends ConnectionDAO {
 			rs = stmt.executeQuery(sql.toString());
 
 			@SuppressWarnings("unused")
-			Cliente u = null;
+			Login u = null;
 			while (rs.next()) {
-				u = new Cliente();
+				u = new Login();
 			}
 		} catch (Exception e) {
 			// TODO Auto-generated catch block

@@ -7,7 +7,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.pcs.autok.dao.connect.ConnectionDAO;
-import com.pcs.autok.model.Funcionario;
+import com.pcs.autok.model.Administrador;
+import com.pcs.autok.model.Atendente;
+import com.pcs.autok.model.Caixa;
+import com.pcs.autok.model.TecnicoAnalista;
+import com.pcs.autok.model.TecnicoResponsavel;
+import com.pcs.autok.model.base.abstracts.Funcionario;
+import com.pcs.autok.model.base.abstracts.Usuario;
 
 public class FuncionarioDAO extends ConnectionDAO {
 
@@ -22,16 +28,16 @@ public class FuncionarioDAO extends ConnectionDAO {
 			StringBuilder sql = new StringBuilder();
 
 			sql.append("update dbAutOK.funcionario");
-			sql.append(" set nomefuncionario = '" + funcionario.getNomeFuncionario()
-					+ "', telefonefuncionario = " + funcionario.getTelFuncionario() 
-					+ "', celularfuncionario = " + funcionario.getCelFuncionario() 
-					+ ", enderecofuncionario = '" + funcionario.getEndFuncionario() 
-					+ "', emailfuncionario = '" + funcionario.getEmailFuncionario() 
-					+ "', senhafuncionario = '" + funcionario.getSenhaFuncionario() 
-					+ "', tipofuncionario = " + funcionario.getTipoFuncionario() 
-					+ "', ctpsfuncionario = " + funcionario.getCtpsFuncionario() 
-					+ ", cpffuncionario = " + funcionario.getCpfFuncionario() 
-					+ " where emailfuncionario = '" + funcionario.getEmailFuncionario() 
+			sql.append(" set nomefuncionario = '" + funcionario.getNome()
+					+ "', telefonefuncionario = " + funcionario.getTelefone() 
+					+ "', celularfuncionario = " + funcionario.getCelular() 
+					+ ", enderecofuncionario = '" + funcionario.getEndereco() 
+					+ "', emailfuncionario = '" + funcionario.getEmail() 
+					+ "', senhafuncionario = '" + funcionario.getSenha() 
+					+ "', tipofuncionario = " + funcionario.getTipo() 
+					+ "', ctpsfuncionario = " + funcionario.getCtps() 
+					+ ", cpffuncionario = " + funcionario.getCpf() 
+					+ " where emailfuncionario = '" + funcionario.getEmail() 
 					+ "';");
 			System.out.println(sql.toString());
 
@@ -63,15 +69,15 @@ public class FuncionarioDAO extends ConnectionDAO {
 			sql.append("insert into dbAutOK.funcionario");
 			sql.append(" values " 
 					+ "(0, " + "'" 
-					+ funcionario.getNomeFuncionario() + "', " 
-					+ funcionario.getTelFuncionario() + ", "
-					+ funcionario.getCelFuncionario() + ", '"
-					+ funcionario.getEndFuncionario() + "', '"
-					+ funcionario.getEmailFuncionario() + "', '"
-					+ funcionario.getSenhaFuncionario() + "', '"
-					+ funcionario.getTipoFuncionario() + "', "
-					+ funcionario.getCtpsFuncionario() + ", "
-					+ funcionario.getCpfFuncionario() + ");");
+					+ funcionario.getNome() + "', " 
+					+ funcionario.getTelefone() + ", "
+					+ funcionario.getCelular() + ", '"
+					+ funcionario.getEndereco() + "', '"
+					+ funcionario.getEmail() + "', '"
+					+ funcionario.getSenha() + "', '"
+					+ funcionario.getTipo() + "', "
+					+ funcionario.getCtps() + ", "
+					+ funcionario.getCpf() + ");");
 			System.out.println(sql.toString());
 
 			stmt.executeUpdate(sql.toString());
@@ -101,7 +107,7 @@ public class FuncionarioDAO extends ConnectionDAO {
 			StringBuilder sql = new StringBuilder();
 
 			sql.append("select * from dbAutOK.funcionario where");
-			sql.append(" nomefuncionario like '" + funcionario.getEmailFuncionario() + "';");
+			sql.append(" nomefuncionario like '" + funcionario.getEmail() + "';");
 			System.out.println(sql.toString());
 
 			rs = stmt.executeQuery(sql.toString());
@@ -136,24 +142,43 @@ public class FuncionarioDAO extends ConnectionDAO {
 			StringBuilder sql = new StringBuilder();
 			
 			sql.append("select * from dbAutOK.funcionario where");
-			sql.append(" emailfuncionario like '" + funcionario.getEmailFuncionario() + "'"
-					+ "and senhafuncionario like '" + funcionario.getSenhaFuncionario() + "';");
+			sql.append(" emailfuncionario like '" + funcionario.getEmail() + "'"
+					+ "and senhafuncionario like '" + funcionario.getSenha() + "';");
 			System.out.println(sql.toString());
 			
 			rs = stmt.executeQuery(sql.toString());
 			
+			if(rs.getString("tipofuncionario").equals("administrador")) {
+				};
+			
 			if (rs.next()) {
-				u = new Funcionario();
-				u.setIdFuncionario(rs.getInt("idfuncionario"));
-				u.setNomeFuncionario(rs.getString("nomefuncionario"));
-				u.setTelFuncionario(rs.getInt("telefonefuncionario"));
-				u.setCelFuncionario(rs.getInt("celularfuncionario"));
-				u.setEndFuncionario(rs.getString("enderecofuncionario"));
-				u.setEmailFuncionario(rs.getString("emailfuncionario"));
-				u.setSenhaFuncionario(rs.getString("senhafuncionario"));
-				u.setTipoFuncionario(rs.getString("tipofuncionario"));
-				u.setCtpsFuncionario(rs.getInt("ctpsfuncionario"));
-				u.setCpfFuncionario(rs.getInt("cpffuncionario"));
+				switch (rs.getString("tipofuncionario")) {
+				case "administrador":
+					u = new Administrador();
+					break;
+				case "tec_analista":
+					u = new TecnicoAnalista();
+					break;
+				case "tec_responsavel":
+					u = new TecnicoResponsavel();
+					break;
+				case "atendente":
+					u = new Atendente();
+					break;
+				case "caixa":
+					u = new Caixa();
+					break;
+				}
+				
+				u.setId(rs.getInt("idfuncionario"));
+				u.setNome(rs.getString("nomefuncionario"));
+				u.setTelefone(rs.getInt("telefonefuncionario"));
+				u.setCelular(rs.getInt("celularfuncionario"));
+				u.setEndereco(rs.getString("enderecofuncionario"));
+				u.setEmail(rs.getString("emailfuncionario"));
+				u.setSenha(rs.getString("senhafuncionario"));
+				u.setCtps(rs.getInt("ctpsfuncionario"));
+				u.setCpf(rs.getInt("cpffuncionario"));
 			}
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -182,8 +207,8 @@ public class FuncionarioDAO extends ConnectionDAO {
 			StringBuilder sql = new StringBuilder();
 
 			sql.append("delete from dbAutOK.funcionario");
-			sql.append(" where emailfuncionario = '" + funcionario.getEmailFuncionario()
-					+ "' and senhafuncionario = '" + funcionario.getSenhaFuncionario()
+			sql.append(" where emailfuncionario = '" + funcionario.getEmail()
+					+ "' and senhafuncionario = '" + funcionario.getSenha()
 					+ "';");
 			System.out.println(sql.toString());
 
@@ -213,8 +238,8 @@ public class FuncionarioDAO extends ConnectionDAO {
 			StringBuilder sql = new StringBuilder();
 	
 			sql.append("select * from dbAutOK.funcionario where");
-			sql.append(" emailfuncionario like '" + funcionario.getEmailFuncionario() 
-						+ "' and senhafuncionario like '" + funcionario.getSenhaFuncionario() + "';");
+			sql.append(" emailfuncionario like '" + funcionario.getEmail() 
+						+ "' and senhafuncionario like '" + funcionario.getSenha() + "';");
 			System.out.println(sql.toString());
 			rs = stmt.executeQuery(sql.toString());
 			result = rs.next();

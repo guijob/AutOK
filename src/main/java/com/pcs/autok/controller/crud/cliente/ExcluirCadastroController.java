@@ -11,7 +11,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.pcs.autok.controller.validators.cliente.ExcluirClienteValidator;
 import com.pcs.autok.dao.ClienteDAO;
-import com.pcs.autok.model.Cliente;
+import com.pcs.autok.model.Login;
 import com.pcs.autok.utils.HashResultParameters;
 import com.pcs.autok.utils.ResultParameters;
 
@@ -23,12 +23,12 @@ public class ExcluirCadastroController {
 			System.out.println("getConfirmacaoExcluirCliente: Passing through...");
 
 			ModelAndView mv = new ModelAndView("formularioExclusao");
-			mv.addObject("clienteEntidade", new Cliente());
+			mv.addObject("clienteEntidade", new Login());
 			return mv;
 	}
 	
 	@RequestMapping(value = "/excluirCliente", method = RequestMethod.POST)
-	public ModelAndView excluirCliente(@ModelAttribute Cliente cliente) {
+	public ModelAndView excluirCliente(@ModelAttribute Login cliente) {
 		System.out.println("excluirCliente: Passing through...");
 		int result;
 		ExcluirClienteValidator validator = new ExcluirClienteValidator(cliente);

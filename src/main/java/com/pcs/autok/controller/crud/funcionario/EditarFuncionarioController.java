@@ -12,8 +12,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.pcs.autok.controller.validators.funcionario.EditarFuncionarioValidator;
 import com.pcs.autok.dao.FuncionarioDAO;
-import com.pcs.autok.model.Cliente;
-import com.pcs.autok.model.Funcionario;
+import com.pcs.autok.model.Login;
+import com.pcs.autok.model.base.abstracts.Funcionario;
 import com.pcs.autok.utils.HashResultParameters;
 import com.pcs.autok.utils.ResultParameters;
 
@@ -21,11 +21,11 @@ import com.pcs.autok.utils.ResultParameters;
 public class EditarFuncionarioController {
 	
 	@RequestMapping(value = "/formularioEditarFuncionario", method = RequestMethod.POST)
-	public ModelAndView editarUsuario(@ModelAttribute Cliente cliente) {
+	public ModelAndView editarUsuario(@ModelAttribute Login cliente) {
 		System.out.println("formularioEditar: Passing through...");
 
 		ModelAndView mv = new ModelAndView("funcionario/formularioEditar");
-		mv.addObject("funcionarioEntidade", new Cliente());
+		mv.addObject("funcionarioEntidade", new Login());
 		return mv;
 	}
 	

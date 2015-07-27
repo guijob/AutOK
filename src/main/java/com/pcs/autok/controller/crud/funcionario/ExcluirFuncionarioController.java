@@ -12,7 +12,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.pcs.autok.controller.validators.funcionario.ExcluirFuncionarioValidator;
 import com.pcs.autok.dao.FuncionarioDAO;
-import com.pcs.autok.model.Funcionario;
+import com.pcs.autok.model.base.abstracts.Funcionario;
 import com.pcs.autok.utils.HashResultParameters;
 import com.pcs.autok.utils.ResultParameters;
 
