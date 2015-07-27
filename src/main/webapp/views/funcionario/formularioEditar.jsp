@@ -35,7 +35,7 @@
 
     <div class="container">
 
-	<form:form class="form-horizontal" style="margin: 0 auto; width:80%;" action="/autok/cadastrarCliente" method="POST" modelAttribute="clienteEntidade">
+	<form:form class="form-horizontal" style="margin: 0 auto; width:80%;" action="/autok/editarFuncionario" method="POST" modelAttribute="clienteEntidade">
 	  <fieldset>
 	    <div id="legend">
 	      <legend>Preencha os campos abaixo</legend>
@@ -44,47 +44,47 @@
 	      <!-- Full name -->
 	      <label class="control-label"  for="nome">Nome completo</label>
 	      <div class="controls">
-	        <form:input type="text" path="nomeCliente" class="input-xlarge-2"></form:input>
+	        <form:input type="text" path="nomeFuncionario" class="input-xlarge-2"></form:input>
 	      </div>
 	    </div>
 	    
 	    <div class="control-group">
 	      <!-- Telephone -->
-	      <label class="control-label"  for="telCliente">Telefone</label>
+	      <label class="control-label"  for="telFuncionario">Telefone</label>
 	      <div class="controls">
-	        <form:input type="text" path="telCliente" class="input-xlarge"></form:input>
+	        <form:input type="text" path="telFuncionario" class="input-xlarge"></form:input>
 	      </div>
 	    </div>
 	    
 	    <div class="control-group">
 	      <!-- Address -->
-	      <label class="control-label"  for="endCliente">Endereço</label>
+	      <label class="control-label"  for="endFuncionario">Endereço</label>
 	      <div class="controls">
-	        <form:input type="text" path="endCliente" class="input-xlarge"></form:input>
+	        <form:input type="text" path="endFuncionario" class="input-xlarge"></form:input>
 	      </div>
 	    </div>
 	    
 	    <div class="control-group">
 	      <!-- Email -->
-	      <label class="control-label"  for="emailCliente">E-mail</label>
+	      <label class="control-label"  for="emailFuncionario">E-mail</label>
 	      <div class="controls">
-	        <form:input type="text" path="emailCliente" class="input-xlarge"></form:input>
+	        <form:input type="text" path="emailFuncionario" class="input-xlarge"></form:input>
 	      </div>
 	    </div>
 	    
 	    <div class="control-group">
 	      <!-- Senha -->
-	      <label class="control-label"  for="senhaCliente">Senha</label>
+	      <label class="control-label"  for="senhaFuncionario">Senha</label>
 	      <div class="controls">
-	        <form:input type="password" path="senhaCliente" class="input-xlarge"></form:input>
+	        <form:input type="password" path="senhaFuncionario" class="input-xlarge"></form:input>
 	      </div>
 	    </div>
 	    
 	    <div class="control-group">
 	      <!-- Confere Senha -->
-	      <label class="control-label"  for="confereSenhaCliente">Senha novamente</label>
+	      <label class="control-label"  for="confereSenhaFuncionario">Senha novamente</label>
 	      <div class="controls">
-	        <form:input type="password" path="confereSenhaCliente" class="input-xlarge"></form:input>
+	        <form:input type="password" path="confereSenhaFuncionario" class="input-xlarge"></form:input>
 	      </div>
 	    </div>
 	    	 

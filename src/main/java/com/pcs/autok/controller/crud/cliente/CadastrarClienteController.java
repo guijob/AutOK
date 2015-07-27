@@ -12,6 +12,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.pcs.autok.controller.validators.cliente.CadastrarClienteValidator;
 import com.pcs.autok.dao.ClienteDAO;
 import com.pcs.autok.model.Cliente;
+import com.pcs.autok.model.Login;
 import com.pcs.autok.utils.HashResultParameters;
 import com.pcs.autok.utils.ResultParameters;
 
@@ -22,13 +23,13 @@ public class CadastrarClienteController {
 	public ModelAndView getFormularioCliente() {
 		System.out.println("getFormularioCliente: Passing through...");
 
-		ModelAndView mv = new ModelAndView("cliente/formulario");
+		ModelAndView mv = new ModelAndView("cliente/formularioCadastroCliente");
 		mv.addObject("clienteEntidade", new Cliente());
 		return mv;
 	}
 
 	@RequestMapping(value = "/cadastrarCliente", method = RequestMethod.POST)
-	public ModelAndView cadastrarCliente(@ModelAttribute Cliente cliente) {
+	public ModelAndView cadastrarCliente(@ModelAttribute Login cliente) {
 		System.out.println("cadastrarCliente: Passing through...");
 		int result;
 		CadastrarClienteValidator validator = new CadastrarClienteValidator(cliente);

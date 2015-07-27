@@ -2,7 +2,7 @@ package com.pcs.autok.model;
 
 import com.pcs.autok.model.base.abstracts.Funcionario;
 
-public class Atendente extends Funcionario{
+public class TecnicoResponsavel extends Funcionario{
 
 	/* id do usuario: chave primaria */
 	private Integer id;
@@ -25,7 +25,7 @@ public class Atendente extends Funcionario{
 	/* senha do usuario */
 	private String senha;
 	
-	private String tipo = "atendente";
+	private String tipo = "tec_responsavel";
 
 	/* endereço do cliente */
 	private Integer ctps;

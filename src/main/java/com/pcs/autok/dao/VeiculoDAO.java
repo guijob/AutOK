@@ -7,11 +7,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.pcs.autok.dao.connect.ConnectionDAO;
-import com.pcs.autok.model.Atendente;
+import com.pcs.autok.model.Veiculo;
 
-public class AtendenteDAO extends ConnectionDAO {
+public class VeiculoDAO extends ConnectionDAO {
 
-	public void editarAtendente(Atendente atendente) {
+	public void editarVeiculo(Veiculo veiculo) {
 
 		Connection conn = null;
 		Statement stmt = null;
@@ -21,12 +21,13 @@ public class AtendenteDAO extends ConnectionDAO {
 			stmt = conn.createStatement();
 			StringBuilder sql = new StringBuilder();
 
-			sql.append("update dbAutOK.atendente");
-			sql.append(" set nomeatendente = '" + atendente.getNomeAtendente()
-					+ "', telefoneatendente = " + atendente.getTelAtendente() + ",enderecoatendente = '"
-					+ atendente.getEndAtendente() + "', emailatendente = '"
-					+ atendente.getEmailAtendente() + "',senha = '"
-					+ atendente.getSenhaAtendente() + "' where emailatendente = '" + atendente.getEmailAtendente() + "';");
+			sql.append("update dbAutOK.veiculo");
+			sql.append(" set modeloveiculo = '" + veiculo.getModeloVeiculo()
+					+ "', renavam = '" + veiculo.getRENAVAM() + "',fabricanteveiculo = '"
+					+ veiculo.getFabVeiculo() + "', anoveiculo = '"
+					+ veiculo.getFabAno() + "',quilometragem = "
+					+ veiculo.getQuilometragem() + "idcliente = " 
+					+ veiculo.getIdCliente() + ";");
 			System.out.println(sql.toString());
 
 			stmt.executeUpdate(sql.toString());
@@ -44,7 +45,7 @@ public class AtendenteDAO extends ConnectionDAO {
 		}
 	}
 	
-	public void cadastrarAtendente(Atendente atendente) {
+	public void cadastrarVeiculo(Veiculo veiculo) {
 
 		Connection conn = null;
 		Statement stmt = null;
@@ -54,12 +55,12 @@ public class AtendenteDAO extends ConnectionDAO {
 			stmt = conn.createStatement();
 			StringBuilder sql = new StringBuilder();
 
-			sql.append("insert into dbAutOK.atendente");
-			sql.append(" values " + "(0, " + "'" + atendente.getNomeAtendente()
-					+ "', " + atendente.getTelAtendente() + ", '"
-					+ atendente.getEndAtendente() + "', '"
-					+ atendente.getEmailAtendente() + "', '"
-					+ atendente.getSenhaAtendente() + "');");
+			sql.append("insert into dbAutOK.veiculo");
+			sql.append(" values " + "(0, " + "'" + veiculo.getModeloVeiculo()
+					+ "', " + veiculo.getRENAVAM() + ", '"
+					+ veiculo.getFabVeiculo() + "', '"
+					+ veiculo.getFabAno() + "', "
+					+ veiculo.getQuilometragem() + ");");
 			System.out.println(sql.toString());
 
 			stmt.executeUpdate(sql.toString());
@@ -77,7 +78,7 @@ public class AtendenteDAO extends ConnectionDAO {
 		}
 	}
 
-	public boolean buscarEmail(Atendente atendente) {
+	public boolean buscarRENAVAM(Veiculo veiculo) {
 		Connection conn = null;
 		Statement stmt = null;
 		ResultSet rs = null;
@@ -88,8 +89,8 @@ public class AtendenteDAO extends ConnectionDAO {
 			stmt = conn.createStatement();
 			StringBuilder sql = new StringBuilder();
 
-			sql.append("select * from dbAutOK.atendente where");
-			sql.append(" nomeatendente like '" + atendente.getEmailAtendente() + "';");
+			sql.append("select * from dbAutOK.veiculo where");
+			sql.append(" renvam like '" + veiculo.getRENAVAM() + "';");
 			System.out.println(sql.toString());
 
 			rs = stmt.executeQuery(sql.toString());
@@ -113,32 +114,33 @@ public class AtendenteDAO extends ConnectionDAO {
 		return result;
 	}
 	
-	public Atendente buscarRegistro(Atendente atendente) {
+	public Veiculo buscarModelo(Veiculo veiculo) {
 		Connection conn = null;
 		Statement stmt = null;
 		ResultSet rs = null;
-		Atendente u = null;
+		Veiculo u = null;
 		
 		try {
 			conn = startConnection();
 			stmt = conn.createStatement();
 			StringBuilder sql = new StringBuilder();
 			
-			sql.append("select * from dbAutOK.atendente where");
-			sql.append(" emailatendente like '" + atendente.getEmailAtendente() + "'"
-					+ "and senha like '" + atendente.getSenhaAtendente() + "';");
+			sql.append("select * from dbAutOK.veiculo where");
+			sql.append(" modeloveiculo like '" + veiculo.getModeloVeiculo() + "'"
+					+ "and idcliente = " + veiculo.getIdCliente() + "';");
 			System.out.println(sql.toString());
 			
 			rs = stmt.executeQuery(sql.toString());
 			
 			if (rs.next()) {
-				u = new Atendente();
-				u.setIdAtendente(rs.getInt("idatendente"));
-				u.setNomeAtendente(rs.getString("nomeatendente"));
-				u.setTelAtendente(rs.getInt("telefoneatendente"));
-				u.setEndAtendente(rs.getString("enderecoatendente"));
-				u.setEmailAtendente(rs.getString("emailatendente"));
-				u.setSenhaAtendente(rs.getString("senha"));
+				u = new Veiculo();
+				u.setIdVeiculo(rs.getInt("idveiculo"));
+				u.setIdCliente(rs.getInt("idcliente"));
+				u.setModeloVeiculo(rs.getString("modeloveiculo"));
+				u.setRENAVAM(rs.getString("renavam"));
+				u.setFabVeiculo(rs.getString("fabricanteveiculo"));
+				u.setFabAno(rs.getString("anoveiculo"));
+				u.setQuilometragem(rs.getInt("quilometragem"));
 			}
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -156,7 +158,7 @@ public class AtendenteDAO extends ConnectionDAO {
 		return u;
 	}
 	
-	public void excluirAtendente(Atendente atendente) {
+	public void excluirVeiculo(Veiculo veiculo) {
 
 		Connection conn = null;
 		Statement stmt = null;
@@ -166,10 +168,9 @@ public class AtendenteDAO extends ConnectionDAO {
 			stmt = conn.createStatement();
 			StringBuilder sql = new StringBuilder();
 
-			sql.append("delete from dbAutOK.atendente");
-			sql.append(" where emailatendente = '" + atendente.getEmailAtendente()
-					+ "' and senha = '" + atendente.getSenhaAtendente()
-					+ "';");
+			sql.append("delete from dbAutOK.veiculo");
+			sql.append(" renavam like '" + veiculo.getRENAVAM() + "'"
+					+ "and idcliente = " + veiculo.getIdCliente() + "';");
 			System.out.println(sql.toString());
 
 			stmt.executeUpdate(sql.toString());
@@ -187,7 +188,7 @@ public class AtendenteDAO extends ConnectionDAO {
 		}
 	}
 	
-	public boolean buscarAtendente(Atendente atendente) {
+	public boolean buscarVeiculos(Veiculo veiculo) {
 		Connection conn = null;
 		Statement stmt = null;
 		ResultSet rs = null;
@@ -197,9 +198,8 @@ public class AtendenteDAO extends ConnectionDAO {
 			stmt = conn.createStatement();
 			StringBuilder sql = new StringBuilder();
 	
-			sql.append("select * from dbAutOK.atendente where");
-			sql.append(" emailatendente like '" + atendente.getEmailAtendente() 
-						+ "' and senha like '" + atendente.getSenhaAtendente() + "';");
+			sql.append("select * from dbAutOK.veiculo where");
+			sql.append(" idcliente = " + veiculo.getIdCliente() + "';");
 			System.out.println(sql.toString());
 			rs = stmt.executeQuery(sql.toString());
 			result = rs.next();
@@ -221,8 +221,8 @@ public class AtendenteDAO extends ConnectionDAO {
 		return result;
 	}
 
-	public List<Atendente> listarTodos() {
-		List<Atendente> atendentes = new ArrayList<Atendente>();
+	public List<Veiculo> listarTodos(Veiculo veiculo) {
+		List<Veiculo> veiculos = new ArrayList<Veiculo>();
 
 		Connection conn = null;
 		Statement stmt = null;
@@ -232,28 +232,29 @@ public class AtendenteDAO extends ConnectionDAO {
 			conn = startConnection();
 			stmt = conn.createStatement();
 			StringBuilder sql = new StringBuilder();
-			sql.append(" select atendente.idAtendente, atendente.nomeAtendente, atendente.telAtendente");
-			sql.append(" from atendente atendente");
+			sql.append("select * from dbAutOK.veiculo where");
+			sql.append(" idcliente like '" + veiculo.getIdCliente() + "';");
 			rs = stmt.executeQuery(sql.toString());
 
-			Atendente u = null;
+			@SuppressWarnings("unused")
+			Veiculo u = null;
 			while (rs.next()) {
-				u = new Atendente();
+				u = new Veiculo();
 			}
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
 			try {
-				// conn.close();
-				// stmt.close();
-				// rs.close();
+				 conn.close();
+				 stmt.close();
+				 rs.close();
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
-		return atendentes;
+		return veiculos;
 	}
 
 }
