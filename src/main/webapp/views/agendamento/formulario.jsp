@@ -37,63 +37,31 @@
 
     <div class="container">
 
-	<form:form class="form-horizontal" style="margin: 0 auto; width:80%;" action="/autok/cadastrarCliente" method="POST" modelAttribute="clienteEntidade">
+	<form:form class="form-horizontal" style="margin: 0 auto; width:80%;" action="/autok/criarAgendamento" method="POST" modelAttribute="novoAgendamento">
 	  <fieldset>
 	    <div id="legend">
 	      <legend>Preencha os campos abaixo</legend>
 	    </div>
 	    <div class="control-group">
 	      <!-- Full name -->
-	      <label class="control-label"  for="nome">Nome completo</label>
+	      <label class="control-label"  for="descricao">Descricao</label>
 	      <div class="controls">
-	        <form:input type="text" path="nomeCliente" class="input-xlarge-2"></form:input>
+	        <form:input type="text" path="descricao" class="input-xlarge-2"></form:input>
 	      </div>
 	    </div>
 	    
 	    <div class="control-group">
 	      <!-- Telephone -->
-	      <label class="control-label"  for="telCliente">Telefone</label>
+	      <label class="control-label"  for="idHorario">ID Horario</label>
 	      <div class="controls">
-	        <form:input type="text" path="telCliente" class="input-xlarge"></form:input>
-	      </div>
-	    </div>
-	    
-	    <div class="control-group">
-	      <!-- Address -->
-	      <label class="control-label"  for="endCliente">Endereço</label>
-	      <div class="controls">
-	        <form:input type="text" path="endCliente" class="input-xlarge"></form:input>
-	      </div>
-	    </div>
-	    
-	    <div class="control-group">
-	      <!-- Email -->
-	      <label class="control-label"  for="emailCliente">E-mail</label>
-	      <div class="controls">
-	        <form:input type="text" path="emailCliente" class="input-xlarge"></form:input>
-	      </div>
-	    </div>
-	    
-	    <div class="control-group">
-	      <!-- Senha -->
-	      <label class="control-label"  for="senhaCliente">Senha</label>
-	      <div class="controls">
-	        <form:input type="password" path="senhaCliente" class="input-xlarge"></form:input>
-	      </div>
-	    </div>
-	    
-	    <div class="control-group">
-	      <!-- Confere Senha -->
-	      <label class="control-label"  for="confereSenhaCliente">Senha novamente</label>
-	      <div class="controls">
-	        <form:input type="password" path="confereSenhaCliente" class="input-xlarge"></form:input>
+	        <form:input type="text" path="idHorario" class="input-xlarge"></form:input>
 	      </div>
 	    </div>
 	    	 
 	    <div class="control-group">
 	      <!-- Button -->
 	      <div class="controls">
-	        <button class="btn btn-success">Cadastrar</button>
+	        <button class="btn btn-success">Criar</button>
 	      </div>
 	    </div>
 	  </fieldset>

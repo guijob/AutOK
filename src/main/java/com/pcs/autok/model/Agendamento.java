@@ -6,22 +6,12 @@ public class Agendamento {
 	
 	private String descricao;
 	
-	private Integer idTecnico;
-
 	private Integer idAgendamento;
 		
 	private Integer idHorario;
 
 	public Integer getIdCliente() {
 		return idCliente;
-	}
-
-	public Integer getIdTecnico() {
-		return idTecnico;
-	}
-
-	public void setIdTecnico(Integer idTecnico) {
-		this.idTecnico = idTecnico;
 	}
 	
 	public void setIdCliente(Integer idCliente) {
