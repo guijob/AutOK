@@ -34,8 +34,8 @@
 	        </div>
 	        <div class="collapse navbar-collapse">
 		   		<ul class="nav navbar-nav">
-	            <li><a href="/">Home</a></li>
-        		<li class="active"><a href = "${pageContext.request.contextPath}/paginaVeiculos">Veiculos</a></li>
+	            <li class="active"><a href="/">Home</a></li>
+        		<li><a href = "${pageContext.request.contextPath}/paginaVeiculos">Veiculos</a></li>
 	            <li><a href="${pageContext.request.contextPath}/mostrarAgendamentos">Agendamentos</a></li>
 	            <li><a href="${pageContext.request.contextPath}/mostrarOrdensDeServico">Ordens de Serviço</a></li>
 	          </ul>
@@ -90,7 +90,7 @@
 		</tbody>  
 	</table>
 	
-	<a class="btn btn-primary btn-lg pull-right" href="${pageContext.request.contextPath}/formularioCadastrarVeiculo" role="button">Novo Veiculo</a>
+	<a class="btn btn-primary btn-lg pull-right" href="${pageContext.request.contextPath}/novoVeiculo" role="button">Novo Veiculo</a>
 
         </div>
 	

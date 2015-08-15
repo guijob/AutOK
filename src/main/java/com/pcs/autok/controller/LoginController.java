@@ -40,7 +40,7 @@ public class LoginController {
 
 		if (result == ResultParameters.OK.getResult() & !(u == null)) {
 			session.setAttribute("usuarioLogado", u);
-			return "home";
+			return "cliente/home";
 		} else {
 			System.out.println("logarUsuario: Error " + result);
 			ModelAndView mv2 = new ModelAndView("erro");

@@ -34,18 +34,17 @@
 	        </div>
 	        <div class="collapse navbar-collapse">
 		   		<ul class="nav navbar-nav">
-	            <li><a href="/">Home</a></li>
-        		<li class="active"><a href = "${pageContext.request.contextPath}/paginaVeiculos">Veiculos</a></li>
-	            <li><a href="${pageContext.request.contextPath}/mostrarAgendamentos">Agendamentos</a></li>
-	            <li><a href="${pageContext.request.contextPath}/mostrarOrdensDeServico">Ordens de Serviço</a></li>
+	            <li href="#home"><a href="#">Home</a></li>
+	            <li><a href="#about">Agendamentos</a></li>
+	            <li><a href="#contact">Ordens de Serviço</a></li>
 	          </ul>
 	          <ul class="nav navbar-nav navbar-right">
 	          	<p class="navbar-text">${usuarioLogado.nome}</p> 
 	          	<li><a href="./"><span class="glyphicon glyphicon-user"></span><span class="sr-only">(current)</span></a></li>
 	            <li class="dropdown">
-	              <a href="${pageContext.request.contextPath}/acessarConta" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-cog"></span></a>
+	              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-cog"></span></a>
 	              <ul class="dropdown-menu">
-	                <li><a href="${pageContext.request.contextPath}/configuracoesConta">Configurações da conta </a></li>
+	                <li><a href = "${pageContext.request.contextPath}/configuracoesConta">Configurações da conta </a></li>
 	                <li><a href="#"></a></li>
 	                <li role="separator" class="divider"></li>
 	                <li><a href="logout">Sair do sistema</a></li>
@@ -57,41 +56,12 @@
 	    </div>
 
         <div class="starter-template">
-	<c:if test="${not empty msgSucesso}">
-		<span class="label label-success" style="font-size: 14px;">${msgSucesso}</span>
-	</c:if>
-	
-	
-	
-	<table class="table table-striped table-nonfluid" >  
-        <thead>  
-          <tr>  
-            <th  style="width: 5%;">ID</th>  
-            <th  style="width: 60%;">Modelo</th>  
-            <th  style="width: 30%;">Ano</th> 
-            <th  style="width: 30%;">Quilometragem</th>  
-            <th  style="width: 10%;">RENAVAM</th> 
-            <th  style="width: 5%;">Ação</th> 
-          </tr>  
-        </thead>  
-        <tbody>  
-			<c:forEach items="${veiculos}" var="veiculo">
-		          <tr>  
-		            <td class="text-left">${veiculo.id}</td>  
-		            <td class="text-left">${veiculo.Modelo}</td>
-		            <td class="text-left">${veiculo.Ano}</td>
-		            <td class="text-left">${veiculo.Quilometragem}</td>
-		            <td class="text-left">${veiculo.RENAVAM}</td>  
-		            <td class="text-left"><a href="${pageContext.request.contextPath}/detalharVeiculo?id=${veiculo.id}">Editar</a>
-		             <td class="text-left"><a href="${pageContext.request.contextPath}/removerVeiculo?id=${veiculo.id}">Remover</a></td>  
-		          </tr>				
-			</c:forEach>
-	
-		</tbody>  
-	</table>
-	
-	<a class="btn btn-primary btn-lg pull-right" href="${pageContext.request.contextPath}/formularioCadastrarVeiculo" role="button">Novo Veiculo</a>
-
+        	<h1>Configurações de conta</h1>
+        	<p class="lead">${erro}</p>
+        	<p class="">Bem vindo, ${usuarioLogado.nome}</p>
+        	<p><a href = "${pageContext.request.contextPath}/confirmacaoExcluirCliente">Excluir cadastro</a></p>
+        	<p><a href = "${pageContext.request.contextPath}/formularioLoginEditar">Editar cadastro</a></p>
+        	<a href="logout">Sair do sistema</a>
         </div>
 	
     <footer class="footer">

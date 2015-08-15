@@ -33,6 +33,24 @@
 	          <a class="navbar-brand" href="#">AutOK</a>
 	        </div>
 	        <div class="collapse navbar-collapse">
+		   		<ul class="nav navbar-nav">
+	            <li class="active"><a href="/">Home</a></li>
+	            <li><a href="/mostrarAgendamentos">Agendamentos</a></li>
+	            <li><a href="/mostrarOrdensDeServico">Ordens de Serviço</a></li>
+	          </ul>
+	          <ul class="nav navbar-nav navbar-right">
+	          	<p class="navbar-text">${usuarioLogado.nome}</p> 
+	          	<li><a href="./"><span class="glyphicon glyphicon-user"></span><span class="sr-only">(current)</span></a></li>
+	            <li class="dropdown">
+	              <a href="${pageContext.request.contextPath}/acessarConta" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-cog"></span></a>
+	              <ul class="dropdown-menu">
+	                <li><a href="${pageContext.request.contextPath}/configuracoesConta">Configurações da conta </a></li>
+	                <li><a href="#"></a></li>
+	                <li role="separator" class="divider"></li>
+	                <li><a href="logout">Sair do sistema</a></li>
+	              </ul>
+	            </li>
+	          </ul>
 	        </div><!--/.nav-collapse -->
 	      </div>
 	    </div>
@@ -43,4 +61,17 @@
         	<p class="">Bem vindo, ${usuarioLogado.nome}</p>
         	<a href="logout">Sair do sistema</a>
         </div>
-<%@include file="footer.jsp"%>
+	
+    <footer class="footer">
+    	<div class="container">
+        	<p>&copy; Grupo 04 - PCS2034 de 2015</p>
+    	</div> <!-- /container -->
+    </footer>
+    
+    </div><!-- /.container -->
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="js/bootstrap.min.js"></script>
+  </body>
+</html>
