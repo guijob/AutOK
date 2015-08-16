@@ -21,40 +21,7 @@
   <body>
   <div class="container">
 
-	    <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-	      <div class="container">
-	        <div class="navbar-header">
-	          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-	            <span class="sr-only">Toggle navigation</span>
-	            <span class="icon-bar"></span>
-	            <span class="icon-bar"></span>
-	            <span class="icon-bar"></span>
-	          </button>
-	          <a class="navbar-brand" href="#">AutOK</a>
-	        </div>
-	        <div class="collapse navbar-collapse">
-		   		<ul class="nav navbar-nav">
-	            <li><a href="/">Home</a></li>
-        		<li class="active"><a href = "${pageContext.request.contextPath}/paginaVeiculos">Veiculos</a></li>
-	            <li><a href="${pageContext.request.contextPath}/mostrarAgendamentos">Agendamentos</a></li>
-	            <li><a href="${pageContext.request.contextPath}/mostrarOrdensDeServico">Ordens de Serviço</a></li>
-	          </ul>
-	          <ul class="nav navbar-nav navbar-right">
-	          	<p class="navbar-text">${usuarioLogado.nome}</p> 
-	          	<li><a href="./"><span class="glyphicon glyphicon-user"></span><span class="sr-only">(current)</span></a></li>
-	            <li class="dropdown">
-	              <a href="${pageContext.request.contextPath}/acessarConta" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-cog"></span></a>
-	              <ul class="dropdown-menu">
-	                <li><a href="${pageContext.request.contextPath}/configuracoesConta">Configurações da conta </a></li>
-	                <li><a href="#"></a></li>
-	                <li role="separator" class="divider"></li>
-	                <li><a href="logout">Sair do sistema</a></li>
-	              </ul>
-	            </li>
-	          </ul>
-	        </div><!--/.nav-collapse -->
-	      </div>
-	    </div>
+	    <%@include file="../headers/veiculo-header.jsp"%>
 
         <div class="starter-template">
 	<c:if test="${not empty msgSucesso}">
@@ -66,8 +33,9 @@
 	<table class="table table-striped table-nonfluid" >  
         <thead>  
           <tr>  
-            <th  style="width: 5%;">ID</th>  
-            <th  style="width: 60%;">Modelo</th>  
+            <th  style="width: 40%;">Modelo</th>  
+            <th  style="width: 20%;">Fabricante</th>  
+            <th  style="width: 40%;">PlacaVeiculo</th>  
             <th  style="width: 30%;">Ano</th> 
             <th  style="width: 30%;">Quilometragem</th>  
             <th  style="width: 10%;">RENAVAM</th> 
@@ -77,20 +45,20 @@
         <tbody>  
 			<c:forEach items="${veiculos}" var="veiculo">
 		          <tr>  
-		            <td class="text-left">${veiculo.id}</td>  
-		            <td class="text-left">${veiculo.Modelo}</td>
-		            <td class="text-left">${veiculo.Ano}</td>
-		            <td class="text-left">${veiculo.Quilometragem}</td>
-		            <td class="text-left">${veiculo.RENAVAM}</td>  
-		            <td class="text-left"><a href="${pageContext.request.contextPath}/detalharVeiculo?id=${veiculo.id}">Editar</a>
-		             <td class="text-left"><a href="${pageContext.request.contextPath}/removerVeiculo?id=${veiculo.id}">Remover</a></td>  
+   		            <td class="text-left">${veiculo.modeloVeiculo}</td>
+		            <td class="text-left">${veiculo.fabVeiculo}</td>  
+		            <td class="text-left">${veiculo.placaVeiculo}</td>
+		            <td class="text-left">${veiculo.fabAno}</td>
+		            <td class="text-left">${veiculo.quilometragem}</td>
+		            <td class="text-left">${veiculo.renavam}</td>  
+		            <td class="text-left"><a href="${pageContext.request.contextPath}/excluirVeiculo?id=${veiculo.idVeiculo}">Remover</a></td>  
 		          </tr>				
 			</c:forEach>
 	
 		</tbody>  
 	</table>
 	
-	<a class="btn btn-primary btn-lg pull-right" href="${pageContext.request.contextPath}/formularioCadastrarVeiculo" role="button">Novo Veiculo</a>
+	<a class="btn btn-default pull-right" href="${pageContext.request.contextPath}/formularioCadastrarVeiculo" role="button">Novo Veículo</a>
 
         </div>
 	

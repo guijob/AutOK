@@ -10,7 +10,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>AutOK - Formulário</title>
+    <title>AutOK - Formulário de Cadastro de Veículo</title>
 
     <!-- Bootstrap core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -19,96 +19,68 @@
 
   <body>
 
-    <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-	      <div class="container">
-	        <div class="navbar-header">
-	          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-	            <span class="sr-only">Toggle navigation</span>
-	            <span class="icon-bar"></span>
-	            <span class="icon-bar"></span>
-	            <span class="icon-bar"></span>
-	          </button>
-	          <a class="navbar-brand" href="#">AutOK</a>
-	        </div>
-	        <div class="collapse navbar-collapse">
-		   		<ul class="nav navbar-nav">
-	            <li><a href="${pageContext.request.contextPath}/">Home</a></li>
-        		<li class="active"><a href = "${pageContext.request.contextPath}/paginaVeiculos">Veiculos</a></li>
-	            <li><a href="${pageContext.request.contextPath}/mostrarAgendamentos">Agendamentos</a></li>
-	            <li><a href="${pageContext.request.contextPath}/mostrarOrdensDeServico">Ordens de Serviço</a></li>
-	          </ul>
-	          <ul class="nav navbar-nav navbar-right">
-	          	<p class="navbar-text">${usuarioLogado.nome}</p> 
-	          	<li><a href="./"><span class="glyphicon glyphicon-user"></span><span class="sr-only">(current)</span></a></li>
-	            <li class="dropdown">
-	              <a href="${pageContext.request.contextPath}/acessarConta" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-cog"></span></a>
-	              <ul class="dropdown-menu">
-	                <li><a href="${pageContext.request.contextPath}/configuracoesConta">Configurações da conta </a></li>
-	                <li><a href="#"></a></li>
-	                <li role="separator" class="divider"></li>
-	                <li><a href="logout">Sair do sistema</a></li>
-	              </ul>
-	            </li>
-	          </ul>
-	        </div><!--/.nav-collapse -->
-	      </div>
-	    </div>
+    <%@include file="../headers/veiculo-header.jsp"%>
 
     <div class="container">
+	
+	<form:form action="/autok/cadastrarVeiculo" method="post" class="form-horizontal" modelAttribute="veiculoEntidade">
 
-	<form:form class="form-horizontal" style="margin: 10 auto;" action="/autok/cadastrarVeiculo" method="POST" modelAttribute="veiculoEntidade">
-	  <fieldset>
-	    <div id="legend">
-	      <legend>Preencha os campos abaixo</legend>
-	    </div>
-	    <div class="control-group">
-	      <!-- Model name -->
-	      <label class="control-label"  for="modeloVeiculo">Modelo Veiculo</label>
-	      <div class="controls">
-	        <form:input type="text" path="modeloVeiculo" class="input-xlarge-2"></form:input>
-	      </div>
-	    </div>
-	    
-	    <div class="control-group">
-	      <!-- Renvam -->
-	      <label class="control-label"  for="RENAVAM">RENAVAM</label>
-	      <div class="controls">
-	        <form:input type="text" path="RENAVAM" class="input-xlarge"></form:input>
-	      </div>
-	    </div>
-	    
-	    <div class="control-group">
-	      <!-- Mark name -->
-	      <label class="control-label"  for="fabVeiculo">Fabricante Veiculo</label>
-	      <div class="controls">
-	        <form:input type="text" path="fabVeiculo" class="input-xlarge"></form:input>
-	      </div>
-	    </div>
-	    
-	    <div class="control-group">
-	      <!-- Model year -->
-	      <label class="control-label"  for="fabAno">Ano</label>
-	      <div class="controls">
-	        <form:input type="text" path="fabAno" class="input-xlarge"></form:input>
-	      </div>
-	    </div>
-	    
-	    <div class="control-group">
-	      <!-- Quilometragem -->
-	      <label class="control-label"  for="quilometragem">Quilometragem</label>
-	      <div class="controls">
-	        <form:input type="text" path="quilometragem" class="input-xlarge"></form:input>
-	      </div>
-	    </div>
-	    	 
-	    <div class="control-group">
-	      <!-- Button -->
-	      <div class="controls">
-	        <button class="btn btn-success">Cadastrar</button>
-	      </div>
-	    </div>
-	  </fieldset>
-	</form:form>
+			<div class="form-group">
+				<label class="col-xs-3 control-label"></label>
+				<div class="col-xs-5">
+					<label><h3>Formulário de Cadastro de Veículo</h3></label>
+			        
+			        </div>
+			</div>
+			
+			<div class="form-group">
+				<label class="col-xs-3 control-label">Fabricante</label>
+				<div class="col-xs-5 selectContainer">
+					<form:select class="form-control" path="fabVeiculo" items="${hashFabricantes}" />
+				</div>
+			</div>
+
+			<div class="form-group">
+				<label class="col-xs-3 control-label">Modelo</label>
+				<div class="col-xs-5 selectContainer">
+					<form:select class="form-control" path="modeloVeiculo" items="${hashModelos}" />
+				</div>
+			</div>
+
+			<div class="form-group">
+				<label class="col-xs-3 control-label">Placa</label>
+				<div class="col-xs-5">
+					<form:input type="text" class="form-control" name="renavam" path="placaVeiculo" />
+				</div>
+			</div>
+			
+			<div class="form-group">
+				<label class="col-xs-3 control-label">Renavam</label>
+				<div class="col-xs-5">
+					<form:input type="text" class="form-control" name="renavam" path="renavam" />
+				</div>
+			</div>
+			
+			<div class="form-group">
+				<label class="col-xs-3 control-label">Kilometragem</label>
+				<div class="col-xs-5">
+					<form:input type="text" class="form-control" name="placa" path="quilometragem" />
+				</div>
+			</div>
+			
+			<div class="form-group">
+				<label class="col-xs-3 control-label">Ano de Fabricação</label>
+				<div class="col-xs-5">
+					<form:input type="text" class="form-control" name="anoFabricacao" path="fabAno" />
+				</div>
+			</div>
+
+			<div class="form-group">
+				<div class="col-xs-5 col-xs-offset-3">
+					<button type="submit" class="btn btn-default">Autenticar</button>
+				</div>
+			</div>
+		</form:form>
 
     </div> <!-- /container -->
 

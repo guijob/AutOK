@@ -39,7 +39,7 @@
 	            <li><a href="/mostrarOrdensDeServico">Ordens de Serviço</a></li>
 	          </ul>
 	          <ul class="nav navbar-nav navbar-right">
-	          	<p class="navbar-text">${usuarioLogado.nome}</p> 
+	          	<p class="navbar-text">Func. ${usuarioLogado.nome}</p> 
 	          	<li><a href="./"><span class="glyphicon glyphicon-user"></span><span class="sr-only">(current)</span></a></li>
 	            <li class="dropdown">
 	              <a href="${pageContext.request.contextPath}/acessarConta" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-cog"></span></a>

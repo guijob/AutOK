@@ -3,7 +3,7 @@
 			setTimeout("document.location = 'http://localhost:8080/autok/listarVeiculos'",3000);
 		</script>
         <div class="starter-template">
-        	<h1>Veículo excluído com sucesso...</h1>
+        	<h1>ERRO!</h1>
         	<p class="lead">${erro}</p>
         	<p class="">Você será redirecionado em 3 segundos.</p>
         </div>

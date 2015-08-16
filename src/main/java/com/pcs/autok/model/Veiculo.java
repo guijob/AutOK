@@ -12,7 +12,7 @@ public class Veiculo {
 	private String modeloVeiculo;
 
 	/* RENAVAM do veiculo */
-	private String RENAVAM;
+	private String renavam;
 
 	/* fabricante do veiculo */
 	private String fabVeiculo;
@@ -22,8 +22,20 @@ public class Veiculo {
 
 	/* quilometragem */
 	private Integer quilometragem;
+	
+	private String placaVeiculo;
 
 	/* getters e setters */
+
+	
+
+	@Override
+	public String toString() {
+		return "Veiculo [idVeiculo=" + idVeiculo + ", idCliente=" + idCliente
+				+ ", modeloVeiculo=" + modeloVeiculo + ", RENAVAM=" + renavam
+				+ ", fabVeiculo=" + fabVeiculo + ", fabAno=" + fabAno
+				+ ", quilometragem=" + quilometragem + "]";
+	}
 
 	public Integer getIdVeiculo() {
 		return idVeiculo;
@@ -32,9 +44,9 @@ public class Veiculo {
 	public void setIdVeiculo(Integer idVeiculo) {
 		this.idVeiculo = idVeiculo;
 	}
-	
+
 	public Integer getIdCliente() {
-		return idVeiculo;
+		return idCliente;
 	}
 
 	public void setIdCliente(Integer idCliente) {
@@ -49,12 +61,12 @@ public class Veiculo {
 		this.modeloVeiculo = modeloVeiculo;
 	}
 
-	public String getRENAVAM() {
-		return RENAVAM;
+	public String getRenavam() {
+		return renavam;
 	}
 
-	public void setRENAVAM(String rENAVAM) {
-		RENAVAM = rENAVAM;
+	public void setRenavam(String renavam) {
+		this.renavam = renavam;
 	}
 
 	public String getFabVeiculo() {
@@ -77,15 +89,15 @@ public class Veiculo {
 		return quilometragem;
 	}
 
-	public void setQuilometragem(int quilometragem) {
+	public void setQuilometragem(Integer quilometragem) {
 		this.quilometragem = quilometragem;
 	}
 
-	@Override
-	public String toString() {
-		return "Veiculo [idVeiculo=" + idVeiculo + ", idCliente=" + idCliente
-				+ ", modeloVeiculo=" + modeloVeiculo + ", RENAVAM=" + RENAVAM
-				+ ", fabVeiculo=" + fabVeiculo + ", fabAno=" + fabAno
-				+ ", quilometragem=" + quilometragem + "]";
+	public String getPlacaVeiculo() {
+		return placaVeiculo;
+	}
+
+	public void setPlacaVeiculo(String placaVeiculo) {
+		this.placaVeiculo = placaVeiculo;
 	}
 }
