@@ -25,35 +25,39 @@
 
     <div class="container">
 
-	<form:form class="form-horizontal" style="margin: 0 auto; width:80%;" action="/autok/criarAgendamento" method="POST" modelAttribute="novoAgendamento">
-	  <fieldset>
-	    <div id="legend">
-	      <legend>Preencha os campos abaixo</legend>
-	    </div>
-	    <div class="control-group">
-	      <!-- Full name -->
-	      <label class="control-label"  for="descricao">Descricao</label>
-	      <div class="controls">
-	        <form:input type="text" path="descricao" class="input-xlarge-2"></form:input>
-	      </div>
-	    </div>
-	    
-	    <div class="control-group">
-	      <!-- Telephone -->
-	      <label class="control-label"  for="idHorario">ID Horario</label>
-	      <div class="controls">
-	        <form:input type="text" path="idHorario" class="input-xlarge"></form:input>
-	      </div>
-	    </div>
-	    	 
-	    <div class="control-group">
-	      <!-- Button -->
-	      <div class="controls">
-	        <button class="btn btn-success">Criar</button>
-	      </div>
-	    </div>
-	  </fieldset>
-	</form:form>
+	<form:form action="/autok/criarAgendamento" method="post" class="form-horizontal" modelAttribute="novoAgendamento">
+
+			<div class="form-group">
+				<label class="col-xs-3 control-label"></label>
+				<div class="col-xs-5">
+					<label><h3>Formulário para Realizer Agendamento</h3></label>
+			        
+			        </div>
+			</div>
+
+			<div class="form-group">
+				<label class="col-xs-3 control-label">Horarios disponíveis</label>
+				<div class="col-xs-5 selectContainer">
+					<form:select class="form-control" path="idHorario" items="${horarios}" />
+				</div>
+			</div>
+			
+
+			<div class="form-group">
+				<label class="col-xs-3 control-label">Descrição</label>
+				<div class="col-xs-5">
+					<form:input type="text" class="form-control" path="descricao" />
+				</div>
+			</div>
+
+
+			<div class="form-group">
+				<div class="col-xs-5 col-xs-offset-3">
+					<button type="submit" class="btn btn-default">Criar</button>
+				</div>
+			</div>
+		</form:form>
+	
 
     </div> <!-- /container -->
 
