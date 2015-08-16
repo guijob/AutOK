@@ -1,6 +1,8 @@
 <%@include file="../header.jsp"%>
 <div class="starter-template">
 
+	<%@include file="../headers/agendamento-header.jsp"%>
+
 	<c:if test="${not empty msgSucesso}">
 		<span class="label label-success" style="font-size: 14px;">${msgSucesso}</span>
 	</c:if>
