@@ -47,7 +47,7 @@ public class LoginDAO extends ConnectionDAO{
 					c.setEndereco(rs.getString("enderecocliente"));
 					c.setEmail(rs.getString("emailcliente"));
 					c.setSenha(rs.getString("senha"));
-					
+					c.setTipo("cliente");
 					isCliente = true;
 				} 
 			}else {
