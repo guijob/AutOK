@@ -35,8 +35,8 @@
 	        <div class="collapse navbar-collapse">
 		   		<ul class="nav navbar-nav">
 	            <li class="active"><a href="/">Home</a></li>
-	            <li><a href="/mostrarAgendamentos">Agendamentos</a></li>
-	            <li><a href="/mostrarOrdensDeServico">Ordens de Serviço</a></li>
+	            <li><a href="${pageContext.request.contextPath}/mostrarAgendamentos">Agendamentos</a></li>
+	            <li><a href="${pageContext.request.contextPath}/mostrarOrdensDeServico">Ordens de Serviço</a></li>
 	          </ul>
 	          <ul class="nav navbar-nav navbar-right">
 	          	<p class="navbar-text">Func. ${usuarioLogado.nome}</p> 
