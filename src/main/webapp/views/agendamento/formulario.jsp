@@ -46,7 +46,7 @@
 			<div class="form-group">
 				<label class="col-xs-3 control-label">Descrição</label>
 				<div class="col-xs-5">
-					<form:input type="text" class="form-control" path="descricao" />
+					<form:textarea type="textarea" class="form-control" rows="5" path="descricao" />
 				</div>
 			</div>
 
