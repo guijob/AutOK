@@ -97,7 +97,9 @@ public class OrdemDeServicoDAO extends ConnectionDAO {
 				os.setIdAgendamento(rs.getInt("idagendamento"));
 				os.setStatus(rs.getString("status"));
 				os.setJustificativa(rs.getString("justificativa"));
-				
+				os.setIdResponsavelUm(rs.getInt("id_responsavel_1"));
+				os.setIdResponsavelDois(rs.getInt("id_responsavel_2"));
+				os.setPrecoTotal(rs.getFloat("preco_total"));
 				returnable.add(os);
 				
 			}

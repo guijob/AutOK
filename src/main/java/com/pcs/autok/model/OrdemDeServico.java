@@ -14,13 +14,13 @@ public class OrdemDeServico {
 	
 	private Integer idResponsavelDois;
 	
-	private Integer precoTotal;
+	private float precoTotal;
 
-	public Integer getPrecoTotal() {
+	public float getPrecoTotal() {
 		return precoTotal;
 	}
 
-	public void setPrecoTotal(Integer precoTotal) {
+	public void setPrecoTotal(float precoTotal) {
 		this.precoTotal = precoTotal;
 	}
 
