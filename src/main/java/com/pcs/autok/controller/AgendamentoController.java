@@ -39,18 +39,34 @@ public class AgendamentoController {
 
 		AgendamentoDAO dao = new AgendamentoDAO();
 
-		ArrayList<Agendamento> agendamentos = (ArrayList<Agendamento>) dao
-				.buscarAgendamentosCliente(u.getId());
+		if (u != null && u.getTipo().equals("cliente")) {
 
-		ModelAndView view = new ModelAndView("agendamento/agendamentos");
-		view.addObject("agendamentos", agendamentos);
+			ArrayList<Agendamento> agendamentos = (ArrayList<Agendamento>) dao.buscarAgendamentosCliente(u.getId());
 
-		return view;
+			ModelAndView view = new ModelAndView("agendamento/agendamentos");
+			view.addObject("agendamentos", agendamentos);
+			view.addObject("tipoUsuario", u.getTipo());
+
+			return view;
+
+		} else if (u != null && u.getTipo().equals("tec_analista")) {
+			
+			
+			ArrayList<Agendamento> agendamentos = (ArrayList<Agendamento>) dao.buscarAgendamentosAnalista(u.getId());
+
+			ModelAndView view = new ModelAndView("agendamento/agendamentos");
+			view.addObject("agendamentos", agendamentos);
+			view.addObject("tipoUsuario", u.getTipo());
+
+			return view;
+			
+		}
+		
+		return null;
 	}
 
 	@RequestMapping(value = "/agendamentoFormulario")
-	public ModelAndView agendamentoFormulario(HttpSession session)
-			throws ParseException {
+	public ModelAndView agendamentoFormulario(HttpSession session) throws ParseException {
 
 		System.out.println("AgendamentoController: Passing through...");
 		Agendamento agendamento = new Agendamento();
@@ -79,32 +95,24 @@ public class AgendamentoController {
 			Calendar cal = Calendar.getInstance();
 			cal.setTime(data);
 
-			List<Horario> horarios = dao
-					.buscarHorariosDisponiveisDeUmaData(data);
+			List<Horario> horarios = dao.buscarHorariosDisponiveisDeUmaData(data);
 			for (Horario horario : horarios) {
 
 				Set<Integer> chaves = map.keySet();
 				for (Integer chave : chaves) {
-					if (map.get(chave).contains(
-							horario.getHorarioLivre().toString() + ":00h")) {
+					if (map.get(chave).contains(horario.getHorarioLivre().toString() + ":00h")) {
 						repetido = true;
 					}
 				}
 				if (!repetido) {
 					if (horario.getHorarioLivre() > 9)
 						map.put(horario.getIdHorario(),
-								cal.get(Calendar.DATE) + " de "
-										+ map2.get(cal.get(Calendar.MONTH) + 1)
-										+ " de " + cal.get(Calendar.YEAR)
-										+ " - " + horario.getHorarioLivre()
-										+ ":00h");
+								cal.get(Calendar.DATE) + " de " + map2.get(cal.get(Calendar.MONTH) + 1) + " de "
+										+ cal.get(Calendar.YEAR) + " - " + horario.getHorarioLivre() + ":00h");
 					else
 						map.put(horario.getIdHorario(),
-								cal.get(Calendar.DATE) + " de "
-										+ map2.get(cal.get(Calendar.MONTH) + 1)
-										+ " de " + cal.get(Calendar.YEAR)
-										+ " - 0" + horario.getHorarioLivre()
-										+ ":00h");
+								cal.get(Calendar.DATE) + " de " + map2.get(cal.get(Calendar.MONTH) + 1) + " de "
+										+ cal.get(Calendar.YEAR) + " - 0" + horario.getHorarioLivre() + ":00h");
 
 				}
 				repetido = false;
@@ -124,21 +132,18 @@ public class AgendamentoController {
 	}
 
 	@RequestMapping(value = "/criarAgendamento")
-	public ModelAndView criarAgendamento(HttpSession session,
-			@ModelAttribute Agendamento novoAgendamento) {
+	public ModelAndView criarAgendamento(HttpSession session, @ModelAttribute Agendamento novoAgendamento) {
 
 		System.out.println("AgendamentoController: Passing through...");
 
 		AgendamentoDAO dao = new AgendamentoDAO();
-		novoAgendamento.setIdCliente(((Usuario) session
-				.getAttribute("usuarioLogado")).getId());
+		novoAgendamento.setIdCliente(((Usuario) session.getAttribute("usuarioLogado")).getId());
 		dao.criarAgendamento(novoAgendamento, novoAgendamento.getIdHorario());
 		return listarAgendamentos(session);
 	}
 
 	@RequestMapping(value = "/excluirAgendamento")
-	public ModelAndView excluirAgendamento(HttpSession session,
-			@RequestParam("idAgendamento") Integer idAgendamento,
+	public ModelAndView excluirAgendamento(HttpSession session, @RequestParam("idAgendamento") Integer idAgendamento,
 			@RequestParam("idHorario") Integer idHorario) {
 
 		System.out.println("AgendamentoController: Passing through...");
@@ -148,8 +153,7 @@ public class AgendamentoController {
 		return listarAgendamentos(session);
 	}
 
-	public static <K, V extends Comparable<? super V>> Map<K, V> sortByValue(
-			Map<K, V> map) {
+	public static <K, V extends Comparable<? super V>> Map<K, V> sortByValue(Map<K, V> map) {
 		List<Map.Entry<K, V>> list = new LinkedList<>(map.entrySet());
 		Collections.sort(list, new Comparator<Map.Entry<K, V>>() {
 			@Override

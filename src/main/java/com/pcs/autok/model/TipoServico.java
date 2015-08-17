@@ -7,6 +7,16 @@ public class TipoServico {
 	private String nome;
 	
 	private int duracaoEmHoras;
+	
+	private float preco;
+
+	public float getPreco() {
+		return preco;
+	}
+
+	public void setPreco(float preco) {
+		this.preco = preco;
+	}
 
 	public int getDuracaoEmHoras() {
 		return duracaoEmHoras;
@@ -31,6 +41,12 @@ public class TipoServico {
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
+
+	@Override
+	public String toString() {
+		return nome;
+	}
+	
 	
 	
 }

@@ -1,7 +1,7 @@
 <%@include file="../header.jsp"%>
 <div class="starter-template">
 
-	<%@include file="../headers/agendamento-header.jsp"%>
+	<%@include file="../headers/os-header.jsp"%>
 
 	<c:if test="${not empty msgSucesso}">
 		<span class="label label-success" style="font-size: 14px;">${msgSucesso}</span>
@@ -49,13 +49,13 @@
 
 
  	<c:choose>
-		<c:when test="${tipoUsuario == 'cliente'}"></c:when>
-		<c:when test="${tipoUsuario == 'tec_analista' }"></c:when>
-		<c:otherwise>
+		<c:when test="${tipoUsuario == 'tec_analista'}">
 			<form class="navbar-form navbar-center"
-				action="/autok/agendamentoFormulario" method="get">
+				action="/autok/formularioCriarOS" method="get">
 				<input type="submit" value="Criar OS" class="btn btn-default">
 			</form>
+		</c:when>
+		<c:otherwise>
 		</c:otherwise>
 	</c:choose>
 

@@ -97,6 +97,54 @@ public class AgendamentoDAO extends ConnectionDAO {
 		
 	}
 	
+	public List<Agendamento> buscarAgendamentosAnalista(Integer idAnalista) {
+		Connection conn = null;
+		Statement stmt = null;
+		ResultSet rs = null;
+		List<Agendamento> list = new ArrayList<Agendamento>();
+
+		try {
+			conn = startConnection();
+			stmt = conn.createStatement();
+			StringBuilder sql = new StringBuilder();
+
+			sql.append("select * from dbAutOK.agendamento where");
+			sql.append(" idHorario in (select idHorario from dbAutOK.horario where idFuncionario =  " + idAnalista + ");");
+			System.out.println(sql.toString());
+
+			rs = stmt.executeQuery(sql.toString());
+						
+			while (rs.next()) {
+				
+				Agendamento a = new Agendamento();
+				a.setIdCliente(rs.getInt("idcliente"));
+				a.setIdAgendamento(rs.getInt("idagendamento"));
+				a.setIdHorario(rs.getInt("idHorario"));
+				a.setDescricao(rs.getString("descricao"));
+				
+				list.add(a);
+				
+			}
+			
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			
+			try {
+				conn.close();
+				stmt.close();
+				rs.close();
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
+		return list;
+		
+	}
+	
 	
 	public void excluirAgendamento(Integer idAgendamento, Integer idHorario) {
 

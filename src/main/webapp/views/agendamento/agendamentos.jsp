@@ -30,9 +30,19 @@
 							<td class="text-left">${agendamento.idCliente}</td>
 							<td class="text-left">${agendamento.idHorario}</td>
 							<td class="text-left">${agendamento.descricao}</td>
-							<td class="text-left"><a
-								href="${pageContext.request.contextPath}
-					/excluirAgendamento?idAgendamento=${agendamento.idAgendamento}&idHorario=${agendamento.idHorario}">Cancelar</a></td>
+							<c:choose>
+								<c:when test="${tipoUsuario == 'tec_analista'}">
+									<td class="text-left"><a
+										href="${pageContext.request.contextPath}
+						/formularioCriarOS?idAgendamento=${agendamento.idAgendamento}">Criar OS</a></td>
+								</c:when>
+								<c:when test="${tipoUsuario == 'cliente'}">
+									<td class="text-left"><a
+										href="${pageContext.request.contextPath}
+						/excluirAgendamento?idAgendamento=${agendamento.idAgendamento}&idHorario=${agendamento.idHorario}">Cancelar Agendamento</a></td>
+								</c:when>
+								<c:otherwise></c:otherwise>
+							</c:choose>
 							<%-- <td class="text-left"><a href="${pageContext.request.contextPath}/detalharUsuario?id=${usuario.id}">Editar</a>
 		             <td class="text-left"><a href="${pageContext.request.contextPath}/removerUsuario?id=${usuario.id}">Remover</a></td> --%>
 						</tr>

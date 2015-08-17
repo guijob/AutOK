@@ -47,12 +47,12 @@
     </div>
 
       <hr>
-	<div class="container">
+	<%-- <div class="container">
       <footer>
         <p><a href = "${pageContext.request.contextPath}/paginaPecas">Pecas</a></p>
         <p><a href = "${pageContext.request.contextPath}/paginaVeiculos">Pecas</a></p>
       </footer>
-    </div> <!-- /container -->
+    </div> --%> <!-- /container -->
     <div class="container">
       <footer>
         <p>&copy; Grupo 04 - PCS2034 de 2015</p>

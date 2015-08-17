@@ -30,7 +30,7 @@
 			<div class="form-group">
 				<label class="col-xs-3 control-label"></label>
 				<div class="col-xs-5">
-					<label><h3>Formulário para Realizer Agendamento</h3></label>
+					<label><h3>Formulário para Realizar Agendamento</h3></label>
 			        
 			        </div>
 			</div>
