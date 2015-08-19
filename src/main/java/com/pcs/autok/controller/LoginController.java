@@ -24,8 +24,13 @@ public class LoginController {
 	public ModelAndView getFormularioLogin() {
 		System.out.println("getFormularioLogin: Passing through...");
 
+		Map<String, String> tipoUsuario = new HashMap<String, String>();
+		tipoUsuario.put("cliente", "Cliente");  
+        tipoUsuario.put("funcionario", "Funcionário");  
+
 		ModelAndView mv = new ModelAndView("formularioLogin");
 		mv.addObject("loginEntidade", new Login());
+		mv.addObject("hashTipoUsuario", tipoUsuario);
 		return mv;
 	}
 
@@ -40,7 +45,16 @@ public class LoginController {
 
 		if (result == ResultParameters.OK.getResult() & !(u == null)) {
 			session.setAttribute("usuarioLogado", u);
-			return "home";
+						
+			if(login.getTipoUsuario().equals("cliente")) {
+				System.out.println("Sou um cliente");
+				return "cliente/home";
+			}
+			else {
+				System.out.println("Sou um funcionario do tipo " + u.getTipo());
+				return "funcionario/home";
+			}
+
 		} else {
 			System.out.println("logarUsuario: Error " + result);
 			ModelAndView mv2 = new ModelAndView("erro");

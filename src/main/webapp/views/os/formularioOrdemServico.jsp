@@ -1,6 +1,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
+<!--  TODO - UPDATE THIS FILE TO MATCH THE AGENDAMENTO FORM -->
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -10,7 +12,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>AutOK - Formulário de Cadastro de Veículo</title>
+    <title>AutOK - Formulário</title>
 
     <!-- Bootstrap core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -19,68 +21,64 @@
 
   <body>
 
-    <%@include file="../headers/veiculo-header.jsp"%>
+    <%@include file="../headers/os-header.jsp"%>
 
     <div class="container">
-	
-	<form:form action="/autok/cadastrarVeiculo" method="post" class="form-horizontal" modelAttribute="veiculoEntidade">
+
+	<form:form action="/autok/criarOrdemServico?idAgendamento=${formulario.idAgendamento}" method="post" class="form-horizontal" modelAttribute="formulario">
 
 			<div class="form-group">
 				<label class="col-xs-3 control-label"></label>
 				<div class="col-xs-5">
-					<label><h3>Formulário de Cadastro de Veículo</h3></label>
+					<label><h3>Formulário para Criar OS</h3></label>
 			        
 			        </div>
 			</div>
+
+			<div class="form-group">
+				<label class="col-xs-3 control-label">Escolha um serviço</label>
+				<div class="col-xs-5 selectContainer">
+					<form:select class="form-control" path="um" name="um" items="${servicos}" />
+				</div>
+			</div>
 			
 			<div class="form-group">
-				<label class="col-xs-3 control-label">Fabricante</label>
+				<label class="col-xs-3 control-label">Escolha um serviço</label>
 				<div class="col-xs-5 selectContainer">
-					<form:select class="form-control" path="fabVeiculo" items="${hashFabricantes}" />
+					<form:select class="form-control" path="dois" name="dois" items="${servicos}" />
+				</div>
+			</div>
+			
+			
+			<div class="form-group">
+				<label class="col-xs-3 control-label">Escolha um serviço</label>
+				<div class="col-xs-5 selectContainer">
+					<form:select class="form-control"  name="tres" path="tres" items="${servicos}" />
+				</div>
+			</div>
+			
+			<div class="form-group">
+				<label class="col-xs-3 control-label">Escolha um serviço</label>
+				<div class="col-xs-5 selectContainer">
+					<form:select class="form-control" path="quatro" name="quatro" items="${servicos}" />
+				</div>
+			</div>
+			
+			<div class="form-group">
+				<label class="col-xs-3 control-label">Escolha um serviço</label>
+				<div class="col-xs-5 selectContainer">
+					<form:select class="form-control" path="cinco" name="cinco" items="${servicos}" />
 				</div>
 			</div>
 
-			<div class="form-group">
-				<label class="col-xs-3 control-label">Modelo</label>
-				<div class="col-xs-5 selectContainer">
-					<form:select class="form-control" path="modeloVeiculo" items="${hashModelos}" />
-				</div>
-			</div>
-
-			<div class="form-group">
-				<label class="col-xs-3 control-label">Placa</label>
-				<div class="col-xs-5">
-					<form:input type="text" class="form-control" name="renavam" path="placaVeiculo" />
-				</div>
-			</div>
-			
-			<div class="form-group">
-				<label class="col-xs-3 control-label">Renavam</label>
-				<div class="col-xs-5">
-					<form:input type="text" class="form-control" name="renavam" path="renavam" />
-				</div>
-			</div>
-			
-			<div class="form-group">
-				<label class="col-xs-3 control-label">Kilometragem</label>
-				<div class="col-xs-5">
-					<form:input type="text" class="form-control" name="placa" path="quilometragem" />
-				</div>
-			</div>
-			
-			<div class="form-group">
-				<label class="col-xs-3 control-label">Ano de Fabricação</label>
-				<div class="col-xs-5">
-					<form:input type="text" class="form-control" name="anoFabricacao" path="fabAno" />
-				</div>
-			</div>
 
 			<div class="form-group">
 				<div class="col-xs-5 col-xs-offset-3">
-					<button type="submit" class="btn btn-default">Autenticar</button>
+					<button type="submit" class="btn btn-default">Criar</button>
 				</div>
 			</div>
 		</form:form>
+	
 
     </div> <!-- /container -->
 

@@ -24,6 +24,16 @@ public abstract class Usuario implements UsuarioInterface{
 
 	/* senha do usuario */
 	private String senha;
+	
+	private String tipo;
+
+	public String getTipo() {
+		return tipo;
+	}
+
+	public void setTipo(String tipo) {
+		this.tipo = tipo;
+	}
 
 	public Integer getId() {
 		return id;

@@ -7,44 +7,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.pcs.autok.dao.connect.ConnectionDAO;
+import com.pcs.autok.model.Agenda;
+import com.pcs.autok.model.Horario;
 import com.pcs.autok.model.Login;
 
-public class ClienteDAO extends ConnectionDAO {
-
-	public void editarCliente(Login cliente) {
-
-		Connection conn = null;
-		Statement stmt = null;
-
-		try {
-			conn = startConnection();
-			stmt = conn.createStatement();
-			StringBuilder sql = new StringBuilder();
-
-			sql.append("update dbAutOK.cliente");
-			sql.append(" set nomecliente = '" + cliente.getNome()
-					+ "', telefonecliente = " + cliente.getTelefone() + ",enderecocliente = '"
-					+ cliente.getEndereco() + "', emailcliente = '"
-					+ cliente.getEmail() + "',senha = '"
-					+ cliente.getSenha() + "' where emailcliente = '" + cliente.getEmail() + "';");
-			System.out.println(sql.toString());
-
-			stmt.executeUpdate(sql.toString());
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} finally {
-			try {
-				conn.close();
-				stmt.close();
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
-	}
+public class AgendaDAO extends ConnectionDAO {
 	
-	public void cadastrarCliente(Login cliente) {
+	private static final String COMMA = ",";
+
+	public void criarAgenda(Agenda agenda) {
 
 		Connection conn = null;
 		Statement stmt = null;
@@ -54,12 +25,8 @@ public class ClienteDAO extends ConnectionDAO {
 			stmt = conn.createStatement();
 			StringBuilder sql = new StringBuilder();
 
-			sql.append("insert into dbAutOK.cliente");
-			sql.append(" values " + "(0, " + "'" + cliente.getNome()
-					+ "', " + cliente.getTelefone() + ", '"
-					+ cliente.getEndereco() + "', '"
-					+ cliente.getEmail() + "', '"
-					+ cliente.getSenha() + "');");
+			sql.append("insert into dbAutOK.agenda");
+			sql.append(" values " + "(" + agenda.getDataAgenda().toString() + ", " + agenda.getIdFuncionario()+ ");");
 			System.out.println(sql.toString());
 
 			stmt.executeUpdate(sql.toString());
@@ -77,7 +44,7 @@ public class ClienteDAO extends ConnectionDAO {
 		}
 	}
 
-	public boolean buscarEmail(Login cliente) {
+	public boolean buscarEmail(Agenda agenda) {
 		Connection conn = null;
 		Statement stmt = null;
 		ResultSet rs = null;
@@ -88,15 +55,15 @@ public class ClienteDAO extends ConnectionDAO {
 			stmt = conn.createStatement();
 			StringBuilder sql = new StringBuilder();
 
-			sql.append("select * from dbAutOK.cliente where");
-			sql.append(" nomecliente like '" + cliente.getEmail() + "';");
+			sql.append("select * from dbAutOK.agenda where");
+			//sql.append(" nomeagenda like '" + agenda.getEmail() + "';");
 			System.out.println(sql.toString());
 
 			rs = stmt.executeQuery(sql.toString());
 
 			System.out.println(rs.next());
 			result = rs.next();
-			
+
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -112,32 +79,32 @@ public class ClienteDAO extends ConnectionDAO {
 		}
 		return result;
 	}
-	
-	public Login buscarRegistro(Login cliente) {
+
+	public Login buscarRegistro(Login agenda) {
 		Connection conn = null;
 		Statement stmt = null;
 		ResultSet rs = null;
 		Login u = null;
-		
+
 		try {
 			conn = startConnection();
 			stmt = conn.createStatement();
 			StringBuilder sql = new StringBuilder();
-			
-			sql.append("select * from dbAutOK.cliente where");
-			sql.append(" emailcliente like '" + cliente.getEmail() + "'"
-					+ "and senha like '" + cliente.getSenha() + "';");
+
+			sql.append("select * from dbAutOK.agenda where");
+			sql.append(
+					" emailagenda like '" + agenda.getEmail() + "'" + "and senha like '" + agenda.getSenha() + "';");
 			System.out.println(sql.toString());
-			
+
 			rs = stmt.executeQuery(sql.toString());
-			
+
 			if (rs.next()) {
 				u = new Login();
-				u.setId(rs.getInt("idcliente"));
-				u.setNome(rs.getString("nomecliente"));
-				u.setTelefone(rs.getInt("telefonecliente"));
-				u.setEndereco(rs.getString("enderecocliente"));
-				u.setEmail(rs.getString("emailcliente"));
+				u.setId(rs.getInt("idagenda"));
+				u.setNome(rs.getString("nomeagenda"));
+				u.setTelefone(rs.getInt("telefoneagenda"));
+				u.setEndereco(rs.getString("enderecoagenda"));
+				u.setEmail(rs.getString("emailagenda"));
 				u.setSenha(rs.getString("senha"));
 			}
 		} catch (Exception e) {
@@ -155,8 +122,8 @@ public class ClienteDAO extends ConnectionDAO {
 		}
 		return u;
 	}
-	
-	public void excluirCliente(Login cliente) {
+
+	public void excluirAgenda(Agenda agenda) {
 
 		Connection conn = null;
 		Statement stmt = null;
@@ -166,10 +133,8 @@ public class ClienteDAO extends ConnectionDAO {
 			stmt = conn.createStatement();
 			StringBuilder sql = new StringBuilder();
 
-			sql.append("delete from dbAutOK.cliente");
-			sql.append(" where emailcliente = '" + cliente.getEmail()
-					+ "' and senha = '" + cliente.getSenha()
-					+ "';");
+			sql.append("delete from dbAutOK.agenda");
+			sql.append(" where dataagenda = " + agenda.toString() + "and idfuncionario = " + agenda.getIdFuncionario() + ");");
 			System.out.println(sql.toString());
 
 			stmt.executeUpdate(sql.toString());
@@ -186,42 +151,76 @@ public class ClienteDAO extends ConnectionDAO {
 			}
 		}
 	}
-	
-	public boolean buscarCliente(Login cliente) {
+
+	public ArrayList<ArrayList<Horario>> buscarAgenda(int idFuncionario) {
 		Connection conn = null;
 		Statement stmt = null;
 		ResultSet rs = null;
 		boolean result = false;
+		ArrayList<ArrayList<Horario>> returnable = new ArrayList<>();
+
 		try {
+			
 			conn = startConnection();
 			stmt = conn.createStatement();
 			StringBuilder sql = new StringBuilder();
-	
-			sql.append("select * from dbAutOK.cliente where");
-			sql.append(" emailcliente like '" + cliente.getEmail() 
-						+ "' and senha like '" + cliente.getSenha() + "';");
+
+			sql.append("select * from dbAutOK.agenda where");
+			sql.append(" idFuncionario = " + idFuncionario + ");");
 			System.out.println(sql.toString());
 			rs = stmt.executeQuery(sql.toString());
-			result = rs.next();
+			
+			ArrayList<Agenda> dias = new ArrayList<>();
+			
+			while (rs.next()) {
+				
+				Agenda dia = new Agenda();
+				dia.setDataAgenda(rs.getDate("dataagenda"));
+				dia.setIdFuncionario(idFuncionario);
+				dias.add(dia);
+			}
+			
+			for (Agenda dia: dias) {
+				
+				ArrayList<Horario> horarios = new ArrayList<>();
+				
+				sql.append("select * from dbAutOK.horario where");
+				sql.append(" idFuncionario = " + idFuncionario + "and datahorario = " + dia.getDataAgenda().toString() + ");");
+				System.out.println(sql.toString());
+				rs = stmt.executeQuery(sql.toString());
+				
+				while (rs.next()) {
+					
+					Horario horario = new Horario();
+					horario.setDate(dia.getDataAgenda());
+					horario.setIdFuncionario(idFuncionario);
+					horario.setHorarioLivre(rs.getInt("horario"));
+					horarios.add(horario);
+				}
+				
+				returnable.add(horarios);
+				
+			}
+			
 		} catch (Exception e) {
-				// TODO Auto-generated catch block
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
 			try {
 				conn.close();
 				stmt.close();
 				rs.close();
-				
+
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
-		return result;
+		return returnable;
 	}
 
 	public List<Login> listarTodos() {
-		List<Login> clientes = new ArrayList<Login>();
+		List<Login> agendas = new ArrayList<Login>();
 
 		Connection conn = null;
 		Statement stmt = null;
@@ -231,8 +230,8 @@ public class ClienteDAO extends ConnectionDAO {
 			conn = startConnection();
 			stmt = conn.createStatement();
 			StringBuilder sql = new StringBuilder();
-			sql.append(" select cliente.idCliente, cliente.nomeCliente, cliente.telCliente");
-			sql.append(" from cliente cliente");
+			sql.append(" select agenda.idagenda, agenda.nomeagenda, agenda.telagenda");
+			sql.append(" from agenda agenda");
 			rs = stmt.executeQuery(sql.toString());
 
 			@SuppressWarnings("unused")
@@ -245,15 +244,15 @@ public class ClienteDAO extends ConnectionDAO {
 			e.printStackTrace();
 		} finally {
 			try {
-				 conn.close();
-				 stmt.close();
-				 rs.close();
+				conn.close();
+				stmt.close();
+				rs.close();
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
-		return clientes;
+		return agendas;
 	}
 
 }

@@ -11,7 +11,18 @@ public class Horario {
 	private Date date;
 	
 	private Integer horarioLivre;
+	
+	private Integer ocupado;
 
+	public void setOcupado(Integer ocupado) {
+		this.ocupado = ocupado;
+	}
+	
+	public Integer getOcupado() {
+		
+		return ocupado;
+	}
+	
 	public Integer getIdHorario() {
 		return idHorario;
 	}

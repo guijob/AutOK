@@ -17,6 +17,57 @@ import com.pcs.autok.model.base.abstracts.Usuario;
 
 public class FuncionarioDAO extends ConnectionDAO {
 
+	public List<Funcionario> buscarTodosFuncionariosPorTipo(String tipo) {
+		Connection conn = null;
+		Statement stmt = null;
+		ResultSet rs = null;
+		List<Funcionario> funcionarios = new ArrayList<Funcionario>();
+		
+		try {
+			conn = startConnection();
+			stmt = conn.createStatement();
+			StringBuilder sql = new StringBuilder();
+			
+			sql.append("select * from dbAutOK.funcionario where");
+			sql.append(" tipofuncionario like '" + tipo + "';");
+			System.out.println(sql.toString());
+			
+			rs = stmt.executeQuery(sql.toString());
+			
+			Funcionario u = null;
+			
+			while (rs.next()) {
+					u = new TecnicoResponsavel();
+				
+				u.setId(rs.getInt("idfuncionario"));
+				u.setNome(rs.getString("nomefuncionario"));
+				u.setTelefone(rs.getInt("telefonefuncionario"));
+				u.setCelular(rs.getInt("celularfuncionario"));
+				u.setEndereco(rs.getString("enderecofuncionario"));
+				u.setEmail(rs.getString("emailfuncionario"));
+				u.setSenha(rs.getString("senhafuncionario"));
+				u.setCtps(rs.getInt("ctpsfuncionario"));
+				u.setCpf(rs.getInt("cpffuncionario"));
+				u.setTipo(rs.getString("tipofuncionario"));
+				funcionarios.add(u);
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			try {
+				conn.close();
+				stmt.close();
+				rs.close();
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		return funcionarios;
+	}
+	
+	
 	public void editarFuncionario(Funcionario funcionario) {
 
 		Connection conn = null;

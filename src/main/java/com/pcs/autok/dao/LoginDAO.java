@@ -28,65 +28,68 @@ public class LoginDAO extends ConnectionDAO{
 		try {
 			conn = startConnection();
 			stmt = conn.createStatement();
-			StringBuilder sql = new StringBuilder();
 			
-			sql.append("select * from dbAutOK.cliente where");
-			sql.append(" emailcliente like '" + login.getEmail() + "'"
-					+ "and senha like '" + login.getSenha() + "';");
-			System.out.println(sql.toString());
-			
-			rs = stmt.executeQuery(sql.toString());
-			
-			if (rs.next()) {
-				c = new Login();
-				c.setId(rs.getInt("idcliente"));
-				c.setNome(rs.getString("nomecliente"));
-				c.setTelefone(rs.getInt("telefonecliente"));
-				c.setEndereco(rs.getString("enderecocliente"));
-				c.setEmail(rs.getString("emailcliente"));
-				c.setSenha(rs.getString("senha"));
+			if (login.getTipoUsuario().equals("cliente")){
+				StringBuilder sql = new StringBuilder();
 				
-				isCliente = true;
-			} else {
-				StringBuilder sql2 = new StringBuilder();
-				sql2.append("select * from dbAutOK.funcionario where");
-				sql2.append(" emailfuncionario like '" + login.getEmail() + "'"
-						+ "and senhafuncionario like '" + login.getSenha() + "';");
-				System.out.println(sql2.toString());
+				sql.append("select * from dbAutOK.cliente where");
+				sql.append(" emailcliente like '" + login.getEmail() + "'"
+						+ " and senha like '" + login.getSenha() + "';");
+				System.out.println(sql.toString());
 				
-				rs2 = stmt.executeQuery(sql2.toString());
-
-				if (rs2.next()) {
-					switch (rs2.getString("tipofuncionario")) {
-					case "administrador":
-						u = new Administrador();
-						break;
-					case "tec_analista":
-						u = new TecnicoAnalista();
-						break;
-					case "tec_responsavel":
-						u = new TecnicoResponsavel();
-						break;
-					case "atendente":
-						u = new Atendente();
-						break;
-					case "caixa":
-						u = new Caixa();
-						break;
-					}
+				rs = stmt.executeQuery(sql.toString());
+				
+				if (rs.next()) {
+					c = new Login();
+					c.setId(rs.getInt("idcliente"));
+					c.setNome(rs.getString("nomecliente"));
+					c.setTelefone(rs.getInt("telefonecliente"));
+					c.setEndereco(rs.getString("enderecocliente"));
+					c.setEmail(rs.getString("emailcliente"));
+					c.setSenha(rs.getString("senha"));
+					c.setTipo("cliente");
+					isCliente = true;
+				} 
+			}else {
+					StringBuilder sql2 = new StringBuilder();
+					sql2.append("select * from dbAutOK.funcionario where");
+					sql2.append(" emailfuncionario like '" + login.getEmail() + "'"
+							+ " and senhafuncionario like '" + login.getSenha() + "';");
+					System.out.println(sql2.toString());
 					
-					u.setId(rs2.getInt("idfuncionario"));
-					u.setNome(rs2.getString("nomefuncionario"));
-					u.setTelefone(rs2.getInt("telefonefuncionario"));
-					u.setCelular(rs2.getInt("celularfuncionario"));
-					u.setEndereco(rs2.getString("enderecofuncionario"));
-					u.setEmail(rs2.getString("emailfuncionario"));
-					u.setSenha(rs2.getString("senhafuncionario"));
-					u.setTipo(rs2.getString("tipofuncionario"));
-					u.setCtps(rs2.getInt("ctpsfuncionario"));
-					u.setCpf(rs2.getInt("cpffuncionario"));
+					rs2 = stmt.executeQuery(sql2.toString());
+	
+					if (rs2.next()) {
+						switch (rs2.getString("tipofuncionario")) {
+						case "administrador":
+							u = new Administrador();
+							break;
+						case "tec_analista":
+							u = new TecnicoAnalista();
+							break;
+						case "tec_responsavel":
+							u = new TecnicoResponsavel();
+							break;
+						case "atendente":
+							u = new Atendente();
+							break;
+						case "caixa":
+							u = new Caixa();
+							break;
+						}
+						
+						u.setId(rs2.getInt("idfuncionario"));
+						u.setNome(rs2.getString("nomefuncionario"));
+						u.setTelefone(rs2.getInt("telefonefuncionario"));
+						u.setCelular(rs2.getInt("celularfuncionario"));
+						u.setEndereco(rs2.getString("enderecofuncionario"));
+						u.setEmail(rs2.getString("emailfuncionario"));
+						u.setSenha(rs2.getString("senhafuncionario"));
+						u.setTipo(rs2.getString("tipofuncionario"));
+						u.setCtps(rs2.getInt("ctpsfuncionario"));
+						u.setCpf(rs2.getInt("cpffuncionario"));
+					}
 				}
-			}
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -94,13 +97,18 @@ public class LoginDAO extends ConnectionDAO{
 			try {
 				conn.close();
 				stmt.close();
-				rs.close();
+				
+				if(login.getTipoUsuario().equals("cliente"))
+					rs.close();
+				else
+					rs2.close();
+				
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
-		if (isCliente)
+		if (login.getTipoUsuario().equals("cliente"))
 			return c;
 		else
 			return u;

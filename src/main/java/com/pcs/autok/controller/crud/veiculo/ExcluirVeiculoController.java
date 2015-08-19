@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.pcs.autok.controller.validators.veiculo.ExcluirVeiculoValidator;
@@ -27,12 +28,16 @@ public class ExcluirVeiculoController {
 			return mv;
 	}
 	
-	@RequestMapping(value = "/excluirVeiculo", method = RequestMethod.POST)
-	public ModelAndView excluirVeiculo(@ModelAttribute Veiculo veiculo) {
+	@RequestMapping(value = "/excluirVeiculo", method = RequestMethod.GET)
+	public ModelAndView excluirVeiculo(@RequestParam("id") Integer idVeiculo) {
 		System.out.println("excluirVeiculo: Passing through...");
 		int result;
-		ExcluirVeiculoValidator validator = new ExcluirVeiculoValidator(veiculo);
+		
 		VeiculoDAO dao = new VeiculoDAO();
+		
+		Veiculo veiculo = dao.buscarVeiculoPorIdVeiculo(idVeiculo);
+		
+		ExcluirVeiculoValidator validator = new ExcluirVeiculoValidator(veiculo);
 		ModelAndView mv = new ModelAndView("/veiculo/exclusaoOk");
 
 		result = validator.validar(veiculo);
@@ -47,7 +52,7 @@ public class ExcluirVeiculoController {
 			HashResultParameters hashMap = new HashResultParameters();
 			map = hashMap.setResultParametersHashMap(map);
 			
-			mv2.addObject("erro", map.get(result));
+			mv2.addObject("veiculo/erro", map.get(result));
 			return mv2;
 		}
 	}

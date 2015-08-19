@@ -21,21 +21,7 @@
   <body>
   <div class="container">
 
-	    <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-	      <div class="container">
-	        <div class="navbar-header">
-	          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-	            <span class="sr-only">Toggle navigation</span>
-	            <span class="icon-bar"></span>
-	            <span class="icon-bar"></span>
-	            <span class="icon-bar"></span>
-	          </button>
-	          <a class="navbar-brand" href="#">AutOK</a>
-	        </div>
-	        <div class="collapse navbar-collapse">
-	        </div><!--/.nav-collapse -->
-	      </div>
-	    </div>
+		<%@include file="../headers/menu-header.jsp"%>
 
         <div class="starter-template">
         	<h1>LOGOU!</h1>
@@ -43,4 +29,17 @@
         	<p class="">Bem vindo, ${usuarioLogado.nome}</p>
         	<a href="logout">Sair do sistema</a>
         </div>
-<%@include file="footer.jsp"%>
+	
+    <footer class="footer">
+    	<div class="container">
+        	<p>&copy; Grupo 04 - PCS2034 de 2015</p>
+    	</div> <!-- /container -->
+    </footer>
+    
+    </div><!-- /.container -->
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="js/bootstrap.min.js"></script>
+  </body>
+</html>

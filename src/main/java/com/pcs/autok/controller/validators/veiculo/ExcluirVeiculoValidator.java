@@ -15,14 +15,13 @@ public class ExcluirVeiculoValidator {
 	public int validar(Veiculo veiculo) {
 
 		/* validar campo vazio */
-		if (veiculo.getRENAVAM() == null) {
+		if (veiculo.getRenavam() == null) {
 			System.out.println("validarVeiculo: Não passou por ter renavam vazio...");
 			return ResultParameters.CAMPO_VAZIO.getResult();
 		}
 		
 		VeiculoDAO dao = new VeiculoDAO();
-		boolean result = dao.buscarRENAVAM(veiculo);
-		System.out.println(": " + result);
+		boolean result = dao.buscarRenavam(veiculo);
 		if (!result) {
 			System.out.println("Não passou porque não existe usuário no banco de dados");
 			return ResultParameters.USUARIO_NAO_ENCONTRADO.getResult();

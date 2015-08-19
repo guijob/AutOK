@@ -6,22 +6,34 @@ public class Agendamento {
 	
 	private String descricao;
 	
-	private Integer idTecnico;
-
 	private Integer idAgendamento;
 		
 	private Integer idHorario;
+	
+	private String date;
+	
+	private String horarioLivre;
+	
+	
+
+	public String getDate() {
+		return date;
+	}
+
+	public void setDate(String date) {
+		this.date = date;
+	}
+
+	public String getHorarioLivre() {
+		return horarioLivre;
+	}
+
+	public void setHorarioLivre(String horarioLivre) {
+		this.horarioLivre = horarioLivre;
+	}
 
 	public Integer getIdCliente() {
 		return idCliente;
-	}
-
-	public Integer getIdTecnico() {
-		return idTecnico;
-	}
-
-	public void setIdTecnico(Integer idTecnico) {
-		this.idTecnico = idTecnico;
 	}
 	
 	public void setIdCliente(Integer idCliente) {
