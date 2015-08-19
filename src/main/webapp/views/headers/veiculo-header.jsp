@@ -11,14 +11,13 @@
 	        </div>
 	        <div class="collapse navbar-collapse">
 		   		<ul class="nav navbar-nav">
-	            <li><a href="${pageContext.request.contextPath}/">Home</a></li>
+	            <li><a href="${pageContext.request.contextPath}/homeLogged">Home</a></li>
         		<li class="active"><a href = "${pageContext.request.contextPath}/listarVeiculos">Veículos</a></li>
 	            <li><a href="${pageContext.request.contextPath}/listarAgendamentos">Agendamentos</a></li>
 	            <li><a href="${pageContext.request.contextPath}/mostrarOrdensDeServico">Ordens de Serviço</a></li>
 	          </ul>
 	          <ul class="nav navbar-nav navbar-right">
 	          	<p class="navbar-text">${usuarioLogado.nome}</p> 
-	          	<li><a href="./"><span class="glyphicon glyphicon-user"></span><span class="sr-only">(current)</span></a></li>
 	            <li class="dropdown">
 	              <a href="${pageContext.request.contextPath}/acessarConta" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-cog"></span></a>
 	              <ul class="dropdown-menu">

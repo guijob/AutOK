@@ -27,7 +27,7 @@
         	<h1>Configurações de conta</h1>
         	<p class="lead">Escolha uma opção de conta</p>
         	<p><a href = "${pageContext.request.contextPath}/confirmacaoExcluirCliente">Excluir cadastro</a></p>
-        	<p><a href = "${pageContext.request.contextPath}/formularioLoginEditar">Editar cadastro</a></p>
+        	<p><a href = "${pageContext.request.contextPath}/formularioEditar">Editar cadastro</a></p>
         	<a href="logout">Sair do sistema</a>
         </div>
 	

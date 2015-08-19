@@ -38,31 +38,28 @@ public class AgendamentoController {
 		Usuario u = (Usuario) session.getAttribute("usuarioLogado");
 
 		AgendamentoDAO dao = new AgendamentoDAO();
+		
+		ArrayList<Agendamento> agendamentos;
 
 		if (u != null && u.getTipo().equals("cliente")) {
 
-			ArrayList<Agendamento> agendamentos = (ArrayList<Agendamento>) dao.buscarAgendamentosCliente(u.getId());
-
-			ModelAndView view = new ModelAndView("agendamento/listaAgendamentos");
-			view.addObject("agendamentos", agendamentos);
-			view.addObject("tipoUsuario", u.getTipo());
-
-			return view;
+			agendamentos = (ArrayList<Agendamento>) dao.buscarAgendamentosCliente(u.getId());
 
 		} else if (u != null && u.getTipo().equals("tec_analista")) {
 			
+			agendamentos = (ArrayList<Agendamento>) dao.buscarAgendamentosAnalista(u.getId());
 			
-			ArrayList<Agendamento> agendamentos = (ArrayList<Agendamento>) dao.buscarAgendamentosAnalista(u.getId());
+		} else {
+		
+			agendamentos = new ArrayList<>();
 
-			ModelAndView view = new ModelAndView("agendamento/listaAgendamentos");
-			view.addObject("agendamentos", agendamentos);
-			view.addObject("tipoUsuario", u.getTipo());
-
-			return view;
-			
 		}
 		
-		return null;
+		ModelAndView view = new ModelAndView("agendamento/listaAgendamentos");
+		view.addObject("agendamentos", agendamentos);
+		view.addObject("tipoUsuario", u.getTipo());
+		
+		return view;
 	}
 
 	@RequestMapping(value = "/agendamentoFormulario")

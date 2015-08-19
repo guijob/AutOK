@@ -33,54 +33,54 @@
 	      <!-- Full name -->
 	      <label class="control-label"  for="nome">Nome completo</label>
 	      <div class="controls">
-	        <form:input type="text" path="nomeCliente" class="input-xlarge-2"></form:input>
+	        <form:input type="text" path="nome" class="input-xlarge-2" value="${clienteEntidade.nome}"></form:input>
 	      </div>
 	    </div>
 	    
 	    <div class="control-group">
 	      <!-- Telephone -->
-	      <label class="control-label"  for="telCliente">Telefone</label>
+	      <label class="control-label"  for="telefone">Telefone</label>
 	      <div class="controls">
-	        <form:input type="text" path="telCliente" class="input-xlarge"></form:input>
+	        <form:input type="text" path="telefone" class="input-xlarge" value="${clienteEntidade.telefone}"></form:input>
 	      </div>
 	    </div>
 	    
 	    <div class="control-group">
 	      <!-- Address -->
-	      <label class="control-label"  for="endCliente">Endereço</label>
+	      <label class="control-label"  for="endereco">Endereço</label>
 	      <div class="controls">
-	        <form:input type="text" path="endCliente" class="input-xlarge"></form:input>
+	        <form:input type="text" path="endereco" class="input-xlarge" value="${clienteEntidade.endereco}"></form:input>
 	      </div>
 	    </div>
 	    
 	    <div class="control-group">
 	      <!-- Email -->
-	      <label class="control-label"  for="emailCliente">E-mail</label>
+	      <label class="control-label"  for="email">E-mail</label>
 	      <div class="controls">
-	        <form:input type="text" path="emailCliente" class="input-xlarge"></form:input>
+	        <form:input type="text" path="email" class="input-xlarge" value="${clienteEntidade.email}" ></form:input>
 	      </div>
 	    </div>
 	    
 	    <div class="control-group">
 	      <!-- Senha -->
-	      <label class="control-label"  for="senhaCliente">Senha</label>
+	      <label class="control-label"  for="senha">Senha</label>
 	      <div class="controls">
-	        <form:input type="password" path="senhaCliente" class="input-xlarge"></form:input>
+	        <form:input type="password" path="senha" class="input-xlarge"></form:input>
 	      </div>
 	    </div>
 	    
 	    <div class="control-group">
 	      <!-- Confere Senha -->
-	      <label class="control-label"  for="confereSenhaCliente">Senha novamente</label>
+	      <label class="control-label"  for="confereSenha">Senha novamente</label>
 	      <div class="controls">
-	        <form:input type="password" path="confereSenhaCliente" class="input-xlarge"></form:input>
+	        <form:input type="password" path="confereSenha" class="input-xlarge"></form:input>
 	      </div>
 	    </div>
 	    	 
 	    <div class="control-group">
 	      <!-- Button -->
 	      <div class="controls">
-	        <button class="btn btn-success">Cadastrar</button>
+	        <button class="btn btn-success">Editar</button>
 	      </div>
 	    </div>
 	  </fieldset>
