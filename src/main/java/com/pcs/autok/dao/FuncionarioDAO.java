@@ -23,7 +23,6 @@ public class FuncionarioDAO extends ConnectionDAO {
 		ResultSet rs = null;
 		List<Funcionario> funcionarios = new ArrayList<Funcionario>();
 		
-		
 		try {
 			conn = startConnection();
 			stmt = conn.createStatement();

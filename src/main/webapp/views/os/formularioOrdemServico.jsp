@@ -25,7 +25,7 @@
 
     <div class="container">
 
-	<form:form action="/autok/criarOrdemServico" method="post" class="form-horizontal" modelAttribute="formulario">
+	<form:form action="/autok/criarOrdemServico?idAgendamento=${formulario.idAgendamento}" method="post" class="form-horizontal" modelAttribute="formulario">
 
 			<div class="form-group">
 				<label class="col-xs-3 control-label"></label>
@@ -38,14 +38,14 @@
 			<div class="form-group">
 				<label class="col-xs-3 control-label">Escolha um serviço</label>
 				<div class="col-xs-5 selectContainer">
-					<form:select class="form-control" path="um" items="${servicos}" />
+					<form:select class="form-control" path="um" name="um" items="${servicos}" />
 				</div>
 			</div>
 			
 			<div class="form-group">
 				<label class="col-xs-3 control-label">Escolha um serviço</label>
 				<div class="col-xs-5 selectContainer">
-					<form:select class="form-control" path="dois" items="${servicos}" />
+					<form:select class="form-control" path="dois" name="dois" items="${servicos}" />
 				</div>
 			</div>
 			
@@ -53,21 +53,21 @@
 			<div class="form-group">
 				<label class="col-xs-3 control-label">Escolha um serviço</label>
 				<div class="col-xs-5 selectContainer">
-					<form:select class="form-control" path="tres" items="${servicos}" />
+					<form:select class="form-control"  name="tres" path="tres" items="${servicos}" />
 				</div>
 			</div>
 			
 			<div class="form-group">
 				<label class="col-xs-3 control-label">Escolha um serviço</label>
 				<div class="col-xs-5 selectContainer">
-					<form:select class="form-control" path="quatro" items="${servicos}" />
+					<form:select class="form-control" path="quatro" name="quatro" items="${servicos}" />
 				</div>
 			</div>
 			
 			<div class="form-group">
 				<label class="col-xs-3 control-label">Escolha um serviço</label>
 				<div class="col-xs-5 selectContainer">
-					<form:select class="form-control" path="cinco" items="${servicos}" />
+					<form:select class="form-control" path="cinco" name="cinco" items="${servicos}" />
 				</div>
 			</div>
 

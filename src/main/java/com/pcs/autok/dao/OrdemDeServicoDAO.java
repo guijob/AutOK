@@ -11,7 +11,7 @@ import com.pcs.autok.model.OrdemDeServico;
 
 public class OrdemDeServicoDAO extends ConnectionDAO {
 
-	public void criarOS(OrdemDeServico os) {
+	public void criarOS(OrdemDeServico os, int duracao) {
 
 		Connection conn = null;
 		Statement stmt = null;
@@ -19,6 +19,12 @@ public class OrdemDeServicoDAO extends ConnectionDAO {
 		try {
 			conn = startConnection();
 			stmt = conn.createStatement();
+			
+			HorarioDAO dao = new HorarioDAO();
+			
+			dao.setHorariosOcupados(dao.primeirosNHorariosLivresDeTecnico(duracao, os.getIdResponsavelUm()), true);
+			dao.setHorariosOcupados(dao.primeirosNHorariosLivresDeTecnico(duracao, os.getIdResponsavelDois()), true);
+
 			StringBuilder sql = new StringBuilder();
 
 			sql.append("insert into dbAutOK.ordem_servico");

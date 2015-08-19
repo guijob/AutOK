@@ -7,15 +7,15 @@ import com.pcs.autok.model.TipoServico;
 
 public class FormularioOrdemServico {
 	
-	private TipoServico um;
+	private Integer um;
 	
-	private TipoServico dois;
+	private Integer dois;
 	
-	private TipoServico tres;
+	private Integer tres;
 
-	private TipoServico quatro;
+	private Integer quatro;
 
-	private TipoServico cinco;
+	private Integer cinco;
 	
 	private int idAgendamento;
 
@@ -27,92 +27,51 @@ public class FormularioOrdemServico {
 		this.idAgendamento = idAgendamento;
 	}
 
-	public TipoServico getUm() {
+	public Integer getUm() {
 		return um;
 	}
 
-	public void setUm(TipoServico um) {
+	public void setUm(Integer um) {
 		this.um = um;
 	}
 
-	public TipoServico getDois() {
+	public Integer getDois() {
 		return dois;
 	}
 
-	public void setDois(TipoServico dois) {
+	public void setDois(Integer dois) {
 		this.dois = dois;
 	}
 
-	public TipoServico getTres() {
+	public Integer getTres() {
 		return tres;
 	}
 
-	public void setTres(TipoServico tres) {
+	public void setTres(Integer tres) {
 		this.tres = tres;
 	}
 
-	public TipoServico getQuatro() {
+	public Integer getQuatro() {
 		return quatro;
 	}
 
-	public void setQuatro(TipoServico quatro) {
+	public void setQuatro(Integer quatro) {
 		this.quatro = quatro;
 	}
 
-	public TipoServico getCinco() {
+	public Integer getCinco() {
 		return cinco;
 	}
 
-	public void setCinco(TipoServico cinco) {
+	public void setCinco(Integer cinco) {
 		this.cinco = cinco;
 	}
-	
-	/*public List<TipoServico> getServicosNaoNulos() {
-		
-		List<TipoServico> returnable = new ArrayList<TipoServico>();
-		
-		List<TipoServico> lista = new ArrayList<TipoServico>();
-		lista.add(um);
-		lista.add(dois);
-		lista.add(tres);
-		lista.add(quatro);
-		lista.add(cinco);
 
-		for (TipoServico servico: lista) {
-			
-			if (servico != null && ! (servico.getNome().equals("Selecione")))
-				returnable.add(servico);
-			
-		}
-		
-		return returnable;
-		
-	}*/
-	
-	/*public float getPrecoTotal() {
-		
-		
-		float preco = 0;
-		
-		for (TipoServico servico: getServicosNaoNulos()) {
-			
-			preco = preco + servico.getPreco();
-		
-		}
-		
-		return preco;
+	@Override
+	public String toString() {
+		return um + ", " + dois + ", " + tres + ", "+ quatro + ", " + cinco;
 	}
+
 	
-	public int getDuracaoTotal() {
-		
-		int duracao = 0;
-		
-		for (TipoServico servico: getServicosNaoNulos()) {
-			
-			duracao = duracao + servico.getDuracaoEmHoras();
-		}
-		
-		return duracao;
-	}*/
 
 }

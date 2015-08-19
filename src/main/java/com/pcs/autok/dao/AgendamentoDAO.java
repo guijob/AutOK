@@ -109,7 +109,7 @@ public class AgendamentoDAO extends ConnectionDAO {
 			StringBuilder sql = new StringBuilder();
 
 			sql.append("select * from dbAutOK.agendamento where");
-			sql.append(" idHorario in (select idHorario from dbAutOK.horario where idFuncionario =  " + idAnalista + ");");
+			sql.append(" idHorario in (select id from dbAutOK.horario where idfuncionario =  " + idAnalista + ");");
 			System.out.println(sql.toString());
 
 			rs = stmt.executeQuery(sql.toString());

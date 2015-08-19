@@ -43,7 +43,7 @@ public class AgendamentoController {
 
 			ArrayList<Agendamento> agendamentos = (ArrayList<Agendamento>) dao.buscarAgendamentosCliente(u.getId());
 
-			ModelAndView view = new ModelAndView("agendamento/agendamentos");
+			ModelAndView view = new ModelAndView("agendamento/listaAgendamentos");
 			view.addObject("agendamentos", agendamentos);
 			view.addObject("tipoUsuario", u.getTipo());
 
@@ -54,7 +54,7 @@ public class AgendamentoController {
 			
 			ArrayList<Agendamento> agendamentos = (ArrayList<Agendamento>) dao.buscarAgendamentosAnalista(u.getId());
 
-			ModelAndView view = new ModelAndView("agendamento/agendamentos");
+			ModelAndView view = new ModelAndView("agendamento/listaAgendamentos");
 			view.addObject("agendamentos", agendamentos);
 			view.addObject("tipoUsuario", u.getTipo());
 
@@ -125,7 +125,7 @@ public class AgendamentoController {
 
 		Map<Integer, String> sortedMapAllDays = sortByValue(mapAllDays);
 
-		ModelAndView view = new ModelAndView("agendamento/formulario");
+		ModelAndView view = new ModelAndView("agendamento/formularioAgendamento");
 		view.addObject("novoAgendamento", agendamento);
 		view.addObject("horarios", sortedMapAllDays);
 		return view;
