@@ -16,8 +16,30 @@ public class FormularioOrdemServico {
 	private Integer quatro;
 
 	private Integer cinco;
+
+	private Integer tecResponsavel1;
+	
+	private Integer tecResponsavel2;
 	
 	private int idAgendamento;
+
+	
+	
+	public Integer getTecResponsavel1() {
+		return tecResponsavel1;
+	}
+
+	public void setTecResponsavel1(Integer tecResponsavel1) {
+		this.tecResponsavel1 = tecResponsavel1;
+	}
+
+	public Integer getTecResponsavel2() {
+		return tecResponsavel2;
+	}
+
+	public void setTecResponsavel2(Integer tecResponsavel2) {
+		this.tecResponsavel2 = tecResponsavel2;
+	}
 
 	public int getIdAgendamento() {
 		return idAgendamento;

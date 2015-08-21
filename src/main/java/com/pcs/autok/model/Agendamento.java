@@ -4,6 +4,16 @@ public class Agendamento {
 	
 	private Integer idCliente;
 	
+	private boolean temOS;
+	
+	public boolean isTemOS() {
+		return temOS;
+	}
+
+	public void setTemOS(boolean temOS) {
+		this.temOS = temOS;
+	}
+
 	private String descricao;
 	
 	private Integer idAgendamento;

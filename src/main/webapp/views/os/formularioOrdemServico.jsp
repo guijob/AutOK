@@ -71,6 +71,19 @@
 				</div>
 			</div>
 
+			<div class="form-group">
+				<label class="col-xs-3 control-label">Escolha Téc Responsável 1</label>
+				<div class="col-xs-5 selectContainer">
+					<form:select class="form-control" path="tecResponsavel1"  items="${responsaveis}" />
+				</div>
+			</div>
+			
+			<div class="form-group">
+				<label class="col-xs-3 control-label">Escolha Téc Responsável 2</label>
+				<div class="col-xs-5 selectContainer">
+					<form:select class="form-control" path="tecResponsavel2"  items="${responsaveis2}" />
+				</div>
+			</div>
 
 			<div class="form-group">
 				<div class="col-xs-5 col-xs-offset-3">

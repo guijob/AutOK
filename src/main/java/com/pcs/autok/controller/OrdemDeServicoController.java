@@ -1,7 +1,6 @@
 package com.pcs.autok.controller;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -82,18 +81,130 @@ public class OrdemDeServicoController {
 		os.setIdAgendamento(idAgendamento);
 		ModelAndView view = new ModelAndView("os/formularioOrdemServico");
 		TipoDeServicoDAO dao = new TipoDeServicoDAO();
+
+		FuncionarioDAO dao2 = new FuncionarioDAO();
 		List<TipoServico> servicos = dao.listarTodos();
 		HashMap<Integer, String> hash = new HashMap<>();
+		HashMap<Integer, String> hashResponsaveis= new HashMap<>();
+		HashMap<Integer, String> hashResponsaveis2= new HashMap<>();
 		
 		for (TipoServico servico: servicos) {
 			hash.put(servico.getId(), servico.getNome());
 		}
 		
+		List<Funcionario> tecResp = dao2.buscarTodosFuncionariosPorTipo("tec_responsavel");
+
+		/*HorarioDAO daoHorario = new HorarioDAO();
+		
+		ArrayList<Horario> primeirosHorarios = (ArrayList<Horario>) daoHorario
+				.primeiroHorarioLivreDeTecnicos("tec_responsavel", new Date());
+		
+		boolean shouldBreak = false;
+		
+		int idResp1 = 0, idResp2 = 0;
+				
+		for (int i = 0; i < primeirosHorarios.size() - 1; i++) {
+			
+			int horarioLivre = primeirosHorarios.get(i).getHorarioLivre();
+
+			for (int j = i + 1; j < primeirosHorarios.size(); j++) {
+				
+				if (primeirosHorarios.get(j).getHorarioLivre() == horarioLivre
+					&& primeirosHorarios.get(j).getDate().equals(primeirosHorarios.get(i).getDate())) {
+					
+					idResp1 = primeirosHorarios.get(i).getIdFuncionario();
+					idResp2 = (primeirosHorarios.get(j).getIdFuncionario());
+					shouldBreak = true;
+					break;
+				}
+				
+			}
+			
+			if (shouldBreak) break;
+			
+		}
+		int idx1 = 0, idx2 = 0;
+		
+		for (Funcionario f: tecResp)
+		{
+			if (f.getId() == idResp1) {
+				idx1 = tecResp.indexOf(f);
+			}
+		}
+		for (Funcionario f: tecResp)
+		{
+			if (f.getId() == idResp2) {
+				idx2 = tecResp.indexOf(f);
+			}
+		}
+		hashResponsaveis.put(idResp1, tecResp.get(idx1).getNome());
+		hashResponsaveis2.put(idResp2, tecResp.get(idx2).getNome());
+		*/
+		
+		boolean amor = false;
+		for (Funcionario funcionario: tecResp) {
+			if (amor) {
+				hashResponsaveis.put(funcionario.getId(), funcionario.getNome());
+			}
+			amor = true;
+
+				hashResponsaveis2.put(funcionario.getId(), funcionario.getNome());
+			
+		}
+
+		
 		hash.put(0, "Selecione");
 		view.addObject("formulario", os);
 		view.addObject("servicos", hash);
+
+		view.addObject("responsaveis", hashResponsaveis);
+		view.addObject("responsaveis2", hashResponsaveis2);
 		
 		return view;
+	}
+	
+	@RequestMapping("/AprovarOS")
+	public ModelAndView aprovarOS(HttpSession session, 
+			 @RequestParam("id") Integer id) {
+		
+		OrdemDeServicoDAO dao = new OrdemDeServicoDAO();
+				
+		dao.alterarStatusDaOS(id, "Em execucao");
+		
+		return mostrarOrdensDeServico(session);
+	}
+	
+	@RequestMapping("/SuspenderOS")
+	public ModelAndView suspenderOS(HttpSession session, 
+			 @RequestParam("id") Integer id) {
+		
+		OrdemDeServicoDAO dao = new OrdemDeServicoDAO();
+		
+		dao.alterarStatusDaOS(id, "Suspensa");
+		
+		return mostrarOrdensDeServico(session);
+	}
+	
+	@RequestMapping("/FinalizarOS")
+	public ModelAndView finalizarOS(HttpSession session, 
+			 @RequestParam("id") Integer id) {
+		
+		OrdemDeServicoDAO dao = new OrdemDeServicoDAO();
+		
+		dao.alterarStatusDaOS(id, "Aguardando pagamento");
+		
+		return mostrarOrdensDeServico(session);
+	}
+	
+	@RequestMapping("/PagarOS")
+	public ModelAndView pagarOS(HttpSession session, 
+			 @RequestParam("id") Integer id) {
+		
+		OrdemDeServicoDAO dao = new OrdemDeServicoDAO();
+		
+		dao.alterarStatusDaOS(id, "Paga");
+		
+		return mostrarOrdensDeServico(session);
 	}
 	
 	@RequestMapping("/criarOrdemServico")
@@ -137,39 +248,15 @@ public class OrdemDeServicoController {
 		}
 		
 		OrdemDeServicoDAO dao = new OrdemDeServicoDAO();
-		HorarioDAO daoHorario = new HorarioDAO();
 		OrdemDeServico os = new OrdemDeServico();
 		os.setIdAgendamento(idAgendamento);
 		os.setPrecoTotal(precoTotal);
-		os.setStatus("Em andamento");
+		os.setDuracao(duracaoTotal);
+		os.setIdResponsavelUm(formulario.getTecResponsavel1());
+		os.setIdResponsavelDois(formulario.getTecResponsavel2());
+		os.setStatus("Aguardando aprovacao");
 		os.setJustificativa("");
 				
-		ArrayList<Horario> primeirosHorarios = (ArrayList<Horario>) daoHorario
-				.primeiroHorarioLivreDeTecnicos("tec_responsavel", new Date());
-		
-		boolean shouldBreak = false;
-				
-		for (int i = 0; i < primeirosHorarios.size() - 1; i++) {
-			
-			int horarioLivre = primeirosHorarios.get(i).getHorarioLivre();
-
-			for (int j = i + 1; j < primeirosHorarios.size(); j++) {
-				
-				if (primeirosHorarios.get(j).getHorarioLivre() == horarioLivre
-					&& primeirosHorarios.get(j).getDate().equals(primeirosHorarios.get(i).getDate())) {
-					
-					os.setIdResponsavelUm(primeirosHorarios.get(i).getIdFuncionario());
-					os.setIdResponsavelDois(primeirosHorarios.get(j).getIdFuncionario());
-					shouldBreak = true;
-					break;
-				}
-				
-			}
-			
-			if (shouldBreak) break;
-			
-		}
-		
 		dao.criarOS(os, duracaoTotal);
 		
 		return mostrarOrdensDeServico(session);

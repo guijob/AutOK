@@ -14,6 +14,16 @@ public class OrdemDeServico {
 	
 	private Integer idResponsavelDois;
 	
+	private Integer duracao;	
+	
+	public Integer getDuracao() {
+		return duracao;
+	}
+
+	public void setDuracao(Integer duracao) {
+		this.duracao = duracao;
+	}
+
 	private float precoTotal;
 
 	public float getPrecoTotal() {

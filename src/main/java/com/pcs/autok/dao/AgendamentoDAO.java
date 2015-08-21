@@ -178,5 +178,41 @@ public class AgendamentoDAO extends ConnectionDAO {
 		}
 	}
 	
+	public List<Integer> agendamentosComOS() {
+
+		Connection conn = null;
+		Statement stmt = null;
+		List<Integer> returnable = new ArrayList<Integer>();
+		try {
+			conn = startConnection();
+			stmt = conn.createStatement();
+			StringBuilder sql = new StringBuilder();
+
+			sql.append("select idagendamento from dbAutOK.agendamento where ");
+			sql.append("idagendamento in (select idagendamento from dbAutOK.ordem_servico);");
+			System.out.println(sql.toString());
+
+			ResultSet rs = stmt.executeQuery(sql.toString());
+			
+			while (rs.next()) {
+				
+				returnable.add(rs.getInt("idagendamento"));
+			}
+			
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			try {
+				conn.close();
+				stmt.close();
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+		}
+		return returnable;
+	}
 
 }

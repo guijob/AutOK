@@ -40,6 +40,9 @@ public class AgendamentoController {
 		AgendamentoDAO dao = new AgendamentoDAO();
 		
 		ArrayList<Agendamento> agendamentos;
+		
+		ArrayList<Integer> agendamentosComOs = (ArrayList<Integer>)dao.agendamentosComOS();
+
 
 		if (u != null && u.getTipo().equals("cliente")) {
 
@@ -53,6 +56,13 @@ public class AgendamentoController {
 		
 			agendamentos = new ArrayList<>();
 
+		}
+
+		for (Agendamento a : agendamentos) {
+			if (agendamentosComOs.contains(a.getIdAgendamento()))
+				a.setTemOS(true);
+			else
+				a.setTemOS(false);
 		}
 		
 		ModelAndView view = new ModelAndView("agendamento/listaAgendamentos");

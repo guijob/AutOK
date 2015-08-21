@@ -35,10 +35,31 @@
 							<td class="text-left">${os.idResponsavelUm}</td>
 							<td class="text-left">${os.idResponsavelDois}</td>
 							<td class="text-left">${os.precoTotal}</td>
-							<%-- <td class="text-left"><a
-								href="${pageContext.request.contextPath}
-					/excluirAgendamento?idAgendamento=${agendamento.idAgendamento}&idHorario=${agendamento.idHorario}">Cancelar</a></td> --%>
 
+
+							<c:if
+								test="${tipoUsuario == 'tec_analista' && os.status == 'Aguardando aprovacao'}">
+								<td class="text-left"><a
+									href="${pageContext.request.contextPath}
+					/AprovarOS?id=${os.id}">Aprovar</a></td>
+								<td class="text-left"><a
+									href="${pageContext.request.contextPath}
+					/SuspenderOS?id=${os.id}">Suspender</a></td>
+							</c:if>
+							
+							<c:if
+								test="${tipoUsuario == 'tec_responsavel' && os.status == 'Em execucao'}">
+								<td class="text-left"><a
+									href="${pageContext.request.contextPath}
+					/FinalizarOS?id=${os.id}">Finalizar</a></td>
+							</c:if>
+							
+							<c:if
+								test="${tipoUsuario == 'caixa' && os.status == 'Aguardando pagamento'}">
+								<td class="text-left"><a
+									href="${pageContext.request.contextPath}
+					/PagarOS?id=${os.id}">Confirmar pagamento</a></td>
+							</c:if>
 						</tr>
 					</c:forEach>
 
@@ -46,19 +67,6 @@
 			</table>
 		</c:otherwise>
 	</c:choose>
-
-
- 	<c:choose>
-		<c:when test="${tipoUsuario == 'tec_analista'}">
-			<form class="navbar-form navbar-center"
-				action="/autok/formularioCriarOS" method="get">
-				<input type="submit" value="Criar OS" class="btn btn-default">
-			</form>
-		</c:when>
-		<c:otherwise>
-		</c:otherwise>
-	</c:choose>
-
 
 </div>
 <%@include file="../footer.jsp"%>
