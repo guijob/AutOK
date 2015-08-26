@@ -331,16 +331,16 @@ public class FuncionarioDAO extends ConnectionDAO {
 			
 			while(rs.next()) {	
 				u = new Funcionario();
-				u.setIdFuncionario(rs.getInt("idfuncionario"));
-				u.setNomeFuncionario(rs.getString("nomefuncionario"));
-				u.setTelFuncionario(rs.getInt("telefonefuncionario"));
-				u.setCelFuncionario(rs.getInt("celularfuncionario"));
-				u.setEndFuncionario(rs.getString("enderecofuncionario"));
-				u.setEmailFuncionario(rs.getString("emailfuncionario"));
-				u.setSenhaFuncionario(rs.getString("senhafuncionario"));
-				u.setTipoFuncionario(rs.getString("tipofuncionario"));
-				u.setCtpsFuncionario(rs.getInt("ctpsfuncionario"));
-				u.setCpfFuncionario(rs.getInt("cpffuncionario"));
+				u.setId(rs.getInt("idfuncionario"));
+				u.setNome(rs.getString("nomefuncionario"));
+				u.setTelefone(rs.getInt("telefonefuncionario"));
+				u.setCelular(rs.getInt("celularfuncionario"));
+				u.setEndereco(rs.getString("enderecofuncionario"));
+				u.setEmail(rs.getString("emailfuncionario"));
+				u.setSenha(rs.getString("senhafuncionario"));
+				u.setTipo(rs.getString("tipofuncionario"));
+				u.setCtps(rs.getInt("ctpsfuncionario"));
+				u.setCpf(rs.getInt("cpffuncionario"));
 				funcionarios.add(u);
 			}
 		} catch (Exception e) {

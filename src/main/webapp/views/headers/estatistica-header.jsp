@@ -11,11 +11,11 @@
 	        </div>
 	        <div class="collapse navbar-collapse">
 		   		<ul class="nav navbar-nav">
-	            <li><a href="${pageContext.request.contextPath}/homeLogged">Home</a></li>
-        		<li class="active"><a href = "${pageContext.request.contextPath}/listarVeiculos">Veículos</a></li>
+	            <li><a href="${pageContext.request.contextPath}/homeLogged">Home</a></li>        		
+        		<li><a href="${pageContext.request.contextPath}/listarVeiculos">Veículos</a></li>
 	            <li><a href="${pageContext.request.contextPath}/listarAgendamentos">Agendamentos</a></li>
-	            <li><a href="${pageContext.request.contextPath}/mostrarOrdensDeServico">Ordens de Serviço</a></li>	            
-	          	<li><a href="${pageContext.request.contextPath}/Estatisticas">Estatistica</a></li>
+	            <li><a href="${pageContext.request.contextPath}/mostrarOrdensDeServico">Ordens de Serviço</a></li>
+	            <li class="active"><a href = "${pageContext.request.contextPath}/Estatisticas">Estatistica</a></li>
 	          </ul>
 	          <ul class="nav navbar-nav navbar-right">
 	          	<p class="navbar-text">${usuarioLogado.nome}</p> 
