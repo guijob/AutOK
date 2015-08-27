@@ -4,8 +4,18 @@ public class Agendamento {
 	
 	private Integer idCliente;
 	
+	private Integer idVeiculo;
+	
 	private boolean temOS;
 	
+	public Integer getIdVeiculo() {
+		return idVeiculo;
+	}
+
+	public void setIdVeiculo(Integer idVeiculo) {
+		this.idVeiculo = idVeiculo;
+	}
+
 	public boolean isTemOS() {
 		return temOS;
 	}

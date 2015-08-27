@@ -23,8 +23,12 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.pcs.autok.dao.AgendamentoDAO;
 import com.pcs.autok.dao.HorarioDAO;
+import com.pcs.autok.dao.TipoVeiculoDAO;
+import com.pcs.autok.dao.VeiculoDAO;
 import com.pcs.autok.model.Agendamento;
 import com.pcs.autok.model.Horario;
+import com.pcs.autok.model.TipoVeiculo;
+import com.pcs.autok.model.Veiculo;
 import com.pcs.autok.model.base.abstracts.Usuario;
 import com.pcs.autok.utils.HashDaysParameters;
 
@@ -87,6 +91,7 @@ public class AgendamentoController {
 		Map<Integer, String> map2 = new HashMap<Integer, String>();
 		HashDaysParameters hashMap = new HashDaysParameters();
 		map2 = hashMap.setDaysParametersHashMap(map2);
+		
 
 		// converte Date para String de maneira legivel
 		for (Date data : datas) {
@@ -132,9 +137,29 @@ public class AgendamentoController {
 
 		Map<Integer, String> sortedMapAllDays = sortByValue(mapAllDays);
 
+		//hashMap para veiculos
+		Usuario u = (Usuario) session.getAttribute("usuarioLogado");
+		
+		VeiculoDAO daoVeiculos = new VeiculoDAO();
+		List<Veiculo> veiculos = daoVeiculos.listarVeiculosPorIdUsuario(u);
+		
+		TipoVeiculoDAO daoTipoVeiculo = new TipoVeiculoDAO();
+		TipoVeiculo tipoVeiculo;
+		
+		Map<Integer, String> mapVeiculos = new HashMap<Integer, String>();
+		
+		for(Veiculo veiculo: veiculos) {
+			tipoVeiculo = daoTipoVeiculo.buscarTipoVeiculo(veiculo);
+			mapVeiculos.put(veiculo.getIdVeiculo(), tipoVeiculo.getModelo() + ", " + tipoVeiculo.getFabricante());
+		}
+
+		//fim hash para veiculos
+		
+		
 		ModelAndView view = new ModelAndView("agendamento/formularioAgendamento");
 		view.addObject("novoAgendamento", agendamento);
 		view.addObject("horarios", sortedMapAllDays);
+		view.addObject("veiculos", mapVeiculos);
 		return view;
 	}
 
