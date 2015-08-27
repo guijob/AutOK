@@ -302,5 +302,52 @@ public class OrdemDeServicoDAO extends ConnectionDAO {
 		return returnable;
 
 	}
+	
+	public List<OrdemDeServico> listarOrdensDeServicoDeCaixa() {
+
+		Connection conn = null;
+		Statement stmt = null;
+		ResultSet rs = null;
+
+		ArrayList<OrdemDeServico> returnable = new ArrayList<>();
+
+		try {
+			conn = startConnection();
+			stmt = conn.createStatement();
+			StringBuilder sql = new StringBuilder();
+
+			sql.append("select * from dbAutOK.ordem_servico where status like 'Aguardando pagamento';");
+			System.out.println(sql.toString());
+
+			rs = stmt.executeQuery(sql.toString());
+
+			while (rs.next()) {
+
+				OrdemDeServico os = new OrdemDeServico();
+				os.setId(rs.getInt("idordem_servico"));
+				os.setIdAgendamento(rs.getInt("idagendamento"));
+				os.setStatus(rs.getString("status"));
+				os.setJustificativa(rs.getString("justificativa"));
+				os.setIdResponsavelUm(rs.getInt("id_responsavel_1"));
+				os.setIdResponsavelDois(rs.getInt("id_responsavel_2"));
+				os.setPrecoTotal(rs.getFloat("preco_total"));
+				returnable.add(os);
+
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				conn.close();
+				stmt.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+
+		return returnable;
+
+	}
 
 }

@@ -67,6 +67,16 @@ public class OrdemDeServicoController {
 			view.addObject("tipoUsuario", u.getTipo());
 
 			return view;
+		} else if (u != null && u.getTipo().equals("caixa")) {
+			
+
+			ArrayList<OrdemDeServico> lista = (ArrayList<OrdemDeServico>) dao.listarOrdensDeServicoDeCaixa();
+
+			ModelAndView view = new ModelAndView("os/listaOrdemServico");
+			view.addObject("ordensDeServico", lista);
+			view.addObject("tipoUsuario", u.getTipo());
+
+			return view;
 		}
 
 		return null;
