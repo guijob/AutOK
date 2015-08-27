@@ -56,6 +56,10 @@ public class AgendamentoController {
 			
 			agendamentos = (ArrayList<Agendamento>) dao.buscarAgendamentosAnalista(u.getId());
 			
+		} else if (u != null && u.getTipo().equals("administrador")) {
+			
+			agendamentos = (ArrayList<Agendamento>) dao.buscarTodosAgendamentos();
+			
 		} else {
 		
 			agendamentos = new ArrayList<>();
@@ -107,7 +111,7 @@ public class AgendamentoController {
 			Calendar cal = Calendar.getInstance();
 			cal.setTime(data);
 
-			List<Horario> horarios = dao.buscarHorariosDisponiveisDeUmaData(data);
+			List<Horario> horarios = dao.buscarHorariosDisponiveisDeUmaDataDeTecnicosAnalistas(data);
 			for (Horario horario : horarios) {
 
 				Set<Integer> chaves = map.keySet();

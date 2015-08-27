@@ -63,11 +63,10 @@
         	<p class="">Bem vindo, ${usuarioLogado.nome}</p>
         	<c:if test="${tipoUsuario != 'cliente' && tipoUsuario != 'tec_analista' 
         	&& tipoUsuario != 'tec_responsavel' && tipoUsuario != 'caixa'}">
-					<a href="${pageContext.request.contextPath}/listarCrudCliente">CRUD Cliente</a><br>
-					<a href="${pageContext.request.contextPath}/listarCrudFuncionario">CRUD Funcionario</a><br>
-					<a href="${pageContext.request.contextPath}/listarCrudVeiculo">CRUD Veiculos</a><br>
-					<a href="${pageContext.request.contextPath}/formularioAgendamento">Agendamentos</a><br>
-					<a href="${pageContext.request.contextPath}/listarAgendamentos">Ordens de Serviço</a><br>
+					<a method="POST" href="${pageContext.request.contextPath}/formularioCadastrarCliente">Criar cliente</a><br>
+					<a href="${pageContext.request.contextPath}/listarAgendamentos">Acessar cliente</a><br>
+					<a href="${pageContext.request.contextPath}/listarAgendamentos">Excluir cliente</a><br>
+					<a href="${pageContext.request.contextPath}/listarAgendamentos">Excluir cliente</a><br>
 					<br>
 			</c:if>
         	<a href="logout">Sair do sistema</a>

@@ -77,6 +77,26 @@ public class OrdemDeServicoController {
 			view.addObject("tipoUsuario", u.getTipo());
 
 			return view;
+		}else if (u != null && u.getTipo().equals("tec_analista")) {
+			
+
+			ArrayList<OrdemDeServico> lista = (ArrayList<OrdemDeServico>) dao.listarOrdensDeServicoDeAnalista(u.getId());
+
+			ModelAndView view = new ModelAndView("os/listaOrdemServico");
+			view.addObject("ordensDeServico", lista);
+			view.addObject("tipoUsuario", u.getTipo());
+
+			return view;
+		} else if (u != null && u.getTipo().equals("administrador")) {
+			
+
+			ArrayList<OrdemDeServico> lista = (ArrayList<OrdemDeServico>) dao.listarOrdensDeServicoDeAdministrador();
+
+			ModelAndView view = new ModelAndView("os/listaOrdemServico");
+			view.addObject("ordensDeServico", lista);
+			view.addObject("tipoUsuario", u.getTipo());
+
+			return view;
 		}
 
 		return null;
