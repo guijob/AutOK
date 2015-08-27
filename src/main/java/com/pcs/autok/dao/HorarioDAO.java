@@ -15,6 +15,56 @@ import com.pcs.autok.model.Horario;
 
 public class HorarioDAO extends ConnectionDAO {
 
+	public List<Horario> buscarHorariosDisponiveisDeUmaDataDeTecnicosAnalistas(Date data) throws ParseException {
+
+		Connection conn = null;
+		Statement stmt = null;
+		ResultSet rs = null;
+		List<Horario> horarios = new ArrayList<Horario>();
+		
+		String sData= new SimpleDateFormat("yyyy-MM-dd").format(data);
+		
+		try {
+			conn = startConnection();
+			stmt = conn.createStatement();
+			StringBuilder sql = new StringBuilder();
+
+			sql.append("select * from dbAutOK.horario");
+			sql.append(" where dataHorario like '" + sData + "' and ocupado like 0 and idFuncionario in (");
+			sql.append("select idfuncionario from dbAutOK.funcionario where tipofuncionario like 'tec_analista')");
+			
+			System.out.println(sql.toString());
+
+			rs = stmt.executeQuery(sql.toString());
+
+			Horario horario = null;
+			
+			while (rs.next()) {
+				horario = new Horario();
+				horario.setDate(rs.getDate("dataHorario"));
+				horario.setHorarioLivre(rs.getInt("horario"));
+				horario.setIdFuncionario(rs.getInt("idfuncionario"));
+				horario.setIdHorario(rs.getInt("id"));
+				horario.setOcupado(rs.getInt("ocupado"));
+				
+				horarios.add(horario);
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			try {
+				conn.close();
+				stmt.close();
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
+		return horarios;
+	}
+	
 	public List<Horario> buscarHorariosDisponiveisDeUmaData(Date data) throws ParseException {
 
 		Connection conn = null;
